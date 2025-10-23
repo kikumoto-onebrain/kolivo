@@ -1,4 +1,4 @@
-import { Header } from '@/components/header';
+import { Header } from '@/components/Header';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ClientsCarousel } from '@/components/sections/clients-carousel';
 import { ITOpsSection } from '@/components/sections/itops-section';
@@ -17,90 +17,95 @@ import { Toaster } from '@/components/ui/toaster';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <HeroSection />
-      <ClientsCarousel />
-      <ITOpsSection />
-      <RPASection />
-      <SecuritySection />
-      <SOCSection />
-      <NOCSection />
-      <CloudSection />
-      <ServiceDeskSection />
-      <AssetManagementSection />
-      <StressTestSection />
-      <FieldServiceSection />
-      <ContactSection />
-      <Footer />
-      <Toaster />
+    <>
+      <Header /> {/* ✅ Agora como named import */}
+      <main className="min-h-screen">
+        <HeroSection />
+        <ClientsCarousel />
+        <ITOpsSection />
+        <RPASection />
+        <SecuritySection />
+        <SOCSection />
+        <NOCSection />
+        <CloudSection />
+        <ServiceDeskSection />
+        <AssetManagementSection />
+        <StressTestSection />
+        <FieldServiceSection />
+        <ContactSection />
+        <Footer />
+        <Toaster />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'Kolivo',
-            url: 'https://kolivo.com.br',
-            description:
-              'Transformamos operações complexas em ecossistemas vivos. ITOps, RPA, SOC, NOC e muito mais.',
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: 'https://kolivo.com.br/?s={search_term_string}',
-              'query-input': 'required name=search_term_string',
-            },
-          }),
-        }}
-      />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Service',
-            serviceType: 'IT Operations',
-            provider: {
-              '@type': 'Organization',
+        {/* JSON-LD: WebSite */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
               name: 'Kolivo',
-            },
-            areaServed: {
-              '@type': 'Country',
-              name: 'Brazil',
-            },
-            hasOfferCatalog: {
-              '@type': 'OfferCatalog',
-              name: 'Serviços de TI',
-              itemListElement: [
-                {
-                  '@type': 'Offer',
-                  itemOffered: {
-                    '@type': 'Service',
-                    name: 'ITOps',
-                    description: 'IT Operations com automação e IA',
+              url: 'https://kolivo.com.br',
+              description:
+                'Transformamos operações complexas em ecossistemas vivos. ITOps, RPA, SOC, NOC e muito mais.',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: 'https://kolivo.com.br/?s={search_term_string}',
+                'query-input': 'required name=search_term_string',
+              },
+            }),
+          }}
+        />
+
+        {/* JSON-LD: Service */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Service',
+              serviceType: 'IT Operations',
+              provider: {
+                '@type': 'Organization',
+                name: 'Kolivo',
+              },
+              areaServed: {
+                '@type': 'Country',
+                name: 'Brazil',
+              },
+              hasOfferCatalog: {
+                '@type': 'OfferCatalog',
+                name: 'Serviços de TI',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'ITOps',
+                      description: 'IT Operations com automação e IA',
+                    },
                   },
-                },
-                {
-                  '@type': 'Offer',
-                  itemOffered: {
-                    '@type': 'Service',
-                    name: 'RPA',
-                    description: 'Robotic Process Automation',
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'RPA',
+                      description: 'Robotic Process Automation',
+                    },
                   },
-                },
-                {
-                  '@type': 'Offer',
-                  itemOffered: {
-                    '@type': 'Service',
-                    name: 'SOC',
-                    description: 'Centro de Operações de Segurança 24/7',
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'SOC',
+                      description: 'Centro de Operações de Segurança 24/7',
+                    },
                   },
-                },
-              ],
-            },
-          }),
-        }}
-      />
-    </main>
+                ],
+              },
+            }),
+          }}
+        />
+      </main>
+    </>
   );
 }
