@@ -8,8 +8,6 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
-
-  // timer para hover-intent do dropdown
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -18,15 +16,14 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Scroll suave
+  // Scroll suave funcional
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault()
-    const target = document.querySelector(targetId)
-    if (target) {
-      window.scrollTo({
-        top: (target as HTMLElement).offsetTop - 80,
-        behavior: 'smooth',
-      })
+    const element = document.querySelector(targetId)
+    if (element) {
+      const yOffset = -80 // compensa o header fixo
+      const y = (element as HTMLElement).getBoundingClientRect().top + window.pageYOffset + yOffset
+      window.scrollTo({ top: y, behavior: 'smooth' })
       setMenuOpen(false)
       setIsServicesOpen(false)
     }
@@ -39,7 +36,7 @@ export function Header() {
 
   const closeServicesWithDelay = () => {
     if (hoverTimer.current) clearTimeout(hoverTimer.current)
-    hoverTimer.current = setTimeout(() => setIsServicesOpen(false), 120)
+    hoverTimer.current = setTimeout(() => setIsServicesOpen(false), 150)
   }
 
   return (
@@ -51,21 +48,21 @@ export function Header() {
         isScrolled ? 'bg-[#181828]/90 backdrop-blur-md shadow-md' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
-        {/* Logo Kolivo */}
+      <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center relative">
+        {/* ✅ Logo Kolivo (reduzido) */}
         <a href="/" className="flex items-center space-x-2">
           <Image
-            src="/kolivo.svg"
+            src="/logo-kolivo.png"
             alt="Kolivo Logo"
-            width={130}
-            height={45}
+            width={100}
+            height={32}
             priority
           />
         </a>
 
-        {/* Menu Desktop */}
-        <nav className="hidden md:flex items-center space-x-8 text-white font-medium relative">
-          {/* Wrapper do Dropdown de Serviços – eventos no CONTÊINER */}
+        {/* ✅ Menu Desktop */}
+        <nav className="hidden md:flex items-center text-white font-medium gap-12 relative">
+          {/* Dropdown Serviços */}
           <div
             className="relative"
             onMouseEnter={openServices}
@@ -74,9 +71,7 @@ export function Header() {
             <button
               type="button"
               className="hover:text-[#5a5aff] transition flex items-center gap-1"
-              aria-haspopup="menu"
-              aria-expanded={isServicesOpen}
-              onClick={() => setIsServicesOpen((v) => !v)} // suporte a clique (touch/trackpad)
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
             >
               Serviços
               <svg
@@ -87,26 +82,23 @@ export function Header() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                aria-hidden="true"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
 
-            {/* Dropdown posicionado colado sob o botão (sem “vão”) */}
             {isServicesOpen && (
               <motion.div
                 initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="absolute left-0 top-full w-72 bg-[#1e1e2f] rounded-xl shadow-lg py-4 px-4 space-y-2 text-sm text-gray-200 border border-[#323284]"
+                className="absolute left-0 top-full mt-3 w-72 bg-[#1e1e2f] rounded-xl shadow-lg py-4 px-4 space-y-2 text-sm text-gray-200 border border-[#323284] z-50"
                 onMouseEnter={openServices}
                 onMouseLeave={closeServicesWithDelay}
-                role="menu"
               >
                 <a href="#RPASection" onClick={(e) => handleSmoothScroll(e, '#RPASection')} className="block hover:text-[#5a5aff] transition">RPA</a>
                 <a href="#SecuritySection" onClick={(e) => handleSmoothScroll(e, '#SecuritySection')} className="block hover:text-[#5a5aff] transition">Assessment de Segurança</a>
                 <a href="#SOCSection" onClick={(e) => handleSmoothScroll(e, '#SOCSection')} className="block hover:text-[#5a5aff] transition">SOC & IAM</a>
-                <a href="#NocSection" onClick={(e) => handleSmoothScroll(e, '#NocSection')} className="block hover:text-[#5a5aff] transition">NOC</a>
+                <a href="#NOCSection" onClick={(e) => handleSmoothScroll(e, '#NOCSection')} className="block hover:text-[#5a5aff] transition">NOC</a>
                 <a href="#CloudSection" onClick={(e) => handleSmoothScroll(e, '#CloudSection')} className="block hover:text-[#5a5aff] transition">Infra Cloud & On Premise</a>
                 <a href="#ServiceDeskSection" onClick={(e) => handleSmoothScroll(e, '#ServiceDeskSection')} className="block hover:text-[#5a5aff] transition">Service Desk | CSC</a>
                 <a href="#AssetManagementSection" onClick={(e) => handleSmoothScroll(e, '#AssetManagementSection')} className="block hover:text-[#5a5aff] transition">Gestão de Ativos | ITAM</a>
@@ -116,11 +108,11 @@ export function Header() {
             )}
           </div>
 
-          {/* Botão de Contato destacado */}
+          {/* ✅ Botão Contato destacado */}
           <a
             href="#contato"
             onClick={(e) => handleSmoothScroll(e, '#contato')}
-            className="bg-[#5a5aff] text-white px-5 py-2 rounded-full hover:bg-white hover:text-[#181828] transition font-semibold shadow-md"
+            className="bg-[#5a5aff] text-white px-6 py-2 rounded-full hover:bg-white hover:text-[#181828] transition font-semibold shadow-md"
           >
             Contato
           </a>
@@ -130,8 +122,6 @@ export function Header() {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-white focus:outline-none"
-          aria-expanded={menuOpen}
-          aria-label="Abrir menu"
         >
           {menuOpen ? (
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -144,7 +134,7 @@ export function Header() {
           )}
         </button>
 
-        {/* Menu Mobile */}
+        {/* ✅ Menu Mobile */}
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
@@ -157,7 +147,7 @@ export function Header() {
                 <a href="#RPASection" onClick={(e) => handleSmoothScroll(e, '#RPASection')}>RPA</a>
                 <a href="#SecuritySection" onClick={(e) => handleSmoothScroll(e, '#SecuritySection')}>Assessment de Segurança</a>
                 <a href="#SOCSection" onClick={(e) => handleSmoothScroll(e, '#SOCSection')}>SOC & IAM</a>
-                <a href="#NocSection" onClick={(e) => handleSmoothScroll(e, '#NocSection')}>NOC</a>
+                <a href="#NOCSection" onClick={(e) => handleSmoothScroll(e, '#NOCSection')}>NOC</a>
                 <a href="#CloudSection" onClick={(e) => handleSmoothScroll(e, '#CloudSection')}>Infra Cloud & On Premise</a>
                 <a href="#ServiceDeskSection" onClick={(e) => handleSmoothScroll(e, '#ServiceDeskSection')}>Service Desk | CSC</a>
                 <a href="#AssetManagementSection" onClick={(e) => handleSmoothScroll(e, '#AssetManagementSection')}>Gestão de Ativos | ITAM</a>
@@ -169,7 +159,7 @@ export function Header() {
             <a
               href="#contato"
               onClick={(e) => handleSmoothScroll(e, '#contato')}
-              className="bg-[#5a5aff] px-5 py-2 rounded-full font-semibold hover:bg-white hover:text-[#181828] transition"
+              className="bg-[#5a5aff] px-6 py-2 rounded-full font-semibold hover:bg-white hover:text-[#181828] transition"
             >
               Contato
             </a>
