@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 import Image from 'next/image'
 
 export function Header() {
@@ -10,24 +9,37 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
 
+  // timer para hover-intent do dropdown
+  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // ✅ Scroll suave para anchors (#sections)
+  // Scroll suave
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault()
     const target = document.querySelector(targetId)
     if (target) {
       window.scrollTo({
-        top: (target as HTMLElement).offsetTop - 80, // offset para não cobrir o header
+        top: (target as HTMLElement).offsetTop - 80,
         behavior: 'smooth',
       })
       setMenuOpen(false)
       setIsServicesOpen(false)
     }
+  }
+
+  const openServices = () => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current)
+    setIsServicesOpen(true)
+  }
+
+  const closeServicesWithDelay = () => {
+    if (hoverTimer.current) clearTimeout(hoverTimer.current)
+    hoverTimer.current = setTimeout(() => setIsServicesOpen(false), 120)
   }
 
   return (
@@ -36,32 +48,36 @@ export function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[#181828]/90 backdrop-blur-md shadow-md'
-          : 'bg-transparent'
+        isScrolled ? 'bg-[#181828]/90 backdrop-blur-md shadow-md' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
-        {/* ✅ Logo Kolivo */}
-        <Link href="/" className="flex items-center space-x-2">
+        {/* Logo Kolivo */}
+        <a href="/" className="flex items-center space-x-2">
           <Image
-            src="/logo-kolivo.png"
+            src="/kolivo.svg"
             alt="Kolivo Logo"
             width={130}
             height={45}
             priority
           />
-        </Link>
+        </a>
 
-        {/* ✅ Menu Desktop */}
+        {/* Menu Desktop */}
         <nav className="hidden md:flex items-center space-x-8 text-white font-medium relative">
-          {/* Dropdown Serviços */}
+          {/* Wrapper do Dropdown de Serviços – eventos no CONTÊINER */}
           <div
             className="relative"
-            onMouseEnter={() => setIsServicesOpen(true)}
-            onMouseLeave={() => setIsServicesOpen(false)}
+            onMouseEnter={openServices}
+            onMouseLeave={closeServicesWithDelay}
           >
-            <button className="hover:text-[#5a5aff] transition flex items-center gap-1">
+            <button
+              type="button"
+              className="hover:text-[#5a5aff] transition flex items-center gap-1"
+              aria-haspopup="menu"
+              aria-expanded={isServicesOpen}
+              onClick={() => setIsServicesOpen((v) => !v)} // suporte a clique (touch/trackpad)
+            >
               Serviços
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,16 +87,21 @@ export function Header() {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
 
+            {/* Dropdown posicionado colado sob o botão (sem “vão”) */}
             {isServicesOpen && (
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="absolute left-0 mt-2 w-72 bg-[#1e1e2f] rounded-xl shadow-lg py-4 px-4 space-y-2 text-sm text-gray-200 border border-[#323284]"
+                className="absolute left-0 top-full w-72 bg-[#1e1e2f] rounded-xl shadow-lg py-4 px-4 space-y-2 text-sm text-gray-200 border border-[#323284]"
+                onMouseEnter={openServices}
+                onMouseLeave={closeServicesWithDelay}
+                role="menu"
               >
                 <a href="#RPASection" onClick={(e) => handleSmoothScroll(e, '#RPASection')} className="block hover:text-[#5a5aff] transition">RPA</a>
                 <a href="#SecuritySection" onClick={(e) => handleSmoothScroll(e, '#SecuritySection')} className="block hover:text-[#5a5aff] transition">Assessment de Segurança</a>
@@ -95,7 +116,7 @@ export function Header() {
             )}
           </div>
 
-          {/* ✅ Botão de Contato destacado */}
+          {/* Botão de Contato destacado */}
           <a
             href="#contato"
             onClick={(e) => handleSmoothScroll(e, '#contato')}
@@ -109,6 +130,8 @@ export function Header() {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-white focus:outline-none"
+          aria-expanded={menuOpen}
+          aria-label="Abrir menu"
         >
           {menuOpen ? (
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,7 +144,7 @@ export function Header() {
           )}
         </button>
 
-        {/* ✅ Menu Mobile */}
+        {/* Menu Mobile */}
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
