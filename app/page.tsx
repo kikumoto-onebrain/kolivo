@@ -1,3 +1,4 @@
+import { Header } from '@/components/header';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ClientsCarousel } from '@/components/sections/clients-carousel';
 import { ITOpsSection } from '@/components/sections/itops-section';
