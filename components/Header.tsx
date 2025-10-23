@@ -52,7 +52,7 @@ export function Header() {
         {/* ✅ Logo Kolivo (reduzido) */}
         <a href="/" className="flex items-center space-x-2">
           <Image
-            src="/logo-kolivo.png"
+            src="/kolivo.svg"
             alt="Kolivo Logo"
             width={100}
             height={32}
