@@ -1,29 +1,59 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ChevronsDown } from 'lucide-react';
 
 export function HeroSection() {
+  const [lights, setLights] = useState<
+    { id: number; x: number; y: number; color: string; delay: number }[]
+  >([]);
+
+  useEffect(() => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    // Inicializa os 3 focos em posições aleatórias
+    setLights([
+      {
+        id: 1,
+        x: Math.random() * width - width / 2,
+        y: Math.random() * height - height / 2,
+        color: 'rgba(90, 90, 255, 0.3)',
+        delay: 0,
+      },
+      {
+        id: 2,
+        x: Math.random() * width - width / 2,
+        y: Math.random() * height - height / 2,
+        color: 'rgba(50, 50, 132, 0.25)',
+        delay: 2.5,
+      },
+      {
+        id: 3,
+        x: Math.random() * width - width / 2,
+        y: Math.random() * height - height / 2,
+        color: 'rgba(255, 255, 255, 0.12)',
+        delay: 5,
+      },
+    ]);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-kolivo-primary">
-      {/* Fundo animado */}
+      {/* Fundo animado com focos de luz */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Gradiente suave */}
-        <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/15 via-transparent to-kolivo-blue/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/10 via-transparent to-kolivo-blue/15" />
 
-        {/* Círculos menores e mais visíveis */}
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              'radial-gradient(circle at 25% 40%, rgba(90, 90, 255, 0.18) 0%, transparent 35%)',
-              'radial-gradient(circle at 75% 60%, rgba(50, 50, 132, 0.18) 0%, transparent 35%)',
-              'radial-gradient(circle at 25% 40%, rgba(90, 90, 255, 0.18) 0%, transparent 35%)',
-            ],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
-        />
+        {lights.map((light) => (
+          <LightPulse
+            key={light.id}
+            color={light.color}
+            delay={light.delay}
+            size={280}
+            blur={100}
+          />
+        ))}
 
         {/* Linhas animadas (fluxos de ITOps) */}
         <motion.svg
@@ -68,7 +98,7 @@ export function HeroSection() {
         </motion.svg>
       </div>
 
-      {/* 🔹 Conteúdo principal */}
+      {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           {/* Título principal */}
@@ -113,11 +143,61 @@ export function HeroSection() {
           </motion.div>
         </div>
       </div>
-
-      {/* Ícone ChevronsDown */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white opacity-70">
-        <ChevronsDown size={40} strokeWidth={1.5} />
-      </div>
     </section>
+  );
+}
+
+/**
+ * Mesmo componente LightPulse usado na IntroLogo
+ */
+function LightPulse({
+  color,
+  delay,
+  size,
+  blur,
+}: {
+  color: string;
+  delay: number;
+  size: number;
+  blur: number;
+}) {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  // Atualiza a posição das luzes suavemente a cada ciclo
+  useEffect(() => {
+    const setRandomPos = () => {
+      setPos({
+        x: Math.random() * window.innerWidth - window.innerWidth / 2,
+        y: Math.random() * window.innerHeight - window.innerHeight / 2,
+      });
+    };
+
+    setRandomPos();
+    const interval = setInterval(setRandomPos, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.div
+      className="absolute rounded-full"
+      style={{
+        background: color,
+        width: `${size}px`,
+        height: `${size}px`,
+        filter: `blur(${blur}px)`,
+        left: `calc(50% + ${pos.x}px)`,
+        top: `calc(50% + ${pos.y}px)`,
+      }}
+      animate={{
+        opacity: [0, 0.8, 0],
+        scale: [0.9, 1.1, 0.9],
+      }}
+      transition={{
+        duration: 6,
+        repeat: Infinity,
+        delay,
+        ease: 'easeInOut',
+      }}
+    />
   );
 }
