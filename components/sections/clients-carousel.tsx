@@ -22,11 +22,11 @@ export function ClientsCarousel() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setDuration(6); // 🚀 bem mais rápido no mobile
+        setDuration(4); //
       } else if (window.innerWidth < 1024) {
-        setDuration(12); // tablets intermediários
+        setDuration(12); // 
       } else {
-        setDuration(20); // desktop padrão
+        setDuration(20); //
       }
     };
 
