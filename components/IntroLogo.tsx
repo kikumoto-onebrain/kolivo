@@ -21,7 +21,7 @@ export function IntroLogo() {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    // Gera três focos iniciais em locais diferentes
+    // 3 luzes com posições iniciais diferentes
     setLights([
       {
         id: 1,
@@ -41,27 +41,12 @@ export function IntroLogo() {
         id: 3,
         x: Math.random() * width - width / 2,
         y: Math.random() * height - height / 2,
-        color: 'rgba(255, 255, 255, 0.15)',
+        color: 'rgba(255, 255, 255, 0.12)',
         delay: 5,
       },
     ]);
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Atualiza a posição dos focos periodicamente para dar efeito de movimento
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLights((prev) =>
-        prev.map((light) => ({
-          ...light,
-          x: Math.random() * window.innerWidth - window.innerWidth / 2,
-          y: Math.random() * window.innerHeight - window.innerHeight / 2,
-        }))
-      );
-    }, 7000); // a cada 7s muda o local dos focos
-
-    return () => clearInterval(interval);
   }, []);
 
   const scale = useTransform(scrollY, [0, 150], [1, 0.4]);
@@ -73,29 +58,17 @@ export function IntroLogo() {
       className="fixed inset-0 flex items-center justify-center bg-kolivo-primary z-[9999] overflow-hidden pointer-events-none"
       style={{ opacity }}
     >
-      {/* Fundo com três focos independentes */}
+      {/* Fundo com focos de luz sincronizados */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/10 via-transparent to-kolivo-blue/15" />
 
         {lights.map((light) => (
-          <motion.div
+          <LightPulse
             key={light.id}
-            className="absolute w-[280px] h-[280px] rounded-full blur-[100px]"
-            style={{
-              background: light.color,
-              left: `calc(50% + ${light.x}px)`,
-              top: `calc(50% + ${light.y}px)`,
-            }}
-            animate={{
-              opacity: [0, 0.8, 0],
-              scale: [0.9, 1.15, 0.9],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              delay: light.delay,
-              ease: 'easeInOut',
-            }}
+            color={light.color}
+            delay={light.delay}
+            size={280}
+            blur={100}
           />
         ))}
 
@@ -165,5 +138,61 @@ export function IntroLogo() {
         <ChevronsDown size={40} strokeWidth={1.5} />
       </div>
     </motion.div>
+  );
+}
+
+/**
+ * Componente interno para um foco de luz com posição e animação independentes
+ */
+function LightPulse({
+  color,
+  delay,
+  size,
+  blur,
+}: {
+  color: string;
+  delay: number;
+  size: number;
+  blur: number;
+}) {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  // Gera nova posição apenas quando o ciclo termina
+  useEffect(() => {
+    const setRandomPos = () => {
+      setPos({
+        x: Math.random() * window.innerWidth - window.innerWidth / 2,
+        y: Math.random() * window.innerHeight - window.innerHeight / 2,
+      });
+    };
+
+    setRandomPos();
+
+    const interval = setInterval(setRandomPos, 6000); // só move após o fade-out
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.div
+      className="absolute rounded-full"
+      style={{
+        background: color,
+        width: `${size}px`,
+        height: `${size}px`,
+        filter: `blur(${blur}px)`,
+        left: `calc(50% + ${pos.x}px)`,
+        top: `calc(50% + ${pos.y}px)`,
+      }}
+      animate={{
+        opacity: [0, 0.8, 0],
+        scale: [0.9, 1.1, 0.9],
+      }}
+      transition={{
+        duration: 6,
+        repeat: Infinity,
+        delay,
+        ease: 'easeInOut',
+      }}
+    />
   );
 }
