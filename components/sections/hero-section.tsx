@@ -2,11 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { ChevronsDown } from 'lucide-react';
 
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-kolivo-primary">
-      {/* Fundo animado */}
+      {/* 🔵 Fundo animado */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Gradiente suave */}
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/15 via-transparent to-kolivo-blue/20" />
@@ -24,22 +25,22 @@ export function HeroSection() {
           transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
         />
 
-        {/* Linhas animadas (representando fluxos de ITOps) */}
+        {/* 🔹 Linhas animadas (fluxos de ITOps) */}
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 800 600"
-          className="absolute inset-0 w-full h-full opacity-[0.08]"
+          className="absolute inset-0 w-full h-full opacity-[0.1]"
           preserveAspectRatio="none"
         >
           <motion.path
             d="M0,300 C200,350 400,250 600,300 C700,320 800,280 800,280"
             stroke="#5a5aff"
-            strokeWidth="1.2"
+            strokeWidth="1.8"
             fill="none"
             strokeLinecap="round"
             animate={{
               pathLength: [0, 1, 0],
-              opacity: [0.5, 0.8, 0.5],
+              opacity: [0.4, 0.8, 0.4],
             }}
             transition={{
               duration: 8,
@@ -50,7 +51,7 @@ export function HeroSection() {
           <motion.path
             d="M0,350 C200,400 400,300 600,350 C700,370 800,330 800,330"
             stroke="#ffffff"
-            strokeWidth="0.8"
+            strokeWidth="1.5"
             fill="none"
             strokeLinecap="round"
             animate={{
@@ -113,24 +114,10 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Indicador de scroll */}
-      <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 10, 0] }}
-        transition={{
-          opacity: { delay: 1, duration: 0.5 },
-          y: { duration: 2, repeat: Infinity, ease: 'easeInOut' },
-        }}
-      >
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
-          <motion.div
-            className="w-1.5 h-1.5 bg-white rounded-full"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </div>
-      </motion.div>
+      {/* ⬇️ Ícone ChevronsDown (fixo, sem animação) */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white opacity-70">
+        <ChevronsDown size={40} strokeWidth={1.5} />
+      </div>
     </section>
   );
 }
