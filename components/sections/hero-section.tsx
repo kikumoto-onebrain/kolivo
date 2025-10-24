@@ -7,7 +7,7 @@ import { ChevronsDown } from 'lucide-react';
 export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-kolivo-primary">
-      {/* 🔵 Fundo animado */}
+      {/* Fundo animado */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Gradiente suave */}
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/15 via-transparent to-kolivo-blue/20" />
@@ -25,7 +25,7 @@ export function HeroSection() {
           transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
         />
 
-        {/* 🔹 Linhas animadas (fluxos de ITOps) */}
+        {/* Linhas animadas (fluxos de ITOps) */}
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 800 600"
@@ -114,7 +114,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ⬇️ Ícone ChevronsDown (fixo, sem animação) */}
+      {/* Ícone ChevronsDown */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white opacity-70">
         <ChevronsDown size={40} strokeWidth={1.5} />
       </div>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
+import { ChevronsDown } from 'lucide-react';
 
 export function IntroLogo() {
   const { scrollY } = useScroll();
@@ -26,9 +27,12 @@ export function IntroLogo() {
       className="fixed inset-0 flex items-center justify-center bg-kolivo-primary z-[9999] overflow-hidden pointer-events-none"
       style={{ opacity }}
     >
-      {/* Fundo igual ao da Hero */}
+      {/* Fundo animado com gradiente e linhas */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/20 via-transparent to-kolivo-blue/20" />
+        {/* Gradiente suave */}
+        <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/15 via-transparent to-kolivo-blue/20" />
+
+        {/* Círculos animados */}
         <motion.div
           className="absolute inset-0"
           animate={{
@@ -40,9 +44,51 @@ export function IntroLogo() {
           }}
           transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
         />
+
+        {/* Linhas animadas (fluxos) */}
+        <motion.svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 800 600"
+          className="absolute inset-0 w-full h-full opacity-[0.1]"
+          preserveAspectRatio="none"
+        >
+          <motion.path
+            d="M0,300 C200,350 400,250 600,300 C700,320 800,280 800,280"
+            stroke="#5a5aff"
+            strokeWidth="1.8"
+            fill="none"
+            strokeLinecap="round"
+            animate={{
+              pathLength: [0, 1, 0],
+              opacity: [0.4, 0.8, 0.4],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+          <motion.path
+            d="M0,350 C200,400 400,300 600,350 C700,370 800,330 800,330"
+            stroke="#ffffff"
+            strokeWidth="1.5"
+            fill="none"
+            strokeLinecap="round"
+            animate={{
+              pathLength: [0, 1, 0],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              delay: 1,
+              ease: 'easeInOut',
+            }}
+          />
+        </motion.svg>
       </div>
 
-      {/* Logo central que diminui e sobe */}
+      {/* Logo central */}
       {showIntro && (
         <motion.div
           style={{ scale, y }}
@@ -59,6 +105,11 @@ export function IntroLogo() {
           />
         </motion.div>
       )}
+
+      {/* Ícone ChevronsDown fixo */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white opacity-70 z-20">
+        <ChevronsDown size={40} strokeWidth={1.5} />
+      </div>
     </motion.div>
   );
 }
