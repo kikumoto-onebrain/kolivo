@@ -16,13 +16,18 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Scroll suave funcional
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
     e.preventDefault()
     const element = document.querySelector(targetId)
     if (element) {
-      const yOffset = -80 // compensa o header fixo
-      const y = (element as HTMLElement).getBoundingClientRect().top + window.pageYOffset + yOffset
+      const offset = -80 // compensar header fixo
+      const y =
+        (element as HTMLElement).getBoundingClientRect().top +
+        window.pageYOffset +
+        offset
       window.scrollTo({ top: y, behavior: 'smooth' })
       setMenuOpen(false)
       setIsServicesOpen(false)
@@ -45,11 +50,13 @@ export function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-[#181828]/90 backdrop-blur-md shadow-md' : 'bg-transparent'
+        isScrolled
+          ? 'bg-[#181828]/90 backdrop-blur-md shadow-md'
+          : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center relative">
-        {/* ✅ Logo Kolivo (reduzido) */}
+      <div className="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center relative">
+        {/* ✅ Logo Kolivo - tamanho ajustado */}
         <a href="/" className="flex items-center space-x-2">
           <Image
             src="/kolivo.svg"
@@ -57,12 +64,12 @@ export function Header() {
             width={100}
             height={32}
             priority
+            className="w-20 h-auto" // 80px de largura, altura proporcional
           />
         </a>
 
         {/* ✅ Menu Desktop */}
         <nav className="hidden md:flex items-center text-white font-medium gap-12 relative">
-          {/* Dropdown Serviços */}
           <div
             className="relative"
             onMouseEnter={openServices}
@@ -83,7 +90,12 @@ export function Header() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
 
@@ -95,30 +107,30 @@ export function Header() {
                 onMouseEnter={openServices}
                 onMouseLeave={closeServicesWithDelay}
               >
-                <a href="#RPASection" onClick={(e) => handleSmoothScroll(e, '#RPASection')} className="block hover:text-[#5a5aff] transition">RPA</a>
-                <a href="#SecuritySection" onClick={(e) => handleSmoothScroll(e, '#SecuritySection')} className="block hover:text-[#5a5aff] transition">Assessment de Segurança</a>
-                <a href="#SOCSection" onClick={(e) => handleSmoothScroll(e, '#SOCSection')} className="block hover:text-[#5a5aff] transition">SOC & IAM</a>
-                <a href="#NOCSection" onClick={(e) => handleSmoothScroll(e, '#NOCSection')} className="block hover:text-[#5a5aff] transition">NOC</a>
-                <a href="#CloudSection" onClick={(e) => handleSmoothScroll(e, '#CloudSection')} className="block hover:text-[#5a5aff] transition">Infra Cloud & On Premise</a>
-                <a href="#ServiceDeskSection" onClick={(e) => handleSmoothScroll(e, '#ServiceDeskSection')} className="block hover:text-[#5a5aff] transition">Service Desk | CSC</a>
-                <a href="#AssetManagementSection" onClick={(e) => handleSmoothScroll(e, '#AssetManagementSection')} className="block hover:text-[#5a5aff] transition">Gestão de Ativos | ITAM</a>
-                <a href="#StressTestSection" onClick={(e) => handleSmoothScroll(e, '#StressTestSection')} className="block hover:text-[#5a5aff] transition">Stress Test</a>
-                <a href="#FieldServiceSection" onClick={(e) => handleSmoothScroll(e, '#FieldServiceSection')} className="block hover:text-[#5a5aff] transition">Field Service</a>
+                <a href="#rpa-section" onClick={(e) => handleSmoothScroll(e, '#rpa-section')} className="block hover:text-[#5a5aff] transition">RPA</a>
+                <a href="#security-section" onClick={(e) => handleSmoothScroll(e, '#security-section')} className="block hover:text-[#5a5aff] transition">Assessment de Segurança</a>
+                <a href="#soc-section" onClick={(e) => handleSmoothScroll(e, '#soc-section')} className="block hover:text-[#5a5aff] transition">SOC & IAM</a>
+                <a href="#noc-section" onClick={(e) => handleSmoothScroll(e, '#noc-section')} className="block hover:text-[#5a5aff] transition">NOC</a>
+                <a href="#cloud-section" onClick={(e) => handleSmoothScroll(e, '#cloud-section')} className="block hover:text-[#5a5aff] transition">Infra Cloud & On Premise</a>
+                <a href="#service-desk-section" onClick={(e) => handleSmoothScroll(e, '#service-desk-section')} className="block hover:text-[#5a5aff] transition">Service Desk | CSC</a>
+                <a href="#asset-management-section" onClick={(e) => handleSmoothScroll(e, '#asset-management-section')} className="block hover:text-[#5a5aff] transition">Gestão de Ativos | ITAM</a>
+                <a href="#stress-test-section" onClick={(e) => handleSmoothScroll(e, '#stress-test-section')} className="block hover:text-[#5a5aff] transition">Stress Test</a>
+                <a href="#field-service-section" onClick={(e) => handleSmoothScroll(e, '#field-service-section')} className="block hover:text-[#5a5aff] transition">Field Service</a>
               </motion.div>
             )}
           </div>
 
-          {/* ✅ Botão Contato destacado */}
+          {/* ✅ Botão Contato */}
           <a
-            href="#contato"
-            onClick={(e) => handleSmoothScroll(e, '#contato')}
+            href="#contact-section"
+            onClick={(e) => handleSmoothScroll(e, '#contact-section')}
             className="bg-[#5a5aff] text-white px-6 py-2 rounded-full hover:bg-white hover:text-[#181828] transition font-semibold shadow-md"
           >
             Contato
           </a>
         </nav>
 
-        {/* Botão do menu mobile */}
+        {/* Botão mobile */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-white focus:outline-none"
@@ -133,38 +145,6 @@ export function Header() {
             </svg>
           )}
         </button>
-
-        {/* ✅ Menu Mobile */}
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="absolute top-full left-0 w-full bg-[#181828]/95 backdrop-blur-md text-white flex flex-col items-center py-6 space-y-6 md:hidden"
-          >
-            <details className="w-full text-center">
-              <summary className="cursor-pointer hover:text-[#5a5aff]">Serviços</summary>
-              <div className="mt-3 space-y-3 text-sm">
-                <a href="#RPASection" onClick={(e) => handleSmoothScroll(e, '#RPASection')}>RPA</a>
-                <a href="#SecuritySection" onClick={(e) => handleSmoothScroll(e, '#SecuritySection')}>Assessment de Segurança</a>
-                <a href="#SOCSection" onClick={(e) => handleSmoothScroll(e, '#SOCSection')}>SOC & IAM</a>
-                <a href="#NOCSection" onClick={(e) => handleSmoothScroll(e, '#NOCSection')}>NOC</a>
-                <a href="#CloudSection" onClick={(e) => handleSmoothScroll(e, '#CloudSection')}>Infra Cloud & On Premise</a>
-                <a href="#ServiceDeskSection" onClick={(e) => handleSmoothScroll(e, '#ServiceDeskSection')}>Service Desk | CSC</a>
-                <a href="#AssetManagementSection" onClick={(e) => handleSmoothScroll(e, '#AssetManagementSection')}>Gestão de Ativos | ITAM</a>
-                <a href="#StressTestSection" onClick={(e) => handleSmoothScroll(e, '#StressTestSection')}>Stress Test</a>
-                <a href="#FieldServiceSection" onClick={(e) => handleSmoothScroll(e, '#FieldServiceSection')}>Field Service</a>
-              </div>
-            </details>
-
-            <a
-              href="#contato"
-              onClick={(e) => handleSmoothScroll(e, '#contato')}
-              className="bg-[#5a5aff] px-6 py-2 rounded-full font-semibold hover:bg-white hover:text-[#181828] transition"
-            >
-              Contato
-            </a>
-          </motion.div>
-        )}
       </div>
     </motion.header>
   )
