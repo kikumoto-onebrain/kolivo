@@ -44,74 +44,75 @@ export function RPASection() {
       id="rpa"
       className="relative py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
     >
-      {/* Fluxo de automação Make/n8n */}
+      {/* Fundo animado — fluxo visual Make/n8n */}
       <div className="absolute inset-0 overflow-hidden opacity-[0.25]">
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1400 900"
+          viewBox="0 0 1800 900"
           className="w-full h-full"
           preserveAspectRatio="xMidYMid slice"
         >
-          {/* Fluxo completo — começa na esquerda, ramifica e termina na direita */}
+          {/* Linha principal — fluxo base da esquerda para a direita */}
           <motion.path
-            d="M150 450 C300 420 400 380 550 420 S850 480 950 420 S1150 380 1250 450"
+            d="M100 450 C400 400 900 500 1600 450"
             stroke="#5a5aff"
-            strokeWidth="2.2"
+            strokeWidth="2.4"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
             transition={{
-              duration: 8,
+              duration: 9,
               repeat: Infinity,
-              repeatDelay: 1.2,
+              repeatDelay: 1.5,
               ease: 'easeInOut',
             }}
           />
 
-          {/* Linhas de ramificação superior e inferior */}
+          {/* Ramificação superior — aparece apenas depois do fluxo principal alcançar o nó central */}
           <motion.path
-            d="M550 420 C650 350 800 360 900 300"
+            d="M900 450 C1100 350 1300 300 1500 350"
             stroke="#323284"
-            strokeWidth="1.8"
+            strokeWidth="2"
             fill="none"
             strokeLinecap="round"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
             transition={{
-              duration: 8,
-              delay: 0.8,
+              duration: 6,
+              delay: 3, // começa depois que o fluxo chega ao centro
               repeat: Infinity,
-              repeatDelay: 1.2,
+              repeatDelay: 4,
               ease: 'easeInOut',
             }}
           />
 
+          {/* Ramificação inferior — também aparece depois do fluxo chegar ao centro */}
           <motion.path
-            d="M550 420 C650 480 800 500 900 550"
+            d="M900 450 C1100 550 1300 600 1500 550"
             stroke="#323284"
-            strokeWidth="1.8"
+            strokeWidth="2"
             fill="none"
             strokeLinecap="round"
             initial={{ pathLength: 0, opacity: 0 }}
             animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
             transition={{
-              duration: 8,
-              delay: 1,
+              duration: 6,
+              delay: 3.2,
               repeat: Infinity,
-              repeatDelay: 1.2,
+              repeatDelay: 4,
               ease: 'easeInOut',
             }}
           />
 
-          {/* Nós com ícones — aparecem conforme o fluxo avança */}
+          {/* Nós — aparecem conforme o fluxo os alcança */}
           {[
-            { x: 150, y: 450, icon: Settings, delay: 0 },
-            { x: 550, y: 420, icon: Database, delay: 1 },
-            { x: 900, y: 300, icon: Cloud, delay: 2 },
-            { x: 900, y: 550, icon: Network, delay: 2.2 },
-            { x: 1250, y: 450, icon: Cpu, delay: 3 },
+            { x: 100, y: 450, icon: Settings, delay: 0 }, // início
+            { x: 900, y: 450, icon: Database, delay: 3 }, // meio
+            { x: 1500, y: 350, icon: Cloud, delay: 5.2 }, // topo direito
+            { x: 1500, y: 550, icon: Network, delay: 5.4 }, // base direita
+            { x: 1600, y: 450, icon: Cpu, delay: 6.8 }, // final
           ].map((n, i) => {
             const Icon = n.icon;
             return (
@@ -120,18 +121,18 @@ export function RPASection() {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{
                   opacity: [0, 1, 0],
-                  scale: [0, 1, 0],
+                  scale: [0.8, 1.2, 1],
                 }}
                 transition={{
-                  duration: 2,
+                  duration: 1.8,
                   delay: n.delay,
                   repeat: Infinity,
-                  repeatDelay: 7.5 - n.delay,
+                  repeatDelay: 8 - n.delay,
                   ease: 'easeOut',
                 }}
               >
-                <circle cx={n.x} cy={n.y} r="45" fill="#5a5aff" opacity="0.1" />
-                <circle cx={n.x} cy={n.y} r="22" fill="#5a5aff" opacity="0.35" />
+                <circle cx={n.x} cy={n.y} r="50" fill="#5a5aff" opacity="0.1" />
+                <circle cx={n.x} cy={n.y} r="24" fill="#5a5aff" opacity="0.35" />
                 <foreignObject
                   x={n.x - 14}
                   y={n.y - 14}
