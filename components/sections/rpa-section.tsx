@@ -7,11 +7,11 @@ import {
   Link2,
   Zap,
   Lightbulb,
-  Cpu,
-  Database,
-  Network,
   Settings,
   Cloud,
+  Database,
+  Cpu,
+  Network,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -44,7 +44,7 @@ export function RPASection() {
       id="rpa"
       className="relative py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
     >
-      {/* Fundo animado — fluxo Make/n8n aprimorado */}
+      {/* Fluxo de automação Make/n8n */}
       <div className="absolute inset-0 overflow-hidden opacity-[0.25]">
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
@@ -52,104 +52,93 @@ export function RPASection() {
           className="w-full h-full"
           preserveAspectRatio="xMidYMid slice"
         >
-          {/* Linhas de automação — iniciando da esquerda */}
+          {/* Fluxo completo — começa na esquerda, ramifica e termina na direita */}
           <motion.path
-            d="M150 450 C400 350 800 550 1150 400"
+            d="M150 450 C300 420 400 380 550 420 S850 480 950 420 S1150 380 1250 450"
             stroke="#5a5aff"
             strokeWidth="2.2"
-            strokeLinecap="round"
             fill="none"
-            animate={{ pathLength: [0, 1, 0] }}
-            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              repeatDelay: 1.2,
+              ease: 'easeInOut',
+            }}
           />
+
+          {/* Linhas de ramificação superior e inferior */}
           <motion.path
-            d="M150 450 C400 550 800 650 1200 500"
+            d="M550 420 C650 350 800 360 900 300"
             stroke="#323284"
-            strokeWidth="2"
-            strokeLinecap="round"
+            strokeWidth="1.8"
             fill="none"
-            animate={{ pathLength: [0, 1, 0] }}
+            strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
             transition={{
-              duration: 12,
+              duration: 8,
+              delay: 0.8,
               repeat: Infinity,
-              delay: 2,
+              repeatDelay: 1.2,
               ease: 'easeInOut',
             }}
           />
+
           <motion.path
-            d="M150 450 C300 500 700 400 1050 550"
-            stroke="#5a5aff"
-            strokeWidth="2.2"
-            strokeLinecap="round"
+            d="M550 420 C650 480 800 500 900 550"
+            stroke="#323284"
+            strokeWidth="1.8"
             fill="none"
-            animate={{ pathLength: [0, 1, 0] }}
+            strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
             transition={{
-              duration: 14,
+              duration: 8,
+              delay: 1,
               repeat: Infinity,
-              delay: 3,
+              repeatDelay: 1.2,
               ease: 'easeInOut',
             }}
           />
 
-          {/* Pulsos de energia indo da esquerda → direita */}
-          {[0, 1, 2].map((i) => (
-            <motion.circle
-              key={`pulse-${i}`}
-              r="6"
-              fill="#ffffff"
-              stroke="#5a5aff"
-              strokeWidth="1"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{
-                duration: 2,
-                delay: i * 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            >
-              <animateMotion
-                dur={`${8 + i * 2}s`}
-                repeatCount="indefinite"
-                rotate="auto"
-              >
-                <mpath href={`#pulse-path-${i}`} />
-              </animateMotion>
-            </motion.circle>
-          ))}
-
-          {/* Nós visíveis e maiores */}
+          {/* Nós com ícones — aparecem conforme o fluxo avança */}
           {[
-            { x: 150, y: 450, icon: Database },
-            { x: 450, y: 400, icon: Settings },
-            { x: 700, y: 470, icon: Cpu },
-            { x: 950, y: 420, icon: Cloud },
-            { x: 1200, y: 500, icon: Network },
+            { x: 150, y: 450, icon: Settings, delay: 0 },
+            { x: 550, y: 420, icon: Database, delay: 1 },
+            { x: 900, y: 300, icon: Cloud, delay: 2 },
+            { x: 900, y: 550, icon: Network, delay: 2.2 },
+            { x: 1250, y: 450, icon: Cpu, delay: 3 },
           ].map((n, i) => {
             const Icon = n.icon;
             return (
               <motion.g
                 key={i}
+                initial={{ opacity: 0, scale: 0 }}
                 animate={{
-                  opacity: [0.7, 1, 0.7],
-                  scale: [1, 1.15, 1],
+                  opacity: [0, 1, 0],
+                  scale: [0, 1, 0],
                 }}
                 transition={{
-                  duration: 3.5,
-                  delay: i * 0.5,
+                  duration: 2,
+                  delay: n.delay,
                   repeat: Infinity,
-                  ease: 'easeInOut',
+                  repeatDelay: 7.5 - n.delay,
+                  ease: 'easeOut',
                 }}
               >
-                <circle cx={n.x} cy={n.y} r="42" fill="#5a5aff" opacity="0.1" />
-                <circle cx={n.x} cy={n.y} r="22" fill="#5a5aff" opacity="0.3" />
+                <circle cx={n.x} cy={n.y} r="45" fill="#5a5aff" opacity="0.1" />
+                <circle cx={n.x} cy={n.y} r="22" fill="#5a5aff" opacity="0.35" />
                 <foreignObject
                   x={n.x - 14}
                   y={n.y - 14}
                   width="28"
                   height="28"
                 >
-                  <Icon className="w-7 h-7 text-white/80" />
+                  <Icon className="w-7 h-7 text-white/90" />
                 </foreignObject>
               </motion.g>
             );
