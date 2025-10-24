@@ -44,30 +44,30 @@ export function RPASection() {
       id="rpa"
       className="relative py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
     >
-      {/* Fundo animado — fluxo tipo Make/n8n */}
-      <div className="absolute inset-0 overflow-hidden opacity-[0.15]">
+      {/* Fundo animado — fluxo Make/n8n aprimorado */}
+      <div className="absolute inset-0 overflow-hidden opacity-[0.25]">
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1400 900"
           className="w-full h-full"
           preserveAspectRatio="xMidYMid slice"
         >
-          {/* Linhas principais — fluxo */}
+          {/* Linhas de automação — iniciando da esquerda */}
           <motion.path
-            d="M700 450 C850 400 1050 500 1150 350"
+            d="M150 450 C400 350 800 550 1150 400"
             stroke="#5a5aff"
-            strokeWidth="1.5"
-            fill="none"
+            strokeWidth="2.2"
             strokeLinecap="round"
+            fill="none"
             animate={{ pathLength: [0, 1, 0] }}
             transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.path
-            d="M700 450 C850 500 1050 600 1200 550"
-            stroke="#5a5aff"
-            strokeWidth="1.5"
-            fill="none"
+            d="M150 450 C400 550 800 650 1200 500"
+            stroke="#323284"
+            strokeWidth="2"
             strokeLinecap="round"
+            fill="none"
             animate={{ pathLength: [0, 1, 0] }}
             transition={{
               duration: 12,
@@ -77,11 +77,11 @@ export function RPASection() {
             }}
           />
           <motion.path
-            d="M700 450 C550 500 400 400 250 450"
-            stroke="#323284"
-            strokeWidth="1.2"
-            fill="none"
+            d="M150 450 C300 500 700 400 1050 550"
+            stroke="#5a5aff"
+            strokeWidth="2.2"
             strokeLinecap="round"
+            fill="none"
             animate={{ pathLength: [0, 1, 0] }}
             transition={{
               duration: 14,
@@ -91,45 +91,65 @@ export function RPASection() {
             }}
           />
 
-          {/* Nós centrais e ramificações */}
+          {/* Pulsos de energia indo da esquerda → direita */}
+          {[0, 1, 2].map((i) => (
+            <motion.circle
+              key={`pulse-${i}`}
+              r="6"
+              fill="#ffffff"
+              stroke="#5a5aff"
+              strokeWidth="1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{
+                duration: 2,
+                delay: i * 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              <animateMotion
+                dur={`${8 + i * 2}s`}
+                repeatCount="indefinite"
+                rotate="auto"
+              >
+                <mpath href={`#pulse-path-${i}`} />
+              </animateMotion>
+            </motion.circle>
+          ))}
+
+          {/* Nós visíveis e maiores */}
           {[
-            { x: 700, y: 450, icon: Settings },
-            { x: 250, y: 450, icon: Database },
-            { x: 1150, y: 350, icon: Cloud },
-            { x: 1200, y: 550, icon: Network },
-            { x: 950, y: 480, icon: Cpu },
-            { x: 550, y: 400, icon: Bot },
+            { x: 150, y: 450, icon: Database },
+            { x: 450, y: 400, icon: Settings },
+            { x: 700, y: 470, icon: Cpu },
+            { x: 950, y: 420, icon: Cloud },
+            { x: 1200, y: 500, icon: Network },
           ].map((n, i) => {
             const Icon = n.icon;
             return (
               <motion.g
                 key={i}
                 animate={{
-                  opacity: [0.6, 1, 0.6],
-                  scale: [1, 1.1, 1],
+                  opacity: [0.7, 1, 0.7],
+                  scale: [1, 1.15, 1],
                 }}
                 transition={{
-                  duration: 3,
-                  delay: i * 0.4,
+                  duration: 3.5,
+                  delay: i * 0.5,
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
               >
-                <circle cx={n.x} cy={n.y} r="35" fill="#5a5aff" opacity="0.08" />
-                <circle
-                  cx={n.x}
-                  cy={n.y}
-                  r="18"
-                  fill="#5a5aff"
-                  opacity="0.25"
-                />
+                <circle cx={n.x} cy={n.y} r="42" fill="#5a5aff" opacity="0.1" />
+                <circle cx={n.x} cy={n.y} r="22" fill="#5a5aff" opacity="0.3" />
                 <foreignObject
-                  x={n.x - 12}
-                  y={n.y - 12}
-                  width="24"
-                  height="24"
+                  x={n.x - 14}
+                  y={n.y - 14}
+                  width="28"
+                  height="28"
                 >
-                  <Icon className="w-6 h-6 text-white/70" />
+                  <Icon className="w-7 h-7 text-white/80" />
                 </foreignObject>
               </motion.g>
             );
