@@ -23,7 +23,7 @@ export function Header() {
     e.preventDefault()
     const element = document.querySelector(targetId)
     if (element) {
-      const offset = -80 // compensa o header fixo
+      const offset = -80 // compensar header fixo
       const y =
         (element as HTMLElement).getBoundingClientRect().top +
         window.pageYOffset +
@@ -46,10 +46,6 @@ export function Header() {
 
   return (
     <motion.header
-      // ❌ remove animação de entrada
-      initial={false}
-      animate={false}
-      transition={false}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-[#181828]/90 backdrop-blur-md shadow-md py-3'
@@ -57,7 +53,7 @@ export function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
-        {/* ✅ Logo Kolivo — reduzido para metade */}
+        {/* ✅ Logo Kolivo — reduzido pela metade */}
         <a href="/" className="flex items-center space-x-2">
           <Image
             src="/kolivo.svg"
