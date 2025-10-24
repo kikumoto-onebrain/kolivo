@@ -61,7 +61,7 @@ export function Header() {
             width={50}
             height={16}
             priority
-            className="w-8 h-auto" // ~32px largura real
+            className="w-12 h-auto" // ~32px largura real
           />
         </a>
 
