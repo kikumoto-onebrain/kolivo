@@ -8,6 +8,9 @@ import { ChevronsDown } from 'lucide-react';
 export function IntroLogo() {
   const { scrollY } = useScroll();
   const [showIntro, setShowIntro] = useState(true);
+  const [lights, setLights] = useState<
+    { x: number; y: number; color: string; delay: number }[]
+  >([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +18,35 @@ export function IntroLogo() {
       else setShowIntro(true);
     };
     window.addEventListener('scroll', handleScroll);
+
+    // Gera as posições e cores dos focos apenas no client
+    const generateLights = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      setLights([
+        {
+          x: Math.random() * width - width / 2,
+          y: Math.random() * height - height / 2,
+          color: 'rgba(90, 90, 255, 0.25)',
+          delay: 0,
+        },
+        {
+          x: Math.random() * width - width / 2,
+          y: Math.random() * height - height / 2,
+          color: 'rgba(50, 50, 132, 0.25)',
+          delay: 2,
+        },
+        {
+          x: Math.random() * width - width / 2,
+          y: Math.random() * height - height / 2,
+          color: 'rgba(255, 255, 255, 0.15)',
+          delay: 4,
+        },
+      ]);
+    };
+
+    generateLights();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -27,46 +59,31 @@ export function IntroLogo() {
       className="fixed inset-0 flex items-center justify-center bg-kolivo-primary z-[9999] overflow-hidden pointer-events-none"
       style={{ opacity }}
     >
-      {/* Fundo animado com piscas suaves */}
+      {/* Fundo animado com focos de luz pulsantes */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Fundo base com leve gradiente */}
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/10 via-transparent to-kolivo-blue/15" />
 
-        {/* Focos de luz pulsantes */}
-        <div className="absolute inset-0">
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              className="absolute w-[500px] h-[500px] rounded-full blur-[160px]"
-              style={{
-                background:
-                  i === 0
-                    ? 'rgba(90, 90, 255, 0.25)'
-                    : i === 1
-                    ? 'rgba(50, 50, 132, 0.25)'
-                    : 'rgba(255, 255, 255, 0.15)',
-              }}
-              animate={{
-                opacity: [0, 1, 0],
-                x: [
-                  Math.random() * window.innerWidth - window.innerWidth / 2,
-                  Math.random() * window.innerWidth - window.innerWidth / 2,
-                ],
-                y: [
-                  Math.random() * window.innerHeight - window.innerHeight / 2,
-                  Math.random() * window.innerHeight - window.innerHeight / 2,
-                ],
-                scale: [0.8, 1.1, 0.8],
-              }}
-              transition={{
-                duration: 6 + i * 2,
-                repeat: Infinity,
-                delay: i * 2.5,
-                ease: 'easeInOut',
-              }}
-            />
-          ))}
-        </div>
+        {lights.map((light, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-[500px] h-[500px] rounded-full blur-[160px]"
+            style={{
+              background: light.color,
+              left: `calc(50% + ${light.x}px)`,
+              top: `calc(50% + ${light.y}px)`,
+            }}
+            animate={{
+              opacity: [0, 1, 0],
+              scale: [0.8, 1.1, 0.8],
+            }}
+            transition={{
+              duration: 6 + i * 2,
+              repeat: Infinity,
+              delay: light.delay,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
 
         {/* Linhas animadas */}
         <motion.svg
