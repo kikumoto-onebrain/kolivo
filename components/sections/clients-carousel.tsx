@@ -15,14 +15,14 @@ const clients = [
 ];
 
 export function ClientsCarousel() {
-  const [speed, setSpeed] = useState('25s'); // desktop padrão
+  const [speed, setSpeed] = useState('25s');
 
   useEffect(() => {
     const updateSpeed = () => {
       const width = window.innerWidth;
-      if (width < 640) setSpeed('12s'); // mobile
-      else if (width < 1024) setSpeed('18s'); // tablet
-      else setSpeed('25s'); // desktop
+      if (width < 640) setSpeed('12s');
+      else if (width < 1024) setSpeed('18s');
+      else setSpeed('25s');
     };
 
     updateSpeed();
@@ -38,33 +38,31 @@ export function ClientsCarousel() {
         </h2>
 
         <div className="relative overflow-hidden">
-          {/* Faixa com duas cópias lado a lado */}
+          {/* 🔁 Faixa com duas cópias lado a lado */}
           <div className="marquee__track" style={{ animationDuration: speed }}>
-            <ul className="marquee__group" aria-hidden="false">
-              {clients.map((client, i) => (
-                <li key={`g1-${i}`} className="marquee__item">
-                  <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                    <Building2 className="w-10 sm:w-12 h-10 sm:h-12 text-kolivo-gray" />
-                    <span className="text-sm font-semibold text-kolivo-gray">{client}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <ul className="marquee__group" aria-hidden="true">
-              {clients.map((client, i) => (
-                <li key={`g2-${i}`} className="marquee__item">
-                  <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                    <Building2 className="w-10 sm:w-12 h-10 sm:h-12 text-kolivo-gray" />
-                    <span className="text-sm font-semibold text-kolivo-gray">{client}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            {[0, 1].map((groupIndex) => (
+              <ul key={groupIndex} className="marquee__group">
+                {clients.map((client, i) => (
+                  <li
+                    key={`${groupIndex}-${i}`}
+                    className={`marquee__item ${
+                      i === clients.length - 1 ? 'marquee__item--last' : ''
+                    }`}
+                  >
+                    <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                      <Building2 className="w-10 sm:w-12 h-10 sm:h-12 text-kolivo-gray" />
+                      <span className="text-sm font-semibold text-kolivo-gray">
+                        {client}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* 🔧 CSS otimizado */}
       <style jsx>{`
         .marquee__track {
           display: flex;
@@ -76,7 +74,7 @@ export function ClientsCarousel() {
 
         .marquee__group {
           display: flex;
-          gap: 4rem; /* espaçamento padronizado */
+          gap: 4rem; /* espaçamento fixo entre logos */
           margin: 0;
           padding: 0;
           list-style: none;
@@ -85,13 +83,18 @@ export function ClientsCarousel() {
 
         .marquee__item {
           flex: none;
-          width: 11rem; /* equilíbrio entre logo e espaçamento */
+          width: 11rem;
           height: 5rem;
           display: flex;
           align-items: center;
           justify-content: center;
           filter: grayscale(100%);
           transition: filter 0.3s ease;
+        }
+
+        /* 🔧 Adiciona espaçamento no último item para não colar com o próximo grupo */
+        .marquee__item--last {
+          margin-right: 4rem;
         }
 
         .marquee__item:hover {
