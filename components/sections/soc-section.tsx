@@ -24,7 +24,7 @@ const features = [
 
 export function SOCSection() {
   return (
-    <section className="py-32 bg-white">
+    <section id="soc" className="py-32 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.div

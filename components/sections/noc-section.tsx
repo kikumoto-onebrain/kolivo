@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 export function NOCSection() {
   return (
-    <section className="relative py-32 bg-kolivo-primary overflow-hidden">
+    <section id="noc" className="relative py-32 bg-kolivo-primary overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>

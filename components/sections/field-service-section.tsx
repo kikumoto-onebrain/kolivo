@@ -24,7 +24,7 @@ const features = [
 
 export function FieldServiceSection() {
   return (
-    <section className="py-32 bg-gradient-to-b from-white to-gray-50">
+    <section id="field-service" className="py-32 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.div

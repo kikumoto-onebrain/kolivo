@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 export function StressTestSection() {
   return (
-    <section className="relative py-32 bg-kolivo-primary overflow-hidden">
+    <section id="streaa-test" className="relative py-32 bg-kolivo-primary overflow-hidden">
       <div className="absolute inset-0 opacity-10">
         <div className="flex items-end justify-around h-full px-8 pb-8">
           {[40, 70, 50, 90, 60, 85, 45, 95].map((height, index) => (

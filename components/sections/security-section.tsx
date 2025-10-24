@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 export function SecuritySection() {
   return (
-    <section className="relative py-32 bg-kolivo-blue overflow-hidden">
+    <section id="assessment-seguranca" className="relative py-32 bg-kolivo-blue overflow-hidden">
       <div className="absolute inset-0 opacity-10">
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"

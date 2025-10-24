@@ -100,7 +100,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-32 bg-kolivo-primary">
+    <section id="contato" className="py-32 bg-kolivo-primary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <motion.div

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 export function ServiceDeskSection() {
   return (
-    <section className="relative py-32 bg-kolivo-blue overflow-hidden">
+    <section id="service-desk" className="relative py-32 bg-kolivo-blue overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-kolivo-primary/50 to-transparent" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

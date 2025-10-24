@@ -105,22 +105,22 @@ export function Header() {
                 onMouseEnter={openServices}
                 onMouseLeave={closeServicesWithDelay}
               >
-                <a href="#rpa-section" onClick={(e) => handleSmoothScroll(e, '#rpa-section')} className="block hover:text-[#5a5aff] transition">RPA</a>
-                <a href="#security-section" onClick={(e) => handleSmoothScroll(e, '#security-section')} className="block hover:text-[#5a5aff] transition">Assessment de Segurança</a>
-                <a href="#soc-section" onClick={(e) => handleSmoothScroll(e, '#soc-section')} className="block hover:text-[#5a5aff] transition">SOC & IAM</a>
-                <a href="#noc-section" onClick={(e) => handleSmoothScroll(e, '#noc-section')} className="block hover:text-[#5a5aff] transition">NOC</a>
-                <a href="#cloud-section" onClick={(e) => handleSmoothScroll(e, '#cloud-section')} className="block hover:text-[#5a5aff] transition">Infra Cloud & On Premise</a>
-                <a href="#service-desk-section" onClick={(e) => handleSmoothScroll(e, '#service-desk-section')} className="block hover:text-[#5a5aff] transition">Service Desk | CSC</a>
-                <a href="#asset-management-section" onClick={(e) => handleSmoothScroll(e, '#asset-management-section')} className="block hover:text-[#5a5aff] transition">Gestão de Ativos | ITAM</a>
-                <a href="#stress-test-section" onClick={(e) => handleSmoothScroll(e, '#stress-test-section')} className="block hover:text-[#5a5aff] transition">Stress Test</a>
-                <a href="#field-service-section" onClick={(e) => handleSmoothScroll(e, '#field-service-section')} className="block hover:text-[#5a5aff] transition">Field Service</a>
+                <a href="#rpan" onClick={(e) => handleSmoothScroll(e, '#rpa-section')} className="block hover:text-[#5a5aff] transition">RPA</a>
+                <a href="#assessment-seguranca" onClick={(e) => handleSmoothScroll(e, '#security-section')} className="block hover:text-[#5a5aff] transition">Assessment de Segurança</a>
+                <a href="#soc" onClick={(e) => handleSmoothScroll(e, '#soc-section')} className="block hover:text-[#5a5aff] transition">SOC & IAM</a>
+                <a href="#noc" onClick={(e) => handleSmoothScroll(e, '#noc-section')} className="block hover:text-[#5a5aff] transition">NOC</a>
+                <a href="#cloud" onClick={(e) => handleSmoothScroll(e, '#cloud-section')} className="block hover:text-[#5a5aff] transition">Infra Cloud & On Premise</a>
+                <a href="#service-desk" onClick={(e) => handleSmoothScroll(e, '#service-desk-section')} className="block hover:text-[#5a5aff] transition">Service Desk | CSC</a>
+                <a href="#gestao-ativos" onClick={(e) => handleSmoothScroll(e, '#asset-management-section')} className="block hover:text-[#5a5aff] transition">Gestão de Ativos | ITAM</a>
+                <a href="#stress-test" onClick={(e) => handleSmoothScroll(e, '#stress-test-section')} className="block hover:text-[#5a5aff] transition">Stress Test</a>
+                <a href="#field-service" onClick={(e) => handleSmoothScroll(e, '#field-service-section')} className="block hover:text-[#5a5aff] transition">Field Service</a>
               </motion.div>
             )}
           </div>
 
           {/* ✅ Botão Contato */}
           <a
-            href="#contact-section"
+            href="#contato"
             onClick={(e) => handleSmoothScroll(e, '#contact-section')}
             className="bg-[#5a5aff] text-white px-7 py-2 rounded-full hover:bg-white hover:text-[#181828] transition font-semibold shadow-lg hover:shadow-[0_0_15px_rgba(90,90,255,0.6)]"
           >
