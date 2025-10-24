@@ -1,3 +1,4 @@
+import { IntroLogo } from '@/components/IntroLogo';
 import { Header } from '@/components/Header';
 import { HeroSection } from '@/components/sections/hero-section';
 import { ClientsCarousel } from '@/components/sections/clients-carousel';
@@ -18,7 +19,13 @@ import { Toaster } from '@/components/ui/toaster';
 export default function Home() {
   return (
     <>
-      <Header /> {/* ✅ Agora como named import */}
+      {/* Tela inicial de entrada com logo animado */}
+      <IntroLogo />
+
+      {/* Header fixo */}
+      <Header />
+
+      {/* Conteúdo principal */}
       <main className="min-h-screen">
         <HeroSection />
         <ClientsCarousel />
