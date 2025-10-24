@@ -23,7 +23,7 @@ export function Header() {
     e.preventDefault()
     const element = document.querySelector(targetId)
     if (element) {
-      const offset = -80 // compensar header fixo
+      const offset = -80
       const y =
         (element as HTMLElement).getBoundingClientRect().top +
         window.pageYOffset +
@@ -53,7 +53,7 @@ export function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
-        {/* ✅ Logo Kolivo — menor e com espaçamento melhor */}
+        {/* ✅ Logo Kolivo */}
         <a href="/" className="flex items-center space-x-2">
           <Image
             src="/kolivo.svg"
@@ -61,13 +61,12 @@ export function Header() {
             width={60}
             height={20}
             priority
-            className="w-14 h-auto"
+            className="w-10 sm:w-14 h-auto transition-all"
           />
         </a>
 
         {/* ✅ Menu Desktop */}
         <nav className="hidden md:flex items-center text-white font-medium gap-16 relative">
-          {/* Dropdown Serviços */}
           <div
             className="relative"
             onMouseEnter={openServices}
@@ -105,20 +104,30 @@ export function Header() {
                 onMouseEnter={openServices}
                 onMouseLeave={closeServicesWithDelay}
               >
-                <a href="#rpa" onClick={(e) => handleSmoothScroll(e, '#rpa')} className="block hover:text-[#5a5aff] transition">RPA</a>
-                <a href="#assessment-seguranca" onClick={(e) => handleSmoothScroll(e, '#assessment-seguranca')} className="block hover:text-[#5a5aff] transition">Assessment de Segurança</a>
-                <a href="#soc" onClick={(e) => handleSmoothScroll(e, '#soc')} className="block hover:text-[#5a5aff] transition">SOC & IAM</a>
-                <a href="#noc" onClick={(e) => handleSmoothScroll(e, '#noc')} className="block hover:text-[#5a5aff] transition">NOC</a>
-                <a href="#cloud" onClick={(e) => handleSmoothScroll(e, '#cloud')} className="block hover:text-[#5a5aff] transition">Infra Cloud & On Premise</a>
-                <a href="#service-desk" onClick={(e) => handleSmoothScroll(e, '#service-desk')} className="block hover:text-[#5a5aff] transition">Service Desk | CSC</a>
-                <a href="#gestao-ativos" onClick={(e) => handleSmoothScroll(e, '#gestao-ativos')} className="block hover:text-[#5a5aff] transition">Gestão de Ativos | ITAM</a>
-                <a href="#stress-test" onClick={(e) => handleSmoothScroll(e, '#stress-test')} className="block hover:text-[#5a5aff] transition">Stress Test</a>
-                <a href="#field-service" onClick={(e) => handleSmoothScroll(e, '#field-service')} className="block hover:text-[#5a5aff] transition">Field Service</a>
+                {[
+                  ['#rpa', 'RPA'],
+                  ['#assessment-seguranca', 'Assessment de Segurança'],
+                  ['#soc', 'SOC & IAM'],
+                  ['#noc', 'NOC'],
+                  ['#cloud', 'Infra Cloud & On Premise'],
+                  ['#service-desk', 'Service Desk | CSC'],
+                  ['#gestao-ativos', 'Gestão de Ativos | ITAM'],
+                  ['#stress-test', 'Stress Test'],
+                  ['#field-service', 'Field Service'],
+                ].map(([href, label]) => (
+                  <a
+                    key={href}
+                    href={href}
+                    onClick={(e) => handleSmoothScroll(e, href)}
+                    className="block hover:text-[#5a5aff] transition"
+                  >
+                    {label}
+                  </a>
+                ))}
               </motion.div>
             )}
           </div>
 
-          {/* ✅ Botão Contato */}
           <a
             href="#contato"
             onClick={(e) => handleSmoothScroll(e, '#contato')}
@@ -128,22 +137,54 @@ export function Header() {
           </a>
         </nav>
 
-        {/* Botão Mobile */}
+        {/* ✅ Botão Mobile */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-white focus:outline-none"
         >
           {menuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
           )}
         </button>
       </div>
+
+      {/* ✅ Menu Mobile */}
+      {menuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="md:hidden bg-[#181828]/95 backdrop-blur-lg border-t border-[#323284] text-white px-6 py-6 space-y-4 shadow-xl"
+        >
+          {[
+            ['#rpa', 'RPA'],
+            ['#assessment-seguranca', 'Assessment de Segurança'],
+            ['#soc', 'SOC & IAM'],
+            ['#noc', 'NOC'],
+            ['#cloud', 'Infra Cloud & On Premise'],
+            ['#service-desk', 'Service Desk | CSC'],
+            ['#gestao-ativos', 'Gestão de Ativos | ITAM'],
+            ['#stress-test', 'Stress Test'],
+            ['#field-service', 'Field Service'],
+            ['#contato', 'Contato'],
+          ].map(([href, label]) => (
+            <a
+              key={href}
+              href={href}
+              onClick={(e) => handleSmoothScroll(e, href)}
+              className="block text-lg font-medium hover:text-[#5a5aff] transition"
+            >
+              {label}
+            </a>
+          ))}
+        </motion.div>
+      )}
     </motion.header>
   )
 }
