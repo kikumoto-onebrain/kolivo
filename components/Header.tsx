@@ -61,7 +61,7 @@ export function Header() {
             width={60}
             height={20}
             priority
-            className="w-10 sm:w-14 h-auto transition-all"
+            className="w-12 sm:w-14 h-auto transition-all"
           />
         </a>
 
