@@ -44,95 +44,103 @@ export function RPASection() {
       id="rpa"
       className="relative py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
     >
-      {/* Fundo animado — fluxo visual Make/n8n */}
+      {/* Fundo animado */}
       <div className="absolute inset-0 overflow-hidden opacity-[0.25]">
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1800 900"
+          viewBox="0 0 1600 900"
           className="w-full h-full"
           preserveAspectRatio="xMidYMid slice"
         >
-          {/* Linha principal — fluxo base da esquerda para a direita */}
+          {/* Linha principal – mais curta e natural */}
           <motion.path
-            d="M100 450 C400 400 900 500 1600 450"
+            id="main-flow"
+            d="M150 450 C400 430 700 470 1000 450"
             stroke="#5a5aff"
             strokeWidth="2.4"
             fill="none"
             strokeLinecap="round"
-            strokeLinejoin="round"
             initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
+            animate={{ pathLength: [0, 1], opacity: [0, 1, 1, 0] }}
             transition={{
-              duration: 9,
+              duration: 8,
+              times: [0, 0.8, 0.95, 1],
               repeat: Infinity,
-              repeatDelay: 1.5,
+              repeatDelay: 1.2,
               ease: 'easeInOut',
             }}
           />
 
-          {/* Ramificação superior — aparece apenas depois do fluxo principal alcançar o nó central */}
+          {/* Ramificação superior – surge quando o fluxo principal chega ao meio */}
           <motion.path
-            d="M900 450 C1100 350 1300 300 1500 350"
+            d="M700 450 C850 380 1000 350 1200 400"
             stroke="#323284"
             strokeWidth="2"
             fill="none"
             strokeLinecap="round"
             initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
+            animate={{ pathLength: [0, 1], opacity: [0, 1, 1, 0] }}
             transition={{
               duration: 6,
-              delay: 3, // começa depois que o fluxo chega ao centro
+              delay: 3, // só começa após o fluxo atingir o meio
+              times: [0, 0.8, 0.95, 1],
               repeat: Infinity,
-              repeatDelay: 4,
+              repeatDelay: 3.2,
               ease: 'easeInOut',
             }}
           />
 
-          {/* Ramificação inferior — também aparece depois do fluxo chegar ao centro */}
+          {/* Ramificação inferior – também sincronizada com o meio */}
           <motion.path
-            d="M900 450 C1100 550 1300 600 1500 550"
+            d="M700 450 C850 520 1000 550 1200 500"
             stroke="#323284"
             strokeWidth="2"
             fill="none"
             strokeLinecap="round"
             initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: [0, 1], opacity: [0, 1, 0] }}
+            animate={{ pathLength: [0, 1], opacity: [0, 1, 1, 0] }}
             transition={{
               duration: 6,
-              delay: 3.2,
+              delay: 3.1,
+              times: [0, 0.8, 0.95, 1],
               repeat: Infinity,
-              repeatDelay: 4,
+              repeatDelay: 3.1,
               ease: 'easeInOut',
             }}
           />
 
-          {/* Nós — aparecem conforme o fluxo os alcança */}
+          {/* Ícones dos nós — aparecem no momento certo e somem no final */}
           {[
-            { x: 100, y: 450, icon: Settings, delay: 0 }, // início
-            { x: 900, y: 450, icon: Database, delay: 3 }, // meio
-            { x: 1500, y: 350, icon: Cloud, delay: 5.2 }, // topo direito
-            { x: 1500, y: 550, icon: Network, delay: 5.4 }, // base direita
-            { x: 1600, y: 450, icon: Cpu, delay: 6.8 }, // final
+            { x: 150, y: 450, icon: Settings, delay: 0, persist: true }, // início fixo
+            { x: 700, y: 450, icon: Database, delay: 3 }, // nó central
+            { x: 1200, y: 400, icon: Cloud, delay: 5.2 },
+            { x: 1200, y: 500, icon: Network, delay: 5.3 },
+            { x: 1000, y: 450, icon: Cpu, delay: 7 },
           ].map((n, i) => {
             const Icon = n.icon;
             return (
               <motion.g
                 key={i}
                 initial={{ opacity: 0, scale: 0 }}
-                animate={{
-                  opacity: [0, 1, 0],
-                  scale: [0.8, 1.2, 1],
-                }}
+                animate={
+                  n.persist
+                    ? { opacity: 1, scale: 1 } // ícone inicial sempre visível
+                    : {
+                        opacity: [0, 1, 1, 0],
+                        scale: [0.8, 1.1, 1, 0.8],
+                      }
+                }
                 transition={{
-                  duration: 1.8,
+                  duration: n.persist ? 0.6 : 6,
                   delay: n.delay,
+                  times: [0, 0.3, 0.9, 1],
                   repeat: Infinity,
-                  repeatDelay: 8 - n.delay,
-                  ease: 'easeOut',
+                  repeatDelay: n.persist ? 0 : 3,
+                  ease: 'easeInOut',
                 }}
               >
-                <circle cx={n.x} cy={n.y} r="50" fill="#5a5aff" opacity="0.1" />
-                <circle cx={n.x} cy={n.y} r="24" fill="#5a5aff" opacity="0.35" />
+                <circle cx={n.x} cy={n.y} r="46" fill="#5a5aff" opacity="0.1" />
+                <circle cx={n.x} cy={n.y} r="22" fill="#5a5aff" opacity="0.35" />
                 <foreignObject
                   x={n.x - 14}
                   y={n.y - 14}
@@ -147,10 +155,10 @@ export function RPASection() {
         </motion.svg>
       </div>
 
-      {/* Conteúdo principal */}
+      {/* Conteúdo da section */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto">
-          {/* Coluna Esquerda — Título e texto */}
+          {/* Coluna esquerda */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -175,7 +183,7 @@ export function RPASection() {
             </Button>
           </motion.div>
 
-          {/* Coluna Direita — Cards */}
+          {/* Coluna direita — cards */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
