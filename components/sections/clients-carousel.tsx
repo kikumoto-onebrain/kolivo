@@ -18,15 +18,15 @@ const clients = [
 export function ClientsCarousel() {
   const [duration, setDuration] = useState(20);
 
-  // Detecta largura da tela e ajusta velocidade automaticamente
+  // Ajusta dinamicamente a velocidade conforme o tamanho da tela
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setDuration(10); // mais rápido no mobile
+        setDuration(6); // 🚀 bem mais rápido no mobile
       } else if (window.innerWidth < 1024) {
-        setDuration(15); // velocidade média em tablets
+        setDuration(12); // tablets intermediários
       } else {
-        setDuration(20); // desktop
+        setDuration(20); // desktop padrão
       }
     };
 
@@ -49,11 +49,12 @@ export function ClientsCarousel() {
         </motion.h2>
 
         <div className="relative overflow-hidden">
+          {/* anima 100% para percorrer toda a faixa duplicada */}
           <motion.div
             className="flex gap-12 items-center"
-            animate={{ x: ['0%', '-50%'] }}
+            animate={{ x: ['0%', '-100%'] }}
             transition={{
-              duration, //
+              duration,
               repeat: Infinity,
               ease: 'linear',
             }}
