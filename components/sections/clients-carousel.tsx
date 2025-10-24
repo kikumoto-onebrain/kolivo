@@ -22,11 +22,11 @@ export function ClientsCarousel() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setDuration(4); //
+        setDuration(4); // ⚡ mais rápido no mobile
       } else if (window.innerWidth < 1024) {
-        setDuration(12); // 
+        setDuration(10); // tablets
       } else {
-        setDuration(20); //
+        setDuration(20); // desktop padrão
       }
     };
 
@@ -49,8 +49,9 @@ export function ClientsCarousel() {
         </motion.h2>
 
         <div className="relative overflow-hidden">
-          {/* anima 100% para percorrer toda a faixa duplicada */}
+          {/* key={duration} força o Framer Motion a reiniciar a animação */}
           <motion.div
+            key={duration}
             className="flex gap-12 items-center"
             animate={{ x: ['0%', '-100%'] }}
             transition={{
