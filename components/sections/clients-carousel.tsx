@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Building2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const clients = [
   'Empresa A',
@@ -15,8 +16,27 @@ const clients = [
 ];
 
 export function ClientsCarousel() {
+  const [duration, setDuration] = useState(20);
+
+  // Detecta largura da tela e ajusta velocidade automaticamente
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setDuration(10); // mais rápido no mobile
+      } else if (window.innerWidth < 1024) {
+        setDuration(15); // velocidade média em tablets
+      } else {
+        setDuration(20); // desktop
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -33,7 +53,7 @@ export function ClientsCarousel() {
             className="flex gap-12 items-center"
             animate={{ x: ['0%', '-50%'] }}
             transition={{
-              duration: 20,
+              duration, //
               repeat: Infinity,
               ease: 'linear',
             }}
@@ -41,10 +61,10 @@ export function ClientsCarousel() {
             {[...clients, ...clients].map((client, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-48 h-24 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 group"
+                className="flex-shrink-0 w-40 sm:w-48 h-20 sm:h-24 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 group"
               >
                 <div className="flex flex-col items-center gap-2 opacity-50 group-hover:opacity-100 transition-opacity">
-                  <Building2 className="w-12 h-12 text-kolivo-gray" />
+                  <Building2 className="w-10 sm:w-12 h-10 sm:h-12 text-kolivo-gray" />
                   <span className="text-sm font-semibold text-kolivo-gray">
                     {client}
                   </span>
