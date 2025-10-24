@@ -28,64 +28,70 @@ export function RPASection() {
       id="rpa"
       className="relative py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
     >
-      {/* Fundo animado do fluxo */}
+      {/* Fundo animado */}
       <div className="absolute inset-0 overflow-hidden opacity-[0.25]">
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1400 900"
+          viewBox="0 0 1200 900"
           className="w-full h-full"
           preserveAspectRatio="xMidYMid slice"
         >
           {/* ===== LINHA PRINCIPAL ===== */}
           <motion.path
-            d="M150 450 C300 440 500 460 650 450"
+            d="M150 450 C250 440 450 460 600 450"
             stroke="#5a5aff"
             strokeWidth="2.4"
             fill="none"
             strokeLinecap="round"
             initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: [0, 1], opacity: [0, 1, 1, 0] }}
+            animate={{
+              pathLength: [0, 1],
+              opacity: [0, 1, 1, 1, 0],
+            }}
             transition={{
-              duration: 3, // 1 - linha principal até ramificações
-              times: [0, 0.8, 0.95, 1],
+              duration: 6,
+              times: [0, 0.4, 0.8, 0.95, 1],
+              repeat: Infinity,
+              repeatDelay: 1,
+              ease: 'easeInOut',
+            }}
+          />
+
+          {/* ===== RAMIFICAÇÕES ===== */}
+          <motion.path
+            d="M600 450 C700 390 850 360 1000 400"
+            stroke="#323284"
+            strokeWidth="2"
+            fill="none"
+            strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{
+              pathLength: [0, 1, 1, 0],
+              opacity: [0, 1, 1, 0],
+            }}
+            transition={{
+              duration: 3.5,
+              delay: 2,
               repeat: Infinity,
               repeatDelay: 3.5,
               ease: 'easeInOut',
             }}
           />
 
-          {/* ===== RAMIFICAÇÃO SUPERIOR ===== */}
           <motion.path
-            d="M650 450 C750 390 950 360 1100 400"
+            d="M600 450 C700 510 850 540 1000 500"
             stroke="#323284"
             strokeWidth="2"
             fill="none"
             strokeLinecap="round"
             initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
-            transition={{
-              duration: 3,
-              delay: 3, // 3 - só inicia após linha principal chegar ao centro
-              times: [0, 0.7, 0.95, 1],
-              repeat: Infinity,
-              repeatDelay: 3.5,
-              ease: 'easeInOut',
+            animate={{
+              pathLength: [0, 1, 1, 0],
+              opacity: [0, 1, 1, 0],
             }}
-          />
-
-          {/* ===== RAMIFICAÇÃO INFERIOR ===== */}
-          <motion.path
-            d="M650 450 C750 510 950 540 1100 500"
-            stroke="#323284"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: [0, 1, 1, 0], opacity: [0, 1, 1, 0] }}
             transition={{
-              duration: 3,
-              delay: 3, // 3 - sincronizado com a superior
-              times: [0, 0.7, 0.95, 1],
+              duration: 3.5,
+              delay: 2,
               repeat: Infinity,
               repeatDelay: 3.5,
               ease: 'easeInOut',
@@ -94,11 +100,11 @@ export function RPASection() {
 
           {/* ===== NÓS ===== */}
           {[
-            { x: 150, y: 450, icon: Settings, delay: 0, persist: true }, // início
-            { x: 650, y: 450, icon: Database, delay: 2.8 }, // aparece quando linha chega no meio
-            { x: 1100, y: 400, icon: Cloud, delay: 4.8 },
-            { x: 1100, y: 500, icon: Network, delay: 5 },
-            { x: 950, y: 450, icon: Cpu, delay: 5.5 },
+            { x: 150, y: 450, icon: Settings, delay: 0, persist: true }, // início fixo
+            { x: 600, y: 450, icon: Database, delay: 1.8 }, // banco de dados mais próximo
+            { x: 1000, y: 400, icon: Cloud, delay: 3.5 },
+            { x: 1000, y: 500, icon: Network, delay: 3.7 },
+            { x: 850, y: 450, icon: Cpu, delay: 4 },
           ].map((n, i) => {
             const Icon = n.icon;
             return (
@@ -107,15 +113,15 @@ export function RPASection() {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={
                   n.persist
-                    ? { opacity: 1, scale: 1 } // engrenagem fixa, sem piscar
-                    : { opacity: [0, 1, 1, 0], scale: [0.8, 1.1, 1, 0.9] }
+                    ? { opacity: 1, scale: 1 } // engrenagem fixa
+                    : { opacity: [0, 1, 1, 0], scale: [0.8, 1.1, 1, 0.8] }
                 }
                 transition={{
                   duration: n.persist ? 0.6 : 6,
                   delay: n.delay,
                   times: [0, 0.3, 0.9, 1],
                   repeat: Infinity,
-                  repeatDelay: 3.5,
+                  repeatDelay: 1,
                   ease: 'easeInOut',
                 }}
               >
