@@ -20,7 +20,7 @@ export function ClientsCarousel() {
   useEffect(() => {
     const updateSpeed = () => {
       const width = window.innerWidth;
-      if (width < 640) setSpeed('12s');
+      if (width < 640) setSpeed('18s');
       else if (width < 1024) setSpeed('18s');
       else setSpeed('25s');
     };
@@ -38,7 +38,7 @@ export function ClientsCarousel() {
         </h2>
 
         <div className="relative overflow-hidden">
-          {/* 🔁 Faixa com duas cópias lado a lado */}
+          {/* Faixa com duas cópias lado a lado */}
           <div className="marquee__track" style={{ animationDuration: speed }}>
             {[0, 1].map((groupIndex) => (
               <ul key={groupIndex} className="marquee__group">
