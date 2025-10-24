@@ -53,15 +53,15 @@ export function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
-        {/* ✅ Logo Kolivo — reduzido pela metade */}
+        {/* ✅ Logo Kolivo — menor e com espaçamento melhor */}
         <a href="/" className="flex items-center space-x-2">
           <Image
             src="/kolivo.svg"
             alt="Kolivo Logo"
-            width={50}
-            height={16}
+            width={60}
+            height={20}
             priority
-            className="w-12 h-auto" // ~32px largura real
+            className="w-14 h-auto"
           />
         </a>
 
@@ -105,15 +105,15 @@ export function Header() {
                 onMouseEnter={openServices}
                 onMouseLeave={closeServicesWithDelay}
               >
-                <a href="#rpan" onClick={(e) => handleSmoothScroll(e, '#rpa-section')} className="block hover:text-[#5a5aff] transition">RPA</a>
-                <a href="#assessment-seguranca" onClick={(e) => handleSmoothScroll(e, '#security-section')} className="block hover:text-[#5a5aff] transition">Assessment de Segurança</a>
-                <a href="#soc" onClick={(e) => handleSmoothScroll(e, '#soc-section')} className="block hover:text-[#5a5aff] transition">SOC & IAM</a>
-                <a href="#noc" onClick={(e) => handleSmoothScroll(e, '#noc-section')} className="block hover:text-[#5a5aff] transition">NOC</a>
-                <a href="#cloud" onClick={(e) => handleSmoothScroll(e, '#cloud-section')} className="block hover:text-[#5a5aff] transition">Infra Cloud & On Premise</a>
-                <a href="#service-desk" onClick={(e) => handleSmoothScroll(e, '#service-desk-section')} className="block hover:text-[#5a5aff] transition">Service Desk | CSC</a>
-                <a href="#gestao-ativos" onClick={(e) => handleSmoothScroll(e, '#asset-management-section')} className="block hover:text-[#5a5aff] transition">Gestão de Ativos | ITAM</a>
-                <a href="#stress-test" onClick={(e) => handleSmoothScroll(e, '#stress-test-section')} className="block hover:text-[#5a5aff] transition">Stress Test</a>
-                <a href="#field-service" onClick={(e) => handleSmoothScroll(e, '#field-service-section')} className="block hover:text-[#5a5aff] transition">Field Service</a>
+                <a href="#rpa" onClick={(e) => handleSmoothScroll(e, '#rpa')} className="block hover:text-[#5a5aff] transition">RPA</a>
+                <a href="#assessment-seguranca" onClick={(e) => handleSmoothScroll(e, '#assessment-seguranca')} className="block hover:text-[#5a5aff] transition">Assessment de Segurança</a>
+                <a href="#soc" onClick={(e) => handleSmoothScroll(e, '#soc')} className="block hover:text-[#5a5aff] transition">SOC & IAM</a>
+                <a href="#noc" onClick={(e) => handleSmoothScroll(e, '#noc')} className="block hover:text-[#5a5aff] transition">NOC</a>
+                <a href="#cloud" onClick={(e) => handleSmoothScroll(e, '#cloud')} className="block hover:text-[#5a5aff] transition">Infra Cloud & On Premise</a>
+                <a href="#service-desk" onClick={(e) => handleSmoothScroll(e, '#service-desk')} className="block hover:text-[#5a5aff] transition">Service Desk | CSC</a>
+                <a href="#gestao-ativos" onClick={(e) => handleSmoothScroll(e, '#gestao-ativos')} className="block hover:text-[#5a5aff] transition">Gestão de Ativos | ITAM</a>
+                <a href="#stress-test" onClick={(e) => handleSmoothScroll(e, '#stress-test')} className="block hover:text-[#5a5aff] transition">Stress Test</a>
+                <a href="#field-service" onClick={(e) => handleSmoothScroll(e, '#field-service')} className="block hover:text-[#5a5aff] transition">Field Service</a>
               </motion.div>
             )}
           </div>
@@ -121,14 +121,14 @@ export function Header() {
           {/* ✅ Botão Contato */}
           <a
             href="#contato"
-            onClick={(e) => handleSmoothScroll(e, '#contact-section')}
+            onClick={(e) => handleSmoothScroll(e, '#contato')}
             className="bg-[#5a5aff] text-white px-7 py-2 rounded-full hover:bg-white hover:text-[#181828] transition font-semibold shadow-lg hover:shadow-[0_0_15px_rgba(90,90,255,0.6)]"
           >
             Contato
           </a>
         </nav>
 
-        {/* Botão mobile */}
+        {/* Botão Mobile */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="md:hidden text-white focus:outline-none"
