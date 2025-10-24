@@ -41,8 +41,9 @@ export function RPASection() {
           className="w-full h-full"
           preserveAspectRatio="xMidYMid slice"
         >
-          {/* Linhas de conexão */}
+          {/* Linhas de conexão com IDs para o pulso */}
           <motion.path
+            id="pulse-path-0"
             d="M150 300 C300 200 600 400 850 280 C1050 200 1250 320 1350 250"
             stroke="#5a5aff"
             strokeWidth="1.5"
@@ -52,6 +53,7 @@ export function RPASection() {
             transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.path
+            id="pulse-path-1"
             d="M100 500 C400 600 800 450 1150 550"
             stroke="#323284"
             strokeWidth="1.2"
@@ -66,6 +68,7 @@ export function RPASection() {
             }}
           />
           <motion.path
+            id="pulse-path-2"
             d="M200 700 C500 600 950 800 1300 650"
             stroke="#5a5aff"
             strokeWidth="1"
@@ -80,7 +83,7 @@ export function RPASection() {
             }}
           />
 
-          {/* Nós (círculos) */}
+          {/* Nós (pontos) */}
           {[
             { x: 150, y: 300 },
             { x: 450, y: 250 },
@@ -112,41 +115,40 @@ export function RPASection() {
             />
           ))}
 
-          {/* Pulso de energia percorrendo as linhas */}
-          {[0, 1, 2].map((i) => (
-            <motion.circle
-              key={`pulse-${i}`}
-              r="5"
-              fill="#ffffff"
-              stroke="#5a5aff"
-              strokeWidth="1"
-              animate={{
-                motionOffset: ['0%', '100%'],
-                opacity: [0.8, 0, 0.8],
-              }}
-              transition={{
-                duration: 8 + i * 2,
-                repeat: Infinity,
-                delay: i * 1.5,
-                ease: 'linear',
-              }}
-            >
-              <animateMotion
-                dur={`${10 + i * 2}s`}
-                repeatCount="indefinite"
-                rotate="auto"
+          {/* Pulso de energia que percorre as linhas */}
+          <motion.g>
+            {[0, 1, 2].map((i) => (
+              <motion.circle
+                key={`pulse-${i}`}
+                r="5"
+                fill="#ffffff"
+                stroke="#5a5aff"
+                strokeWidth="1"
+                animate={{ opacity: [0.8, 0, 0.8] }}
+                transition={{
+                  duration: 6 + i * 2,
+                  repeat: Infinity,
+                  delay: i * 1.5,
+                  ease: 'easeInOut',
+                }}
               >
-                <mpath href={`#line-${i}`} />
-              </animateMotion>
-            </motion.circle>
-          ))}
+                <animateMotion
+                  dur={`${10 + i * 2}s`}
+                  repeatCount="indefinite"
+                  rotate="auto"
+                >
+                  <mpath href={`#pulse-path-${i}`} />
+                </animateMotion>
+              </motion.circle>
+            ))}
+          </motion.g>
         </motion.svg>
       </div>
 
-      {/* Conteúdo */}
+      {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto">
-          {/* Coluna Esquerda */}
+          {/* Coluna Esquerda — Título e texto */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
