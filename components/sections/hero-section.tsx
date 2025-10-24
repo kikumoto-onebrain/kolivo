@@ -1,42 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useEffect, useState } from 'react';
 
 export function HeroSection() {
-  const words = ['fluxo', 'equilíbrio', 'transformação', 'escala'];
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  // Efeito de digitação
-  useEffect(() => {
-    const currentWord = words[currentWordIndex];
-    let typingSpeed = isDeleting ? 60 : 120;
-
-    const typingEffect = setTimeout(() => {
-      setDisplayedText((prev) =>
-        isDeleting
-          ? currentWord.substring(0, prev.length - 1)
-          : currentWord.substring(0, prev.length + 1)
-      );
-
-      if (!isDeleting && displayedText === currentWord) {
-        setTimeout(() => setIsDeleting(true), 1200);
-      } else if (isDeleting && displayedText === '') {
-        setIsDeleting(false);
-        setCurrentWordIndex((prev) => (prev + 1) % words.length);
-      }
-    }, typingSpeed);
-
-    return () => clearTimeout(typingEffect);
-  }, [displayedText, isDeleting, currentWordIndex]);
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-kolivo-primary">
-      {/* 🔵 Fundo animado */}
+      {/* Fundo animado */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/20 via-transparent to-kolivo-blue/20" />
         <motion.div
@@ -55,6 +25,7 @@ export function HeroSection() {
       {/* 🔹 Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
+          {/* Título principal */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -62,14 +33,10 @@ export function HeroSection() {
             className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
           >
             <span className="block text-white">Operações inteligentes</span>
-            <span className="block text-kolivo-accent">
-              Negócios em{' '}
-              <span className="border-r-2 border-kolivo-accent pr-1 animate-pulse">
-                {displayedText}
-              </span>
-            </span>
+            <span className="block text-kolivo-accent">Negócios em fluxo</span>
           </motion.h1>
 
+          {/* Parágrafo */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -80,6 +47,7 @@ export function HeroSection() {
             operações de TI mais inteligentes, automatizadas e colaborativas.
           </motion.p>
 
+          {/* Botão */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -87,7 +55,7 @@ export function HeroSection() {
           >
             <Button
               size="lg"
-              className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] hover:scale-105 group"
+              className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-10 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] hover:scale-105 flex justify-center w-fit mx-auto"
               onClick={() => {
                 document
                   .getElementById('contato')
@@ -95,13 +63,12 @@ export function HeroSection() {
               }}
             >
               Fale com um especialista
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
         </div>
       </div>
 
-      {/* 🔽 Indicador de scroll */}
+      {/* Indicador de scroll */}
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
