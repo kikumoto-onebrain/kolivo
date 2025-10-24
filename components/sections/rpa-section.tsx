@@ -31,56 +31,23 @@ export function RPASection() {
   return (
     <section id="rpa" className="py-32 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto">
+          {/* Coluna Esquerda — Título, texto e botão */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="flex-1 text-left"
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-kolivo-primary mb-6">
               Automação que libera pessoas para inovar
             </h2>
-            <p className="text-xl text-kolivo-gray max-w-3xl mx-auto">
+            <p className="text-xl text-kolivo-gray mb-10 max-w-lg">
               Com RPA (Robotic Process Automation), eliminamos tarefas manuais e
               otimizamos fluxos críticos com precisão e segurança.
             </p>
-          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group p-8 bg-white rounded-2xl border border-gray-200 hover:border-kolivo-accent transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.15)]"
-                >
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-kolivo-accent/10 mb-6 group-hover:bg-kolivo-accent/20 transition-colors">
-                    <Icon className="w-8 h-8 text-kolivo-accent" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-kolivo-primary mb-3">
-                    {feature.title}
-                  </h3>
-                  <p className="text-lg text-kolivo-gray">
-                    {feature.description}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-center"
-          >
             <Button
               size="lg"
               className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
@@ -88,6 +55,39 @@ export function RPASection() {
               Acelere sua operação
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
+          </motion.div>
+
+          {/* Coluna Direita — Cards de features */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6"
+          >
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="group p-6 bg-white rounded-2xl border border-gray-200 hover:border-kolivo-accent transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.15)] max-w-[300px] mx-auto"
+                >
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-kolivo-accent/10 mb-4 group-hover:bg-kolivo-accent/20 transition-colors">
+                    <Icon className="w-7 h-7 text-kolivo-accent" />
+                  </div>
+                  <h3 className="text-xl font-bold text-kolivo-primary mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-base text-kolivo-gray leading-relaxed">
+                    {feature.description}
+                  </p>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </div>
