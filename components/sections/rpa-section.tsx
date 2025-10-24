@@ -1,7 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Bot, Link2, Zap, Lightbulb } from 'lucide-react';
+import {
+  ArrowRight,
+  Bot,
+  Link2,
+  Zap,
+  Lightbulb,
+  Cpu,
+  Database,
+  Network,
+  Settings,
+  Cloud,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const features = [
@@ -33,18 +44,17 @@ export function RPASection() {
       id="rpa"
       className="relative py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
     >
-      {/* Fundo animado — fluxo de automação */}
-      <div className="absolute inset-0 overflow-hidden opacity-[0.12]">
+      {/* Fundo animado — fluxo tipo Make/n8n */}
+      <div className="absolute inset-0 overflow-hidden opacity-[0.15]">
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1400 900"
           className="w-full h-full"
           preserveAspectRatio="xMidYMid slice"
         >
-          {/* Linhas de conexão com IDs para o pulso */}
+          {/* Linhas principais — fluxo */}
           <motion.path
-            id="pulse-path-0"
-            d="M150 300 C300 200 600 400 850 280 C1050 200 1250 320 1350 250"
+            d="M700 450 C850 400 1050 500 1150 350"
             stroke="#5a5aff"
             strokeWidth="1.5"
             fill="none"
@@ -53,25 +63,23 @@ export function RPASection() {
             transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.path
-            id="pulse-path-1"
-            d="M100 500 C400 600 800 450 1150 550"
-            stroke="#323284"
-            strokeWidth="1.2"
+            d="M700 450 C850 500 1050 600 1200 550"
+            stroke="#5a5aff"
+            strokeWidth="1.5"
             fill="none"
             strokeLinecap="round"
             animate={{ pathLength: [0, 1, 0] }}
             transition={{
               duration: 12,
               repeat: Infinity,
-              delay: 1.5,
+              delay: 2,
               ease: 'easeInOut',
             }}
           />
           <motion.path
-            id="pulse-path-2"
-            d="M200 700 C500 600 950 800 1300 650"
-            stroke="#5a5aff"
-            strokeWidth="1"
+            d="M700 450 C550 500 400 400 250 450"
+            stroke="#323284"
+            strokeWidth="1.2"
             fill="none"
             strokeLinecap="round"
             animate={{ pathLength: [0, 1, 0] }}
@@ -83,65 +91,49 @@ export function RPASection() {
             }}
           />
 
-          {/* Nós (pontos) */}
+          {/* Nós centrais e ramificações */}
           {[
-            { x: 150, y: 300 },
-            { x: 450, y: 250 },
-            { x: 700, y: 350 },
-            { x: 950, y: 260 },
-            { x: 1200, y: 320 },
-            { x: 300, y: 500 },
-            { x: 750, y: 480 },
-            { x: 1100, y: 520 },
-            { x: 500, y: 700 },
-            { x: 950, y: 720 },
-          ].map((n, i) => (
-            <motion.circle
-              key={i}
-              cx={n.x}
-              cy={n.y}
-              r="8"
-              fill="#5a5aff"
-              animate={{
-                opacity: [0.2, 0.8, 0.2],
-                scale: [1, 1.3, 1],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                delay: i * 0.4,
-                ease: 'easeInOut',
-              }}
-            />
-          ))}
-
-          {/* Pulso de energia que percorre as linhas */}
-          <motion.g>
-            {[0, 1, 2].map((i) => (
-              <motion.circle
-                key={`pulse-${i}`}
-                r="5"
-                fill="#ffffff"
-                stroke="#5a5aff"
-                strokeWidth="1"
-                animate={{ opacity: [0.8, 0, 0.8] }}
+            { x: 700, y: 450, icon: Settings },
+            { x: 250, y: 450, icon: Database },
+            { x: 1150, y: 350, icon: Cloud },
+            { x: 1200, y: 550, icon: Network },
+            { x: 950, y: 480, icon: Cpu },
+            { x: 550, y: 400, icon: Bot },
+          ].map((n, i) => {
+            const Icon = n.icon;
+            return (
+              <motion.g
+                key={i}
+                animate={{
+                  opacity: [0.6, 1, 0.6],
+                  scale: [1, 1.1, 1],
+                }}
                 transition={{
-                  duration: 6 + i * 2,
+                  duration: 3,
+                  delay: i * 0.4,
                   repeat: Infinity,
-                  delay: i * 1.5,
                   ease: 'easeInOut',
                 }}
               >
-                <animateMotion
-                  dur={`${10 + i * 2}s`}
-                  repeatCount="indefinite"
-                  rotate="auto"
+                <circle cx={n.x} cy={n.y} r="35" fill="#5a5aff" opacity="0.08" />
+                <circle
+                  cx={n.x}
+                  cy={n.y}
+                  r="18"
+                  fill="#5a5aff"
+                  opacity="0.25"
+                />
+                <foreignObject
+                  x={n.x - 12}
+                  y={n.y - 12}
+                  width="24"
+                  height="24"
                 >
-                  <mpath href={`#pulse-path-${i}`} />
-                </animateMotion>
-              </motion.circle>
-            ))}
-          </motion.g>
+                  <Icon className="w-6 h-6 text-white/70" />
+                </foreignObject>
+              </motion.g>
+            );
+          })}
         </motion.svg>
       </div>
 
