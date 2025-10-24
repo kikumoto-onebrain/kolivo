@@ -22,11 +22,11 @@ export function ClientsCarousel() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setDuration(4); // ⚡ mais rápido no mobile
+        setDuration(6); // mais rápido no mobile
       } else if (window.innerWidth < 1024) {
-        setDuration(10); // tablets
+        setDuration(12); // médio em tablets
       } else {
-        setDuration(20); // desktop padrão
+        setDuration(20); // padrão desktop
       }
     };
 
@@ -34,6 +34,9 @@ export function ClientsCarousel() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // 🔁 Duplicamos 3x pra suavizar o loop
+  const repeatedClients = [...clients, ...clients, ...clients];
 
   return (
     <section className="py-20 bg-white overflow-hidden">
@@ -49,10 +52,9 @@ export function ClientsCarousel() {
         </motion.h2>
 
         <div className="relative overflow-hidden">
-          {/* key={duration} força o Framer Motion a reiniciar a animação */}
           <motion.div
             key={duration}
-            className="flex gap-12 items-center"
+            className="flex gap-12 items-center will-change-transform"
             animate={{ x: ['0%', '-100%'] }}
             transition={{
               duration,
@@ -60,7 +62,7 @@ export function ClientsCarousel() {
               ease: 'linear',
             }}
           >
-            {[...clients, ...clients].map((client, index) => (
+            {repeatedClients.map((client, index) => (
               <div
                 key={index}
                 className="flex-shrink-0 w-40 sm:w-48 h-20 sm:h-24 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 group"
