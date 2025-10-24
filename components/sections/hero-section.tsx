@@ -3,10 +3,40 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useEffect, useState } from 'react';
 
 export function HeroSection() {
+  const words = ['fluxo', 'equilíbrio', 'transformação', 'escala'];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // Efeito de digitação
+  useEffect(() => {
+    const currentWord = words[currentWordIndex];
+    let typingSpeed = isDeleting ? 60 : 120;
+
+    const typingEffect = setTimeout(() => {
+      setDisplayedText((prev) =>
+        isDeleting
+          ? currentWord.substring(0, prev.length - 1)
+          : currentWord.substring(0, prev.length + 1)
+      );
+
+      if (!isDeleting && displayedText === currentWord) {
+        setTimeout(() => setIsDeleting(true), 1200);
+      } else if (isDeleting && displayedText === '') {
+        setIsDeleting(false);
+        setCurrentWordIndex((prev) => (prev + 1) % words.length);
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(typingEffect);
+  }, [displayedText, isDeleting, currentWordIndex]);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-kolivo-primary">
+      {/* 🔵 Fundo animado */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/20 via-transparent to-kolivo-blue/20" />
         <motion.div
@@ -22,16 +52,22 @@ export function HeroSection() {
         />
       </div>
 
+      {/* 🔹 Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
           >
-            Transformamos operações complexas em{' '}
-            <span className="text-kolivo-accent">ecossistemas vivos</span>
+            <span className="block text-white">Operações inteligentes</span>
+            <span className="block text-kolivo-accent">
+              Negócios em{' '}
+              <span className="border-r-2 border-kolivo-accent pr-1 animate-pulse">
+                {displayedText}
+              </span>
+            </span>
           </motion.h1>
 
           <motion.p
@@ -54,7 +90,7 @@ export function HeroSection() {
               className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] hover:scale-105 group"
               onClick={() => {
                 document
-                  .getElementById('contact')
+                  .getElementById('contato')
                   ?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
@@ -65,6 +101,7 @@ export function HeroSection() {
         </div>
       </div>
 
+      {/* 🔽 Indicador de scroll */}
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
