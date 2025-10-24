@@ -23,7 +23,7 @@ export function Header() {
     e.preventDefault()
     const element = document.querySelector(targetId)
     if (element) {
-      const offset = -80 // compensar header fixo
+      const offset = -80 // compensa o header fixo
       const y =
         (element as HTMLElement).getBoundingClientRect().top +
         window.pageYOffset +
@@ -46,30 +46,32 @@ export function Header() {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
+      // ❌ remove animação de entrada
+      initial={false}
+      animate={false}
+      transition={false}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#181828]/90 backdrop-blur-md shadow-md'
-          : 'bg-transparent'
+          ? 'bg-[#181828]/90 backdrop-blur-md shadow-md py-3'
+          : 'bg-transparent py-5'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center relative">
-        {/* ✅ Logo Kolivo - tamanho ajustado */}
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+        {/* ✅ Logo Kolivo — reduzido para metade */}
         <a href="/" className="flex items-center space-x-2">
           <Image
             src="/kolivo.svg"
             alt="Kolivo Logo"
-            width={100}
-            height={32}
+            width={50}
+            height={16}
             priority
-            className="w-20 h-auto" // 80px de largura, altura proporcional
+            className="w-8 h-auto" // ~32px largura real
           />
         </a>
 
         {/* ✅ Menu Desktop */}
-        <nav className="hidden md:flex items-center text-white font-medium gap-12 relative">
+        <nav className="hidden md:flex items-center text-white font-medium gap-16 relative">
+          {/* Dropdown Serviços */}
           <div
             className="relative"
             onMouseEnter={openServices}
@@ -103,7 +105,7 @@ export function Header() {
               <motion.div
                 initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="absolute left-0 top-full mt-3 w-72 bg-[#1e1e2f] rounded-xl shadow-lg py-4 px-4 space-y-2 text-sm text-gray-200 border border-[#323284] z-50"
+                className="absolute left-0 top-full mt-5 w-72 bg-[#1e1e2f] rounded-xl shadow-xl py-4 px-5 space-y-2 text-sm text-gray-200 border border-[#323284] z-50"
                 onMouseEnter={openServices}
                 onMouseLeave={closeServicesWithDelay}
               >
@@ -124,7 +126,7 @@ export function Header() {
           <a
             href="#contact-section"
             onClick={(e) => handleSmoothScroll(e, '#contact-section')}
-            className="bg-[#5a5aff] text-white px-6 py-2 rounded-full hover:bg-white hover:text-[#181828] transition font-semibold shadow-md"
+            className="bg-[#5a5aff] text-white px-7 py-2 rounded-full hover:bg-white hover:text-[#181828] transition font-semibold shadow-lg hover:shadow-[0_0_15px_rgba(90,90,255,0.6)]"
           >
             Contato
           </a>
