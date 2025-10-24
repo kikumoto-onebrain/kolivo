@@ -27,25 +27,48 @@ export function IntroLogo() {
       className="fixed inset-0 flex items-center justify-center bg-kolivo-primary z-[9999] overflow-hidden pointer-events-none"
       style={{ opacity }}
     >
-      {/* Fundo animado com gradiente e linhas */}
+      {/* Fundo animado com piscas suaves */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Gradiente suave */}
-        <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/15 via-transparent to-kolivo-blue/20" />
+        {/* Fundo base com leve gradiente */}
+        <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/10 via-transparent to-kolivo-blue/15" />
 
-        {/* Círculos animados */}
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              'radial-gradient(circle at 25% 40%, rgba(90, 90, 255, 0.18) 0%, transparent 35%)',
-              'radial-gradient(circle at 75% 60%, rgba(50, 50, 132, 0.18) 0%, transparent 35%)',
-              'radial-gradient(circle at 25% 40%, rgba(90, 90, 255, 0.18) 0%, transparent 35%)',
-            ],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
-        />
+        {/* Focos de luz pulsantes */}
+        <div className="absolute inset-0">
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="absolute w-[500px] h-[500px] rounded-full blur-[160px]"
+              style={{
+                background:
+                  i === 0
+                    ? 'rgba(90, 90, 255, 0.25)'
+                    : i === 1
+                    ? 'rgba(50, 50, 132, 0.25)'
+                    : 'rgba(255, 255, 255, 0.15)',
+              }}
+              animate={{
+                opacity: [0, 1, 0],
+                x: [
+                  Math.random() * window.innerWidth - window.innerWidth / 2,
+                  Math.random() * window.innerWidth - window.innerWidth / 2,
+                ],
+                y: [
+                  Math.random() * window.innerHeight - window.innerHeight / 2,
+                  Math.random() * window.innerHeight - window.innerHeight / 2,
+                ],
+                scale: [0.8, 1.1, 0.8],
+              }}
+              transition={{
+                duration: 6 + i * 2,
+                repeat: Infinity,
+                delay: i * 2.5,
+                ease: 'easeInOut',
+              }}
+            />
+          ))}
+        </div>
 
-        {/* Linhas animadas (fluxos) */}
+        {/* Linhas animadas */}
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 800 600"
@@ -106,7 +129,7 @@ export function IntroLogo() {
         </motion.div>
       )}
 
-      {/* Ícone ChevronsDown fixo */}
+      {/* Ícone ChevronsDown */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white opacity-70 z-20">
         <ChevronsDown size={40} strokeWidth={1.5} />
       </div>
