@@ -7,29 +7,22 @@ import { Button } from '@/components/ui/button';
 export function ITOpsSection() {
   return (
     <section className="relative py-32 bg-kolivo-primary overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <motion.div
-          className="absolute inset-0"
+      {/* Imagem de fundo + overlay de cor */}
+      <div className="absolute inset-0">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-40"
           style={{
-            backgroundImage:
-              'linear-gradient(90deg, transparent 0%, rgba(90,90,255,0.5) 50%, transparent 100%)',
-            backgroundSize: '200% 2px',
-            backgroundRepeat: 'repeat-y',
-            backgroundPosition: '0 0',
-          }}
-          animate={{
-            backgroundPosition: ['0 0', '100% 0'],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: 'linear',
+            backgroundImage: "url('/itops.webp')",
           }}
         />
+        {/* Overlay de cor suave para mesclar com a imagem */}
+        <div className="absolute inset-0 bg-gradient-to-br from-kolivo-primary/90 via-kolivo-primary/80 to-transparent" />
       </div>
 
+      {/* Conteúdo */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto">
+          {/* Ícone e título */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -45,6 +38,7 @@ export function ITOpsSection() {
             </h2>
           </motion.div>
 
+          {/* Texto descritivo */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -53,11 +47,12 @@ export function ITOpsSection() {
             className="text-xl text-gray-300 leading-relaxed mb-8 text-center"
           >
             Redefinimos o conceito de ITOps ao unir automação, IA e colaboração
-            humana em um modelo contínuo de eficiência. Monitoramos, gerenciamos e otimizamos ambientes de TI com
-            previsibilidade, velocidade e clareza, para que sua empresa opere
-            com menos ruído e mais resultado.
+            humana em um modelo contínuo de eficiência. Monitoramos, gerenciamos e
+            otimizamos ambientes de TI com previsibilidade, velocidade e clareza,
+            para que sua empresa opere com menos ruído e mais resultado.
           </motion.p>
 
+          {/* Botão CTA */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
