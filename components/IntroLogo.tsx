@@ -9,45 +9,59 @@ export function IntroLogo() {
   const { scrollY } = useScroll();
   const [showIntro, setShowIntro] = useState(true);
   const [lights, setLights] = useState<
-    { x: number; y: number; color: string; delay: number }[]
+    { id: number; x: number; y: number; color: string; delay: number }[]
   >([]);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 120) setShowIntro(false);
-      else setShowIntro(true);
+      setShowIntro(window.scrollY <= 120);
     };
     window.addEventListener('scroll', handleScroll);
 
-    // Gera as posições e cores dos focos apenas no client
-    const generateLights = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      setLights([
-        {
-          x: Math.random() * width - width / 2,
-          y: Math.random() * height - height / 2,
-          color: 'rgba(90, 90, 255, 0.3)',
-          delay: 0,
-        },
-        {
-          x: Math.random() * width - width / 2,
-          y: Math.random() * height - height / 2,
-          color: 'rgba(50, 50, 132, 0.25)',
-          delay: 2.5,
-        },
-        {
-          x: Math.random() * width - width / 2,
-          y: Math.random() * height - height / 2,
-          color: 'rgba(255, 255, 255, 0.12)',
-          delay: 5,
-        },
-      ]);
-    };
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-    generateLights();
+    // Gera três focos iniciais em locais diferentes
+    setLights([
+      {
+        id: 1,
+        x: Math.random() * width - width / 2,
+        y: Math.random() * height - height / 2,
+        color: 'rgba(90, 90, 255, 0.3)',
+        delay: 0,
+      },
+      {
+        id: 2,
+        x: Math.random() * width - width / 2,
+        y: Math.random() * height - height / 2,
+        color: 'rgba(50, 50, 132, 0.25)',
+        delay: 2.5,
+      },
+      {
+        id: 3,
+        x: Math.random() * width - width / 2,
+        y: Math.random() * height - height / 2,
+        color: 'rgba(255, 255, 255, 0.15)',
+        delay: 5,
+      },
+    ]);
 
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Atualiza a posição dos focos periodicamente para dar efeito de movimento
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLights((prev) =>
+        prev.map((light) => ({
+          ...light,
+          x: Math.random() * window.innerWidth - window.innerWidth / 2,
+          y: Math.random() * window.innerHeight - window.innerHeight / 2,
+        }))
+      );
+    }, 7000); // a cada 7s muda o local dos focos
+
+    return () => clearInterval(interval);
   }, []);
 
   const scale = useTransform(scrollY, [0, 150], [1, 0.4]);
@@ -59,13 +73,13 @@ export function IntroLogo() {
       className="fixed inset-0 flex items-center justify-center bg-kolivo-primary z-[9999] overflow-hidden pointer-events-none"
       style={{ opacity }}
     >
-      {/* Fundo animado com focos menores e mais suaves */}
+      {/* Fundo com três focos independentes */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/10 via-transparent to-kolivo-blue/15" />
 
-        {lights.map((light, i) => (
+        {lights.map((light) => (
           <motion.div
-            key={i}
+            key={light.id}
             className="absolute w-[280px] h-[280px] rounded-full blur-[100px]"
             style={{
               background: light.color,
@@ -74,10 +88,10 @@ export function IntroLogo() {
             }}
             animate={{
               opacity: [0, 0.8, 0],
-              scale: [0.9, 1.1, 0.9],
+              scale: [0.9, 1.15, 0.9],
             }}
             transition={{
-              duration: 8 + i * 2,
+              duration: 6,
               repeat: Infinity,
               delay: light.delay,
               ease: 'easeInOut',
@@ -133,7 +147,7 @@ export function IntroLogo() {
         <motion.div
           style={{ scale, y }}
           transition={{ type: 'spring', stiffness: 80, damping: 15 }}
-          className="relative z-10"
+          className="relative z-10 will-change-transform"
         >
           <Image
             src="/kolivo.svg"
@@ -141,7 +155,7 @@ export function IntroLogo() {
             width={180}
             height={60}
             priority
-            className="w-40 sm:w-56 h-auto will-change-transform"
+            className="w-40 sm:w-56 h-auto"
           />
         </motion.div>
       )}
