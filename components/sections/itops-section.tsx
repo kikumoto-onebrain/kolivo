@@ -53,17 +53,7 @@ export function ITOpsSection() {
             className="text-xl text-gray-300 leading-relaxed mb-8 text-center"
           >
             Redefinimos o conceito de ITOps ao unir automação, IA e colaboração
-            humana em um modelo contínuo de eficiência.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg text-gray-400 leading-relaxed mb-12 text-center"
-          >
-            Monitoramos, gerenciamos e otimizamos ambientes de TI com
+            humana em um modelo contínuo de eficiência. Monitoramos, gerenciamos e otimizamos ambientes de TI com
             previsibilidade, velocidade e clareza, para que sua empresa opere
             com menos ruído e mais resultado.
           </motion.p>
