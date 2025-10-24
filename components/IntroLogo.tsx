@@ -27,20 +27,20 @@ export function IntroLogo() {
         {
           x: Math.random() * width - width / 2,
           y: Math.random() * height - height / 2,
-          color: 'rgba(90, 90, 255, 0.25)',
+          color: 'rgba(90, 90, 255, 0.3)',
           delay: 0,
         },
         {
           x: Math.random() * width - width / 2,
           y: Math.random() * height - height / 2,
           color: 'rgba(50, 50, 132, 0.25)',
-          delay: 2,
+          delay: 2.5,
         },
         {
           x: Math.random() * width - width / 2,
           y: Math.random() * height - height / 2,
-          color: 'rgba(255, 255, 255, 0.15)',
-          delay: 4,
+          color: 'rgba(255, 255, 255, 0.12)',
+          delay: 5,
         },
       ]);
     };
@@ -59,25 +59,25 @@ export function IntroLogo() {
       className="fixed inset-0 flex items-center justify-center bg-kolivo-primary z-[9999] overflow-hidden pointer-events-none"
       style={{ opacity }}
     >
-      {/* Fundo animado com focos de luz pulsantes */}
+      {/* Fundo animado com focos menores e mais suaves */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/10 via-transparent to-kolivo-blue/15" />
 
         {lights.map((light, i) => (
           <motion.div
             key={i}
-            className="absolute w-[500px] h-[500px] rounded-full blur-[160px]"
+            className="absolute w-[280px] h-[280px] rounded-full blur-[100px]"
             style={{
               background: light.color,
               left: `calc(50% + ${light.x}px)`,
               top: `calc(50% + ${light.y}px)`,
             }}
             animate={{
-              opacity: [0, 1, 0],
-              scale: [0.8, 1.1, 0.8],
+              opacity: [0, 0.8, 0],
+              scale: [0.9, 1.1, 0.9],
             }}
             transition={{
-              duration: 6 + i * 2,
+              duration: 8 + i * 2,
               repeat: Infinity,
               delay: light.delay,
               ease: 'easeInOut',
@@ -141,7 +141,7 @@ export function IntroLogo() {
             width={180}
             height={60}
             priority
-            className="w-40 sm:w-56 h-auto"
+            className="w-40 sm:w-56 h-auto will-change-transform"
           />
         </motion.div>
       )}
