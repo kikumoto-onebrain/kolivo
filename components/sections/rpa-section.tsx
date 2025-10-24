@@ -29,91 +29,124 @@ const features = [
 
 export function RPASection() {
   return (
-    <section id="rpa" className="relative py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
-      {/* Fundo animado minimalista de fluxo */}
-      <div className="absolute inset-0 overflow-hidden opacity-[0.15]">
+    <section
+      id="rpa"
+      className="relative py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden"
+    >
+      {/* Fundo animado — fluxo de automação */}
+      <div className="absolute inset-0 overflow-hidden opacity-[0.12]">
         <motion.svg
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 800"
+          viewBox="0 0 1400 900"
           className="w-full h-full"
           preserveAspectRatio="xMidYMid slice"
         >
-          {/* Linhas principais */}
+          {/* Linhas de conexão */}
           <motion.path
-            d="M100 200 C300 250 500 150 700 200 C850 230 1000 180 1100 220"
+            d="M150 300 C300 200 600 400 850 280 C1050 200 1250 320 1350 250"
             stroke="#5a5aff"
             strokeWidth="1.5"
             fill="none"
             strokeLinecap="round"
-            animate={{
-              pathLength: [0, 1, 0],
-              opacity: [0.3, 0.7, 0.3],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
+            animate={{ pathLength: [0, 1, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
           />
           <motion.path
-            d="M150 400 C400 450 600 350 900 400 C1000 420 1150 380 1200 390"
+            d="M100 500 C400 600 800 450 1150 550"
             stroke="#323284"
             strokeWidth="1.2"
             fill="none"
             strokeLinecap="round"
-            animate={{
-              pathLength: [0, 1, 0],
-              opacity: [0.2, 0.6, 0.2],
-            }}
+            animate={{ pathLength: [0, 1, 0] }}
             transition={{
               duration: 12,
               repeat: Infinity,
-              delay: 2,
+              delay: 1.5,
               ease: 'easeInOut',
             }}
           />
           <motion.path
-            d="M0 600 C300 550 600 650 900 600 C1050 580 1200 620 1300 600"
+            d="M200 700 C500 600 950 800 1300 650"
             stroke="#5a5aff"
             strokeWidth="1"
             fill="none"
             strokeLinecap="round"
-            animate={{
-              pathLength: [0, 1, 0],
-              opacity: [0.25, 0.5, 0.25],
-            }}
+            animate={{ pathLength: [0, 1, 0] }}
             transition={{
               duration: 14,
               repeat: Infinity,
-              delay: 1,
+              delay: 3,
               ease: 'easeInOut',
             }}
           />
 
-          {/* Pontos (nós) */}
-          {[100, 350, 600, 850, 1100].map((x, i) => (
+          {/* Nós (círculos) */}
+          {[
+            { x: 150, y: 300 },
+            { x: 450, y: 250 },
+            { x: 700, y: 350 },
+            { x: 950, y: 260 },
+            { x: 1200, y: 320 },
+            { x: 300, y: 500 },
+            { x: 750, y: 480 },
+            { x: 1100, y: 520 },
+            { x: 500, y: 700 },
+            { x: 950, y: 720 },
+          ].map((n, i) => (
             <motion.circle
               key={i}
-              cx={x}
-              cy={i % 2 === 0 ? 200 : 400}
-              r="6"
+              cx={n.x}
+              cy={n.y}
+              r="8"
               fill="#5a5aff"
-              animate={{ opacity: [0.2, 0.8, 0.2], scale: [1, 1.2, 1] }}
+              animate={{
+                opacity: [0.2, 0.8, 0.2],
+                scale: [1, 1.3, 1],
+              }}
               transition={{
-                duration: 2 + i * 0.3,
+                duration: 3,
                 repeat: Infinity,
-                delay: i * 0.5,
+                delay: i * 0.4,
                 ease: 'easeInOut',
               }}
             />
           ))}
+
+          {/* Pulso de energia percorrendo as linhas */}
+          {[0, 1, 2].map((i) => (
+            <motion.circle
+              key={`pulse-${i}`}
+              r="5"
+              fill="#ffffff"
+              stroke="#5a5aff"
+              strokeWidth="1"
+              animate={{
+                motionOffset: ['0%', '100%'],
+                opacity: [0.8, 0, 0.8],
+              }}
+              transition={{
+                duration: 8 + i * 2,
+                repeat: Infinity,
+                delay: i * 1.5,
+                ease: 'linear',
+              }}
+            >
+              <animateMotion
+                dur={`${10 + i * 2}s`}
+                repeatCount="indefinite"
+                rotate="auto"
+              >
+                <mpath href={`#line-${i}`} />
+              </animateMotion>
+            </motion.circle>
+          ))}
         </motion.svg>
       </div>
 
-      {/* Conteúdo principal */}
+      {/* Conteúdo */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-16 max-w-7xl mx-auto">
-          {/* Coluna Esquerda — Título e texto */}
+          {/* Coluna Esquerda */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
