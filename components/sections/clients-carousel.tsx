@@ -16,7 +16,8 @@ const clients = [
 
 export function ClientsCarousel() {
   return (
-    <section className="py-20 bg-white overflow-hidden">
+    // 🔹 Adicionamos min-h e overflow-x-hidden (não geral)
+    <section className="relative py-24 bg-white overflow-x-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título */}
         <motion.h2
@@ -24,21 +25,20 @@ export function ClientsCarousel() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl sm:text-4xl font-bold text-center text-kolivo-primary mb-12"
+          className="text-3xl sm:text-4xl font-bold text-center text-kolivo-primary mb-16"
         >
           Empresas que confiam no nosso ecossistema
         </motion.h2>
 
-        {/* Carrossel infinito */}
-        <div className="relative flex overflow-hidden">
-          {/* faixa duplicada para loop contínuo */}
+        {/* 🔹 Wrapper fixo para evitar sobreposição */}
+        <div className="relative w-full overflow-hidden flex items-center">
           {[0, 1].map((i) => (
             <motion.div
               key={i}
-              className="flex gap-12 items-center min-w-full"
+              className="flex gap-16 items-center min-w-full"
               animate={{ x: ['0%', '-100%'] }}
               transition={{
-                duration: 25, // velocidade (ajuste entre 15–30 para mais rápido ou lento)
+                duration: 25, // ajuste velocidade aqui (menor = mais rápido)
                 repeat: Infinity,
                 ease: 'linear',
               }}
