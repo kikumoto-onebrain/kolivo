@@ -1,8 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Building2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const clients = [
   'Empresa A',
@@ -16,17 +16,16 @@ const clients = [
 ];
 
 export function ClientsCarousel() {
-  const [duration, setDuration] = useState(20);
+  const [speed, setSpeed] = useState('20s');
 
-  // Ajusta dinamicamente a velocidade conforme o tamanho da tela
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setDuration(6); // mais rápido no mobile
+        setSpeed('6s'); // mais rápido no mobile
       } else if (window.innerWidth < 1024) {
-        setDuration(12); // médio em tablets
+        setSpeed('12s'); // intermediário em tablets
       } else {
-        setDuration(20); // padrão desktop
+        setSpeed('20s'); // padrão desktop
       }
     };
 
@@ -35,8 +34,8 @@ export function ClientsCarousel() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // 🔁 Duplicamos 3x pra suavizar o loop
-  const repeatedClients = [...clients, ...clients, ...clients];
+  // Duplicamos várias vezes para um loop suave
+  const repeatedClients = [...clients, ...clients, ...clients, ...clients];
 
   return (
     <section className="py-20 bg-white overflow-hidden">
@@ -52,14 +51,10 @@ export function ClientsCarousel() {
         </motion.h2>
 
         <div className="relative overflow-hidden">
-          <motion.div
-            key={duration}
-            className="flex gap-12 items-center will-change-transform"
-            animate={{ x: ['0%', '-100%'] }}
-            transition={{
-              duration,
-              repeat: Infinity,
-              ease: 'linear',
+          <div
+            className="flex gap-12 items-center animate-marquee will-change-transform"
+            style={{
+              animationDuration: speed,
             }}
           >
             {repeatedClients.map((client, index) => (
@@ -75,9 +70,24 @@ export function ClientsCarousel() {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
+
+      {/* Animação CSS suave e contínua */}
+      <style jsx>{`
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-marquee {
+          animation: marquee linear infinite;
+        }
+      `}</style>
     </section>
   );
 }
