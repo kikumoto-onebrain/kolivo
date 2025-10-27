@@ -13,7 +13,7 @@ export function SecuritySection() {
       {/* Imagem de fundo + overlay com gradiente azul */}
       <div className="absolute inset-0">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-50"
+          className="absolute inset-0 bg-cover bg-center opacity-40"
           style={{
             backgroundImage: "url('/security.webp')",
           }}
@@ -91,15 +91,15 @@ export function SecuritySection() {
               identificam riscos e fortalecem sua infraestrutura.
             </p>
 
-            <p className="text-lg text-gray-400 leading-relaxed mb-10 max-w-lg">
+            <p className="text-xl text-gray-300 leading-relaxed mb-6 max-w-lg">
               Combinamos análise técnica, compliance e cultura organizacional
               para garantir que a segurança acompanhe a inovação.
             </p>
 
+            {/* Botão */}
             <Button
               size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-kolivo-primary transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
+              className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] hover:scale-105 flex justify-center w-fit"
             >
               Avalie o nível de segurança da sua empresa
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
