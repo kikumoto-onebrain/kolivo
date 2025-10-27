@@ -10,22 +10,65 @@ export function SecuritySection() {
       id="assessment-seguranca"
       className="relative py-32 bg-kolivo-blue overflow-hidden"
     >
-      {/* Fundo animado - escudo à esquerda */}
-      <div className="absolute inset-0 flex items-center justify-center lg:justify-start opacity-10">
-        <motion.div
-          className="relative lg:ml-24"
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        >
-          <Shield className="w-[26rem] h-[26rem] text-kolivo-accent" />
-        </motion.div>
+      {/* Fundo animado - escudo e efeitos de segurança */}
+      <div className="absolute inset-0 flex items-center justify-center lg:justify-start">
+        <div className="relative lg:ml-24 w-[26rem] h-[26rem]">
+          {/* Escudo principal com leve brilho */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0.8 }}
+            animate={{ scale: [0.9, 1, 0.9], opacity: [0.8, 1, 0.8] }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            className="absolute inset-0 flex items-center justify-center text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.3)]"
+          >
+            <Shield className="w-full h-full" />
+          </motion.div>
+
+          {/* Onda de varredura circular */}
+          <motion.div
+            className="absolute inset-0 rounded-full border-2 border-white/20"
+            animate={{
+              scale: [1, 1.3],
+              opacity: [0.4, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: 'easeOut',
+            }}
+          />
+
+          {/* Segunda onda de varredura (com defasagem) */}
+          <motion.div
+            className="absolute inset-0 rounded-full border-2 border-white/10"
+            animate={{
+              scale: [1, 1.6],
+              opacity: [0.4, 0],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              ease: 'easeOut',
+              delay: 1,
+            }}
+          />
+
+          {/* Linhas verticais simulando varredura */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+            animate={{
+              x: ['-100%', '100%'],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+          />
+        </div>
       </div>
 
       {/* Conteúdo principal */}
@@ -42,15 +85,15 @@ export function SecuritySection() {
             transition={{ duration: 0.6 }}
             className="flex-1 text-left lg:pl-12"
           >
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-kolivo-accent/20 mb-6">
-              <Shield className="w-10 h-10 text-kolivo-accent" />
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/15 mb-6">
+              <Shield className="w-10 h-10 text-white" />
             </div>
 
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Diagnóstico completo. <br /> Segurança contínua.
             </h2>
 
-            <p className="text-xl text-gray-300 leading-relaxed mb-6 max-w-lg">
+            <p className="text-xl text-gray-200 leading-relaxed mb-6 max-w-lg">
               Realizamos avaliações de segurança que mapeiam vulnerabilidades,
               identificam riscos e fortalecem sua infraestrutura.
             </p>
