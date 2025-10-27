@@ -9,50 +9,15 @@ export function NOCSection() {
     <section id="noc" className="relative py-32 bg-kolivo-primary overflow-hidden">
       {/* Imagem de fundo + overlay de cor */}
       <div className="absolute inset-0">
-        {/* Imagem */}
+        {/* Imagem de fundo */}
         <div
           className="absolute inset-0 bg-cover bg-center opacity-40"
           style={{
             backgroundImage: "url('/noc.webp')",
           }}
         />
-        {/* Overlay para preservar a cor principal */}
+        {/* Overlay para preservar o tom principal */}
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-primary/90 via-kolivo-primary/80 to-transparent" />
-      </div>
-
-      {/* Padrão de rede sobre o fundo */}
-      <div className="absolute inset-0 opacity-5">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern
-              id="network-pattern"
-              x="0"
-              y="0"
-              width="100"
-              height="100"
-              patternUnits="userSpaceOnUse"
-            >
-              <circle cx="50" cy="50" r="2" fill="#5a5aff" />
-              <line
-                x1="50"
-                y1="50"
-                x2="100"
-                y2="50"
-                stroke="#5a5aff"
-                strokeWidth="1"
-              />
-              <line
-                x1="50"
-                y1="50"
-                x2="50"
-                y2="100"
-                stroke="#5a5aff"
-                strokeWidth="1"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#network-pattern)" />
-        </svg>
       </div>
 
       {/* Conteúdo principal */}
