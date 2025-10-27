@@ -13,7 +13,7 @@ export function SecuritySection() {
       {/* Fundo animado - escudo e efeitos de segurança */}
       <div className="absolute inset-0 flex items-center justify-center lg:justify-start">
         <div className="relative lg:ml-24 w-[26rem] h-[26rem]">
-          {/* Escudo principal com leve brilho */}
+          {/* Escudo principal com leve brilho pulsante */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0.8 }}
             animate={{ scale: [0.9, 1, 0.9], opacity: [0.8, 1, 0.8] }}
@@ -53,19 +53,6 @@ export function SecuritySection() {
               repeat: Infinity,
               ease: 'easeOut',
               delay: 1,
-            }}
-          />
-
-          {/* Linhas verticais simulando varredura */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-            animate={{
-              x: ['-100%', '100%'],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: 'linear',
             }}
           />
         </div>
