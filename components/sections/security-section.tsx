@@ -10,10 +10,10 @@ export function SecuritySection() {
       id="assessment-seguranca"
       className="relative py-32 bg-kolivo-blue overflow-hidden"
     >
-      {/* Fundo animado com o escudo à esquerda */}
+      {/* Fundo animado - escudo à esquerda */}
       <div className="absolute inset-0 flex items-center justify-center lg:justify-start opacity-10">
         <motion.div
-          className="relative lg:ml-32"
+          className="relative lg:ml-24"
           animate={{
             scale: [1, 1.2, 1],
             rotate: [0, 180, 360],
@@ -40,9 +40,9 @@ export function SecuritySection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="flex-1 text-right lg:pl-12"
+            className="flex-1 text-left lg:pl-12"
           >
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-kolivo-accent/20 mb-6 ml-auto">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-kolivo-accent/20 mb-6">
               <Shield className="w-10 h-10 text-kolivo-accent" />
             </div>
 
@@ -50,12 +50,12 @@ export function SecuritySection() {
               Diagnóstico completo. <br /> Segurança contínua.
             </h2>
 
-            <p className="text-xl text-gray-300 leading-relaxed mb-6 max-w-lg ml-auto">
+            <p className="text-xl text-gray-300 leading-relaxed mb-6 max-w-lg">
               Realizamos avaliações de segurança que mapeiam vulnerabilidades,
               identificam riscos e fortalecem sua infraestrutura.
             </p>
 
-            <p className="text-lg text-gray-400 leading-relaxed mb-10 max-w-lg ml-auto">
+            <p className="text-lg text-gray-400 leading-relaxed mb-10 max-w-lg">
               Combinamos análise técnica, compliance e cultura organizacional
               para garantir que a segurança acompanhe a inovação.
             </p>
