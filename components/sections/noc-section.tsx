@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 export function NOCSection() {
   return (
     <section id="noc" className="relative py-32 bg-kolivo-primary overflow-hidden">
+      {/* Padrão de rede no fundo */}
       <div className="absolute inset-0 opacity-5">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -41,14 +42,16 @@ export function NOCSection() {
         </svg>
       </div>
 
+      {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
+          {/* Título e ícone */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            className="text-left mb-8"
           >
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-kolivo-accent/20 mb-6">
               <Network className="w-10 h-10 text-kolivo-accent" />
@@ -58,35 +61,37 @@ export function NOCSection() {
             </h2>
           </motion.div>
 
+          {/* Texto principal */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-gray-300 leading-relaxed mb-8 text-center"
+            className="text-xl text-gray-300 leading-relaxed mb-8 max-w-2xl text-left"
           >
             Nosso NOC (Network Operations Center) garante alta disponibilidade e
             resposta proativa.
           </motion.p>
 
+          {/* Texto complementar */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg text-gray-400 leading-relaxed mb-12 text-center"
+            className="text-lg text-gray-400 leading-relaxed mb-12 max-w-2xl text-left"
           >
             Detectamos e solucionamos incidentes antes que impactem o negócio,
-            assegurando estabilidade, performance e experiência digital
-            impecável.
+            assegurando estabilidade, performance e experiência digital impecável.
           </motion.p>
 
+          {/* Botão CTA */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-center"
+            className="text-left"
           >
             <Button
               size="lg"
