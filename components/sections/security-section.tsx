@@ -99,7 +99,8 @@ export function SecuritySection() {
             {/* Botão */}
             <Button
               size="lg"
-              className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] hover:scale-105 flex justify-center w-fit"
+              variant="outline"
+              className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
             >
               Avalie o nível de segurança da sua empresa
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
