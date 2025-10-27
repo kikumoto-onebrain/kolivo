@@ -7,7 +7,20 @@ import { Button } from '@/components/ui/button';
 export function NOCSection() {
   return (
     <section id="noc" className="relative py-32 bg-kolivo-primary overflow-hidden">
-      {/* Padrão de rede no fundo */}
+      {/* Imagem de fundo + overlay de cor */}
+      <div className="absolute inset-0">
+        {/* Imagem */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-40"
+          style={{
+            backgroundImage: "url('/noc.webp')",
+          }}
+        />
+        {/* Overlay para preservar a cor principal */}
+        <div className="absolute inset-0 bg-gradient-to-br from-kolivo-primary/90 via-kolivo-primary/80 to-transparent" />
+      </div>
+
+      {/* Padrão de rede sobre o fundo */}
       <div className="absolute inset-0 opacity-5">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
