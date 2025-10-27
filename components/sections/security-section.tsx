@@ -23,7 +23,7 @@ export function SecuritySection() {
 
       {/* Escudo com efeito de ondas */}
       <div className="absolute inset-0 flex items-center justify-center lg:justify-start">
-        <div className="relative lg:ml-24 w-[26rem] h-[26rem]">
+        <div className="relative lg:ml-24 w-[21rem] h-[21rem]">
           {/* Escudo pulsante */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0.8 }}
