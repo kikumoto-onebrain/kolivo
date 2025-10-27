@@ -10,10 +10,19 @@ export function SecuritySection() {
       id="assessment-seguranca"
       className="relative py-32 bg-kolivo-blue overflow-hidden"
     >
-      {/* Fundo animado - escudo e efeitos de segurança */}
+      {/* Imagem de fundo com opacidade */}
+      <div className="absolute inset-0">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-25"
+          style={{ backgroundImage: "url('/security.webp')" }}
+        />
+        <div className="absolute inset-0 bg-kolivo-blue/90" /> {/* reforça o tom azul predominante */}
+      </div>
+
+      {/* Fundo animado - escudo com ondas */}
       <div className="absolute inset-0 flex items-center justify-center lg:justify-start">
         <div className="relative lg:ml-24 w-[26rem] h-[26rem]">
-          {/* Escudo principal com leve brilho pulsante */}
+          {/* Escudo principal com brilho pulsante */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0.8 }}
             animate={{ scale: [0.9, 1, 0.9], opacity: [0.8, 1, 0.8] }}
@@ -27,7 +36,7 @@ export function SecuritySection() {
             <Shield className="w-full h-full" />
           </motion.div>
 
-          {/* Onda de varredura circular */}
+          {/* Ondas de varredura circular */}
           <motion.div
             className="absolute inset-0 rounded-full border-2 border-white/20"
             animate={{
@@ -41,7 +50,6 @@ export function SecuritySection() {
             }}
           />
 
-          {/* Segunda onda de varredura (com defasagem) */}
           <motion.div
             className="absolute inset-0 rounded-full border-2 border-white/10"
             animate={{
@@ -61,10 +69,10 @@ export function SecuritySection() {
       {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-          {/* Coluna esquerda (animação visível apenas em telas grandes) */}
+          {/* Coluna esquerda (animação apenas em telas grandes) */}
           <div className="hidden lg:flex flex-1 justify-center items-center"></div>
 
-          {/* Coluna direita (conteúdo textual e CTA) */}
+          {/* Coluna direita (texto e CTA) */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -72,10 +80,6 @@ export function SecuritySection() {
             transition={{ duration: 0.6 }}
             className="flex-1 text-left lg:pl-12"
           >
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/15 mb-6">
-              <Shield className="w-10 h-10 text-white" />
-            </div>
-
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
               Diagnóstico completo. <br /> Segurança contínua.
             </h2>
