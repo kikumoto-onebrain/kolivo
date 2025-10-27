@@ -8,21 +8,23 @@ export function SecuritySection() {
   return (
     <section
       id="assessment-seguranca"
-      className="relative py-32 bg-kolivo-blue overflow-hidden"
+      className="relative py-32 bg-kolivo-primary overflow-hidden"
     >
-      {/* Imagem de fundo com opacidade */}
+      {/* Imagem de fundo + overlay com gradiente azul */}
       <div className="absolute inset-0">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-60"
-          style={{ backgroundImage: "url('/security.webp')" }}
+          className="absolute inset-0 bg-cover bg-center opacity-50"
+          style={{
+            backgroundImage: "url('/security.webp')",
+          }}
         />
-        <div className="absolute inset-0 bg-kolivo-blue/90" /> {/* reforça o tom azul predominante */}
+        <div className="absolute inset-0 bg-gradient-to-br from-kolivo-primary/90 via-kolivo-primary/80 to-transparent" />
       </div>
 
-      {/* Fundo animado - escudo com ondas */}
+      {/* Escudo com efeito de ondas */}
       <div className="absolute inset-0 flex items-center justify-center lg:justify-start">
         <div className="relative lg:ml-24 w-[26rem] h-[26rem]">
-          {/* Escudo principal com brilho pulsante */}
+          {/* Escudo pulsante */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0.8 }}
             animate={{ scale: [0.9, 1, 0.9], opacity: [0.8, 1, 0.8] }}
@@ -36,7 +38,7 @@ export function SecuritySection() {
             <Shield className="w-full h-full" />
           </motion.div>
 
-          {/* Ondas de varredura circular */}
+          {/* Ondas concêntricas */}
           <motion.div
             className="absolute inset-0 rounded-full border-2 border-white/20"
             animate={{
@@ -69,7 +71,7 @@ export function SecuritySection() {
       {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-          {/* Coluna esquerda (animação apenas em telas grandes) */}
+          {/* Coluna esquerda (animação visível apenas em telas grandes) */}
           <div className="hidden lg:flex flex-1 justify-center items-center"></div>
 
           {/* Coluna direita (texto e CTA) */}
@@ -84,7 +86,7 @@ export function SecuritySection() {
               Diagnóstico completo. <br /> Segurança contínua.
             </h2>
 
-            <p className="text-xl text-gray-200 leading-relaxed mb-6 max-w-lg">
+            <p className="text-xl text-gray-300 leading-relaxed mb-6 max-w-lg">
               Realizamos avaliações de segurança que mapeiam vulnerabilidades,
               identificam riscos e fortalecem sua infraestrutura.
             </p>
@@ -97,7 +99,7 @@ export function SecuritySection() {
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-kolivo-blue transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
+              className="border-white text-white hover:bg-white hover:text-kolivo-primary transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
             >
               Avalie o nível de segurança da sua empresa
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
