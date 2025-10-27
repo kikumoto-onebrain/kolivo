@@ -13,7 +13,7 @@ export function SecuritySection() {
       {/* Imagem de fundo com opacidade */}
       <div className="absolute inset-0">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-25"
+          className="absolute inset-0 bg-cover bg-center opacity-50"
           style={{ backgroundImage: "url('/security.webp')" }}
         />
         <div className="absolute inset-0 bg-kolivo-blue/90" /> {/* reforça o tom azul predominante */}
