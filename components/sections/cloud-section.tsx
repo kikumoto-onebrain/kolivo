@@ -1,24 +1,33 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Cloud, Server, Settings } from 'lucide-react';
+import { ArrowRight, Server, Settings, Shield, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const features = [
   {
-    icon: Cloud,
-    title: 'Cloud sob medida',
-    description: 'Escale recursos conforme sua demanda.',
-  },
-  {
     icon: Server,
-    title: 'Infra híbrida',
-    description: 'Conecte ambientes locais e na nuvem.',
+    title: 'Arquitetura híbrida',
+    description:
+      'Desenhamos ambientes cloud e on-premise personalizados para o ritmo e as necessidades da sua operação — com performance e escalabilidade garantidas.',
   },
   {
     icon: Settings,
-    title: 'Governança contínua',
-    description: 'Controle e automação em tempo real.',
+    title: 'Governança e automação',
+    description:
+      'Implementamos processos inteligentes que monitoram, atualizam e otimizam sua infraestrutura de forma constante — menos esforço, mais controle.',
+  },
+  {
+    icon: Shield,
+    title: 'Segurança avançada',
+    description:
+      'Ambientes configurados com camadas de proteção, redundância e resposta rápida — garantindo estabilidade mesmo em cenários críticos.',
+  },
+  {
+    icon: BarChart3,
+    title: 'Escalabilidade total',
+    description:
+      'Cresça no seu tempo: aumente capacidade e recursos de forma dinâmica, sem comprometer performance ou custo operacional.',
   },
 ];
 
@@ -26,64 +35,58 @@ export function CloudSection() {
   return (
     <section id="cloud" className="py-32 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16 max-w-6xl mx-auto">
-          {/* Coluna esquerda - Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 flex-1">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-16">
+          {/* COLUNA ESQUERDA — CARDS (2 por linha inclusive no mobile) */}
+          <div className="flex-1 w-full">
+            <div className="grid grid-cols-2 gap-4 sm:gap-6">
+              {features.map(({ icon: Icon, title, description }, index) => (
                 <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  key={title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
-                  whileHover={{ y: -8 }}
-                  className="p-8 bg-white rounded-2xl border border-gray-200 hover:border-kolivo-accent transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.15)]"
+                  transition={{ duration: 0.4 }}
+                  className="p-5 sm:p-6 bg-white rounded-2xl border border-gray-200 text-left
+                             hover:border-kolivo-accent hover:shadow-[0_0_25px_rgba(90,90,255,0.15)]
+                             transition-all duration-300 hover:-translate-y-1"
                 >
-                  <motion.div
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                      delay: index * 0.3,
-                    }}
-                    className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-kolivo-accent/10 mb-6"
-                  >
-                    <Icon className="w-8 h-8 text-kolivo-accent" />
-                  </motion.div>
-                  <h3 className="text-2xl font-bold text-kolivo-primary mb-3">
-                    {feature.title}
+                  <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-kolivo-accent/10 mb-4">
+                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-kolivo-accent" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-kolivo-primary mb-2 line-clamp-1">
+                    {title}
                   </h3>
-                  <p className="text-lg text-kolivo-gray">
-                    {feature.description}
+                  <p className="text-sm sm:text-base text-kolivo-gray leading-relaxed">
+                    {description}
                   </p>
                 </motion.div>
-              );
-            })}
+              ))}
+            </div>
           </div>
 
-          {/* Coluna direita - Título, texto e botão */}
+          {/* COLUNA DIREITA — TÍTULO, TEXTO E CTA (alinhados à esquerda) */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6 }}
-            className="flex-1 text-right"
+            transition={{ duration: 0.5 }}
+            className="flex-1 w-full text-left"
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-kolivo-primary mb-6">
-              Infraestrutura flexível, <br /> segura e escalável
+              Infraestrutura flexível, <br className="hidden sm:block" />
+              segura e escalável
             </h2>
-            <p className="text-xl text-kolivo-gray mb-10 max-w-md ml-auto">
+
+            <p className="text-lg sm:text-xl text-kolivo-gray mb-8 max-w-md">
               Projetamos e gerenciamos ambientes cloud e on-premise sob medida,
-              garantindo performance, segurança e governança.
+              garantindo performance, segurança e governança contínua.
             </p>
 
             <Button
               size="lg"
-              className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
               variant="outline"
+              className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white
+                         transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
             >
               Modernize sua infraestrutura de TI
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
