@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { ArrowRight, Cloud, Server, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -23,23 +23,23 @@ const features = [
 ];
 
 // Variantes para animações coordenadas
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.25, // atraso entre os cards
+      staggerChildren: 0.25,
     },
   },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
-      ease: 'easeOut',
+      ease: ['easeOut'], // <-- CORRIGIDO
     },
   },
 };
