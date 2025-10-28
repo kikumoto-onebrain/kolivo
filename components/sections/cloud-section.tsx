@@ -24,49 +24,44 @@ const features = [
 
 export function CloudSection() {
   return (
-    <section id="cloud" className="py-32 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="cloud" className="py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 max-w-6xl mx-auto">
-          {/* Coluna esquerda - Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 flex-1">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
-                  whileHover={{ y: -8 }}
-                  className="p-8 bg-white rounded-2xl border border-gray-200 hover:border-kolivo-accent transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.15)]"
-                >
-                  <motion.div
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                      delay: index * 0.3,
-                    }}
-                    className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-kolivo-accent/10 mb-6"
+          
+          {/* Coluna esquerda — Slider automático */}
+          <div className="flex-1 relative overflow-hidden">
+            <motion.div
+              className="flex gap-6"
+              animate={{ x: ['0%', '-100%'] }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            >
+              {[...features, ...features].map((feature, index) => {
+                const Icon = feature.icon;
+                return (
+                  <div
+                    key={index}
+                    className="min-w-[18rem] p-8 bg-white rounded-2xl border border-gray-200 hover:border-kolivo-accent transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.15)]"
                   >
-                    <Icon className="w-8 h-8 text-kolivo-accent" />
-                  </motion.div>
-                  <h3 className="text-2xl font-bold text-kolivo-primary mb-3">
-                    {feature.title}
-                  </h3>
-                  <p className="text-lg text-kolivo-gray">
-                    {feature.description}
-                  </p>
-                </motion.div>
-              );
-            })}
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-kolivo-accent/10 mb-6">
+                      <Icon className="w-8 h-8 text-kolivo-accent" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-kolivo-primary mb-3">
+                      {feature.title}
+                    </h3>
+                    <p className="text-lg text-kolivo-gray">{feature.description}</p>
+                  </div>
+                );
+              })}
+            </motion.div>
           </div>
 
-          {/* Coluna direita - Título, texto e botão */}
+          {/* Coluna direita — Texto e botão */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
@@ -82,8 +77,8 @@ export function CloudSection() {
 
             <Button
               size="lg"
-              className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
               variant="outline"
+              className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
             >
               Modernize sua infraestrutura de TI
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
