@@ -27,7 +27,7 @@ const features = [
     icon: BarChart3,
     title: 'Escalabilidade total',
     description:
-      'Cresça no seu tempo: aumente capacidade e recursos de forma dinâmica, sem comprometer performance ou custo operacional.',
+      'Aumente capacidade e recursos de forma dinâmica, sem comprometer performance ou custo operacional.',
   },
 ];
 
