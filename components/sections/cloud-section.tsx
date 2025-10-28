@@ -1,34 +1,41 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import { ArrowRight, Cloud, Server, Settings } from 'lucide-react';
+import { ArrowRight, Cloud, Server, Shield, BarChart3, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const features = [
   {
-    icon: Cloud,
-    title: 'Cloud sob medida',
-    description: 'Escale recursos conforme sua demanda.',
-  },
-  {
     icon: Server,
-    title: 'Infra híbrida',
-    description: 'Conecte ambientes locais e na nuvem.',
+    title: 'Arquitetura híbrida sob medida',
+    description:
+      'Desenhamos ambientes cloud e on-premise personalizados para o ritmo e as necessidades da sua operação — com performance e escalabilidade garantidas.',
   },
   {
     icon: Settings,
-    title: 'Governança contínua',
-    description: 'Controle e automação em tempo real.',
+    title: 'Governança e automação contínuas',
+    description:
+      'Implementamos processos inteligentes que monitoram, atualizam e otimizam sua infraestrutura de forma constante — menos esforço, mais controle.',
+  },
+  {
+    icon: Shield,
+    title: 'Segurança e alta disponibilidade',
+    description:
+      'Ambientes configurados com camadas de proteção, redundância e resposta rápida — garantindo estabilidade mesmo em cenários críticos.',
+  },
+  {
+    icon: BarChart3,
+    title: 'Escalabilidade sem limites',
+    description:
+      'Cresça no seu tempo: aumente capacidade e recursos de forma dinâmica, sem comprometer performance ou custo operacional.',
   },
 ];
 
-// Variantes para animações coordenadas
+// Variantes de animação
 const containerVariants: Variants = {
   hidden: {},
   visible: {
-    transition: {
-      staggerChildren: 0.25,
-    },
+    transition: { staggerChildren: 0.25 },
   },
 };
 
@@ -37,10 +44,7 @@ const cardVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.6,
-      ease: ['easeOut'], // <-- CORRIGIDO
-    },
+    transition: { duration: 0.6, ease: ['easeOut'] },
   },
 };
 
@@ -52,8 +56,8 @@ export function CloudSection() {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 max-w-6xl mx-auto">
-          
-          {/* Coluna esquerda — Cards animados em sequência */}
+
+          {/* Coluna esquerda — Cards animados */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -76,7 +80,7 @@ export function CloudSection() {
                   <h3 className="text-2xl font-bold text-kolivo-primary mb-3">
                     {feature.title}
                   </h3>
-                  <p className="text-lg text-kolivo-gray">
+                  <p className="text-lg text-kolivo-gray leading-relaxed">
                     {feature.description}
                   </p>
                 </motion.div>
@@ -90,14 +94,14 @@ export function CloudSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="flex-1 text-right"
+            className="flex-1 text-left"
           >
             <h2 className="text-4xl sm:text-5xl font-bold text-kolivo-primary mb-6">
               Infraestrutura flexível, <br /> segura e escalável
             </h2>
-            <p className="text-xl text-kolivo-gray mb-10 max-w-md ml-auto">
+            <p className="text-xl text-kolivo-gray mb-10 max-w-md">
               Projetamos e gerenciamos ambientes cloud e on-premise sob medida,
-              garantindo performance, segurança e governança.
+              garantindo performance, segurança e governança contínua.
             </p>
 
             <Button
