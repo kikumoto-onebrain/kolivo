@@ -1,57 +1,15 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, BarChart3 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function StressTestSection() {
   return (
-    <section id="stress-test" className="relative py-32 bg-kolivo-primary overflow-hidden">
-      {/* Fundo animado com barras */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="flex items-end justify-around h-full px-8 pb-8">
-          {[40, 70, 50, 90, 60, 85, 45, 95].map((height, index) => (
-            <motion.div
-              key={index}
-              className="bg-kolivo-accent rounded-t-lg"
-              style={{ width: '8%' }}
-              initial={{ height: 0 }}
-              whileInView={{ height: `${height}%` }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 1,
-                delay: index * 0.1,
-                ease: 'easeOut',
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Efeito de pulsos circulares simulando ondas de stress */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        {[...Array(4)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full border border-kolivo-accent/30"
-            style={{
-              width: 200,
-              height: 200,
-            }}
-            animate={{
-              scale: [1, 3.5],
-              opacity: [0.3, 0],
-            }}
-            transition={{
-              duration: 4,
-              delay: i * 1,
-              repeat: Infinity,
-              ease: 'easeOut',
-            }}
-          />
-        ))}
-      </div>
-
+    <section
+      id="stress-test"
+      className="relative py-32 bg-kolivo-primary overflow-hidden"
+    >
       {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 max-w-6xl mx-auto">
@@ -67,9 +25,6 @@ export function StressTestSection() {
               transition={{ duration: 0.6 }}
               className="mb-8"
             >
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-kolivo-accent/20 mb-6 relative z-10">
-                <BarChart3 className="w-10 h-10 text-kolivo-accent" />
-              </div>
               <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 relative z-10">
                 Descubra os limites antes que o sistema descubra por você
               </h2>
