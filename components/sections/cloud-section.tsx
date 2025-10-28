@@ -22,42 +22,67 @@ const features = [
   },
 ];
 
+// Variantes para animações coordenadas
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.25, // atraso entre os cards
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+};
+
 export function CloudSection() {
   return (
-    <section id="cloud" className="py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <section
+      id="cloud"
+      className="py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden"
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 max-w-6xl mx-auto">
           
-          {/* Coluna esquerda — Slider automático */}
-          <div className="flex-1 relative overflow-hidden">
-            <motion.div
-              className="flex gap-6"
-              animate={{ x: ['0%', '-100%'] }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-            >
-              {[...features, ...features].map((feature, index) => {
-                const Icon = feature.icon;
-                return (
-                  <div
-                    key={index}
-                    className="min-w-[18rem] p-8 bg-white rounded-2xl border border-gray-200 hover:border-kolivo-accent transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.15)]"
-                  >
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-kolivo-accent/10 mb-6">
-                      <Icon className="w-8 h-8 text-kolivo-accent" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-kolivo-primary mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-lg text-kolivo-gray">{feature.description}</p>
+          {/* Coluna esquerda — Cards animados em sequência */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1"
+          >
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <motion.div
+                  key={index}
+                  variants={cardVariants}
+                  whileHover={{ scale: 1.03 }}
+                  className="p-8 bg-white rounded-2xl border border-gray-200 hover:border-kolivo-accent hover:shadow-[0_0_25px_rgba(90,90,255,0.15)] transition-all duration-300"
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-kolivo-accent/10 mb-6">
+                    <Icon className="w-8 h-8 text-kolivo-accent" />
                   </div>
-                );
-              })}
-            </motion.div>
-          </div>
+                  <h3 className="text-2xl font-bold text-kolivo-primary mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-lg text-kolivo-gray">
+                    {feature.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
 
           {/* Coluna direita — Texto e botão */}
           <motion.div
