@@ -57,7 +57,7 @@ export function NOCSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg text-gray-400 leading-relaxed mb-12 max-w-2xl text-left"
+            className="text-xl text-gray-300 leading-relaxed mb-8 max-w-2xl text-left"
           >
             Detectamos e solucionamos incidentes antes que impactem o negócio,
             assegurando estabilidade, performance e experiência digital impecável.
