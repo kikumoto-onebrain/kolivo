@@ -15,7 +15,7 @@ export function StressTestSection() {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 800 400"
-          className="w-[90%] max-w-4xl opacity-20"
+          className="w-[90%] max-w-4xl opacity-25"
           preserveAspectRatio="none"
         >
           <defs>
@@ -28,12 +28,12 @@ export function StressTestSection() {
           {/* Linha base */}
           <path
             d="M0 200 H800"
-            stroke="rgba(255,255,255,0.1)"
+            stroke="rgba(255,255,255,0.08)"
             strokeWidth="2"
             fill="none"
           />
 
-          {/* Linha animada de batimentos */}
+          {/* Linha animada contínua */}
           <motion.path
             d="M0 200 L100 200 L130 150 L160 250 L190 200 L220 200 L250 170 L280 230 L310 200 L340 200 L370 120 L400 280 L430 200 L460 200 L490 180 L520 220 L550 200 L580 200 L610 150 L640 250 L670 200 L800 200"
             stroke="url(#pulse-gradient)"
@@ -41,12 +41,11 @@ export function StressTestSection() {
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeDasharray="400"
-            animate={{
-              strokeDashoffset: [400, -1200], // movimento contínuo
-            }}
+            strokeDasharray="900"      // tamanho total da linha
+            strokeDashoffset="900"     // começa fora da tela
+            animate={{ strokeDashoffset: [900, 0] }} // avança e desaparece naturalmente
             transition={{
-              duration: 4,
+              duration: 3.8,
               repeat: Infinity,
               ease: 'linear',
             }}
@@ -57,10 +56,10 @@ export function StressTestSection() {
       {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 max-w-6xl mx-auto">
-          {/* Espaço para o gráfico à esquerda */}
+          {/* Espaço à esquerda */}
           <div className="hidden lg:flex flex-1" />
 
-          {/* Coluna direita - texto e botão */}
+          {/* Conteúdo à direita */}
           <div className="flex-1 text-left">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
