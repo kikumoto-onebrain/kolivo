@@ -9,7 +9,7 @@ const features = [
     icon: Database,
     title: 'Inventário automatizado',
     description:
-      'Visão em tempo real dos ativos. Controle completo e automatizado do parque tecnológico.',
+      'Visão em tempo real dos ativos. Controle completo do parque tecnológico.',
   },
   {
     icon: TrendingDown,
@@ -23,9 +23,9 @@ export function AssetManagementSection() {
   return (
     <section id="gestao-ativos" className="py-32 bg-white overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-16 max-w-7xl mx-auto">
-          {/* Coluna esquerda: título, texto e botão */}
-          <div className="flex-1 text-left">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-16 max-w-7xl mx-auto min-h-[70vh]">
+          {/* Coluna esquerda: título, texto e botão centralizados */}
+          <div className="flex-1 flex flex-col items-start justify-center text-left h-full">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -60,7 +60,7 @@ export function AssetManagementSection() {
           </div>
 
           {/* Coluna direita: cards (1 por linha) */}
-          <div className="flex-1 flex flex-col gap-8 w-full">
+          <div className="flex-1 flex flex-col justify-center gap-8 w-full">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
