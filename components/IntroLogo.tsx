@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { ChevronsDown } from 'lucide-react';
 
 export function IntroLogo() {
   const [showIntro, setShowIntro] = useState(true);
@@ -22,7 +21,7 @@ export function IntroLogo() {
     ]);
 
     // Exibe por 2 segundos antes de iniciar o fade-out
-    const timer = setTimeout(() => setShowIntro(false), 3000);
+    const timer = setTimeout(() => setShowIntro(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -86,16 +85,6 @@ export function IntroLogo() {
               priority
               className="w-40 sm:w-56 h-auto"
             />
-          </motion.div>
-
-          {/* Chevron inferior */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white opacity-70 z-20"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 1 }}
-          >
-            <ChevronsDown size={40} strokeWidth={1.5} />
           </motion.div>
         </motion.div>
       )}

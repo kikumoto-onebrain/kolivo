@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { ChevronsDown } from 'lucide-react';
 
 export function HeroSection() {
   const [lights, setLights] = useState<
@@ -143,6 +144,15 @@ export function HeroSection() {
           </motion.div>
         </div>
       </div>
+
+      {/* Chevron duplo animado */}
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white opacity-70 z-20"
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <ChevronsDown size={48} strokeWidth={1.5} />
+      </motion.div>
     </section>
   );
 }
