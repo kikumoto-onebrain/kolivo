@@ -12,7 +12,7 @@ export function StressTestSection() {
     >
       {/* Gráfico animado à esquerda */}
       <div className="absolute inset-0 flex justify-center lg:justify-start items-center pointer-events-none">
-        <motion.svg
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 800 400"
           className="w-[90%] max-w-4xl opacity-20"
@@ -33,7 +33,7 @@ export function StressTestSection() {
             fill="none"
           />
 
-          {/* Linha de batimentos */}
+          {/* Linha animada de batimentos */}
           <motion.path
             d="M0 200 L100 200 L130 150 L160 250 L190 200 L220 200 L250 170 L280 230 L310 200 L340 200 L370 120 L400 280 L430 200 L460 200 L490 180 L520 220 L550 200 L580 200 L610 150 L640 250 L670 200 L800 200"
             stroke="url(#pulse-gradient)"
@@ -41,17 +41,17 @@ export function StressTestSection() {
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeDasharray="1200"
-            strokeDashoffset="1200"
-            animate={{ strokeDashoffset: [1200, 0] }}
+            strokeDasharray="400"
+            animate={{
+              strokeDashoffset: [400, -1200], // movimento contínuo
+            }}
             transition={{
-              duration: 3.5,
+              duration: 4,
               repeat: Infinity,
-              repeatType: 'loop',
-              ease: 'easeInOut',
+              ease: 'linear',
             }}
           />
-        </motion.svg>
+        </svg>
       </div>
 
       {/* Conteúdo principal */}
