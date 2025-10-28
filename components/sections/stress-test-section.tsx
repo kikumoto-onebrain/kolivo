@@ -13,61 +13,61 @@ export function StressTestSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 max-w-6xl mx-auto">
           
-          {/* Gauge animado (lado esquerdo) */}
+          {/* Velocímetro animado - lado esquerdo */}
           <div className="flex-1 flex justify-center items-center">
-            <div className="relative w-64 h-64">
-              {/* Círculo base */}
-              <svg viewBox="0 0 200 200" className="w-full h-full">
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="80"
+            <div className="relative w-64 h-64 flex justify-center items-center">
+              {/* Base semicircular */}
+              <svg viewBox="0 0 200 100" className="w-full h-auto">
+                <path
+                  d="M20 100 A80 80 0 0 1 180 100"
                   stroke="rgba(255,255,255,0.1)"
                   strokeWidth="12"
                   fill="none"
                 />
               </svg>
 
-              {/* Arco de progresso */}
+              {/* Arco de gradiente (stress crescendo) */}
               <motion.svg
-                viewBox="0 0 200 200"
-                className="absolute inset-0"
-                initial={{ rotate: -90 }}
+                viewBox="0 0 200 100"
+                className="absolute top-0 left-0 w-full h-auto"
               >
-                <motion.circle
-                  cx="100"
-                  cy="100"
-                  r="80"
-                  stroke="url(#gauge-gradient)"
-                  strokeWidth="12"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeDasharray="502"
-                  strokeDashoffset="502"
-                  animate={{
-                    strokeDashoffset: [502, 100, 502],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
                 <defs>
-                  <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <linearGradient id="speed-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="#5a5aff" />
                     <stop offset="100%" stopColor="#9b9bff" />
                   </linearGradient>
                 </defs>
+
+                <motion.path
+                  d="M20 100 A80 80 0 0 1 180 100"
+                  stroke="url(#speed-gradient)"
+                  strokeWidth="12"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeDasharray="250"
+                  strokeDashoffset="250"
+                  animate={{ strokeDashoffset: [250, 0, 250] }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
               </motion.svg>
 
-              {/* Ponteiro do gauge */}
+              {/* Ponteiro do velocímetro */}
               <motion.div
-                className="absolute top-1/2 left-1/2 origin-bottom"
-                style={{ width: '4px', height: '80px', backgroundColor: '#5a5aff' }}
-                animate={{ rotate: [0, 180, 0] }}
+                className="absolute origin-bottom"
+                style={{
+                  width: '4px',
+                  height: '90px',
+                  backgroundColor: '#5a5aff',
+                  bottom: '10%',
+                  transformOrigin: 'bottom center',
+                }}
+                animate={{ rotate: [0, 140, 0] }}
                 transition={{
-                  duration: 4,
+                  duration: 5,
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
@@ -75,37 +75,29 @@ export function StressTestSection() {
 
               {/* Indicador central */}
               <motion.div
-                className="absolute inset-0 flex items-center justify-center text-white font-semibold text-lg"
-                animate={{ opacity: [0.8, 1, 0.8], scale: [0.95, 1.05, 0.95] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
+                className="absolute bottom-0 text-white/80 font-semibold text-lg"
+                animate={{ opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
               >
-                LOAD TEST
+                STRESS TEST
               </motion.div>
             </div>
           </div>
 
           {/* Coluna direita - conteúdo */}
           <div className="flex-1 text-left">
-            <motion.div
+            <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6 }}
-              className="mb-8"
+              className="text-4xl sm:text-5xl font-bold text-white mb-6"
             >
-              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-                Descubra os limites antes que o sistema descubra por você
-              </h2>
-            </motion.div>
+              Descubra os limites antes que o sistema descubra por você
+            </motion.h2>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl text-gray-300 leading-relaxed mb-6 max-w-xl"
             >
@@ -116,7 +108,6 @@ export function StressTestSection() {
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-lg text-gray-400 leading-relaxed mb-12 max-w-xl"
             >
@@ -127,7 +118,6 @@ export function StressTestSection() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <Button
