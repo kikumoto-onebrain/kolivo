@@ -10,13 +10,85 @@ export function StressTestSection() {
       id="stress-test"
       className="relative py-32 bg-kolivo-primary overflow-hidden"
     >
-      {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 max-w-6xl mx-auto">
-          {/* Espaço à esquerda (para posicionar o conteúdo à direita) */}
-          <div className="hidden lg:flex flex-1" />
+          
+          {/* Gauge animado (lado esquerdo) */}
+          <div className="flex-1 flex justify-center items-center">
+            <div className="relative w-64 h-64">
+              {/* Círculo base */}
+              <svg viewBox="0 0 200 200" className="w-full h-full">
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="80"
+                  stroke="rgba(255,255,255,0.1)"
+                  strokeWidth="12"
+                  fill="none"
+                />
+              </svg>
 
-          {/* Coluna direita - conteúdo alinhado à esquerda */}
+              {/* Arco de progresso */}
+              <motion.svg
+                viewBox="0 0 200 200"
+                className="absolute inset-0"
+                initial={{ rotate: -90 }}
+              >
+                <motion.circle
+                  cx="100"
+                  cy="100"
+                  r="80"
+                  stroke="url(#gauge-gradient)"
+                  strokeWidth="12"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeDasharray="502"
+                  strokeDashoffset="502"
+                  animate={{
+                    strokeDashoffset: [502, 100, 502],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+                <defs>
+                  <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#5a5aff" />
+                    <stop offset="100%" stopColor="#9b9bff" />
+                  </linearGradient>
+                </defs>
+              </motion.svg>
+
+              {/* Ponteiro do gauge */}
+              <motion.div
+                className="absolute top-1/2 left-1/2 origin-bottom"
+                style={{ width: '4px', height: '80px', backgroundColor: '#5a5aff' }}
+                animate={{ rotate: [0, 180, 0] }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              />
+
+              {/* Indicador central */}
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center text-white font-semibold text-lg"
+                animate={{ opacity: [0.8, 1, 0.8], scale: [0.95, 1.05, 0.95] }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                LOAD TEST
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Coluna direita - conteúdo */}
           <div className="flex-1 text-left">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -25,7 +97,7 @@ export function StressTestSection() {
               transition={{ duration: 0.6 }}
               className="mb-8"
             >
-              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 relative z-10">
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
                 Descubra os limites antes que o sistema descubra por você
               </h2>
             </motion.div>
@@ -35,7 +107,7 @@ export function StressTestSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-300 leading-relaxed mb-6 max-w-xl relative z-10"
+              className="text-xl text-gray-300 leading-relaxed mb-6 max-w-xl"
             >
               Simulamos picos de acesso e cargas extremas para avaliar a
               resiliência da sua infraestrutura.
@@ -46,7 +118,7 @@ export function StressTestSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-lg text-gray-400 leading-relaxed mb-12 max-w-xl relative z-10"
+              className="text-lg text-gray-400 leading-relaxed mb-12 max-w-xl"
             >
               Nossos stress tests ajudam sua equipe a antecipar gargalos e
               preparar o ambiente para qualquer cenário.
@@ -57,7 +129,6 @@ export function StressTestSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="relative z-10"
             >
               <Button
                 size="lg"
