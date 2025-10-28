@@ -10,81 +10,55 @@ export function StressTestSection() {
       id="stress-test"
       className="relative py-32 bg-kolivo-primary overflow-hidden"
     >
+      {/* Gráfico animado à esquerda */}
+      <div className="absolute inset-0 flex justify-center lg:justify-start items-center pointer-events-none">
+        <motion.svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 800 400"
+          className="w-[90%] max-w-4xl opacity-20"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="pulse-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#5a5aff" />
+              <stop offset="100%" stopColor="#9b9bff" />
+            </linearGradient>
+          </defs>
+
+          {/* Linha base */}
+          <path
+            d="M0 200 H800"
+            stroke="rgba(255,255,255,0.1)"
+            strokeWidth="2"
+            fill="none"
+          />
+
+          {/* Linha de batimentos */}
+          <motion.path
+            d="M0 200 L100 200 L130 150 L160 250 L190 200 L220 200 L250 170 L280 230 L310 200 L340 200 L370 120 L400 280 L430 200 L460 200 L490 180 L520 220 L550 200 L580 200 L610 150 L640 250 L670 200 L800 200"
+            stroke="url(#pulse-gradient)"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: [0, 1, 0] }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+        </motion.svg>
+      </div>
+
+      {/* Conteúdo principal */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 max-w-6xl mx-auto">
-          
-          {/* Velocímetro animado - lado esquerdo */}
-          <div className="flex-1 flex justify-center items-center">
-            <div className="relative w-64 h-64 flex justify-center items-center">
-              {/* Base semicircular */}
-              <svg viewBox="0 0 200 100" className="w-full h-auto">
-                <path
-                  d="M20 100 A80 80 0 0 1 180 100"
-                  stroke="rgba(255,255,255,0.1)"
-                  strokeWidth="12"
-                  fill="none"
-                />
-              </svg>
+          {/* Espaço para o gráfico à esquerda */}
+          <div className="hidden lg:flex flex-1" />
 
-              {/* Arco de gradiente (stress crescendo) */}
-              <motion.svg
-                viewBox="0 0 200 100"
-                className="absolute top-0 left-0 w-full h-auto"
-              >
-                <defs>
-                  <linearGradient id="speed-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#5a5aff" />
-                    <stop offset="100%" stopColor="#9b9bff" />
-                  </linearGradient>
-                </defs>
-
-                <motion.path
-                  d="M20 100 A80 80 0 0 1 180 100"
-                  stroke="url(#speed-gradient)"
-                  strokeWidth="12"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeDasharray="250"
-                  strokeDashoffset="250"
-                  animate={{ strokeDashoffset: [250, 0, 250] }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: 'easeInOut',
-                  }}
-                />
-              </motion.svg>
-
-              {/* Ponteiro do velocímetro */}
-              <motion.div
-                className="absolute origin-bottom"
-                style={{
-                  width: '4px',
-                  height: '90px',
-                  backgroundColor: '#5a5aff',
-                  bottom: '10%',
-                  transformOrigin: 'bottom center',
-                }}
-                animate={{ rotate: [0, 140, 0] }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
-
-              {/* Indicador central */}
-              <motion.div
-                className="absolute bottom-0 text-white/80 font-semibold text-lg"
-                animate={{ opacity: [0.8, 1, 0.8] }}
-                transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                STRESS TEST
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Coluna direita - conteúdo */}
+          {/* Coluna direita - texto e botão */}
           <div className="flex-1 text-left">
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
