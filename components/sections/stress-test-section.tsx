@@ -10,49 +10,48 @@ export function StressTestSection() {
       id="stress-test"
       className="relative py-32 bg-kolivo-primary overflow-hidden"
     >
-      {/* Gráfico contínuo fluindo à esquerda */}
-      <div className="absolute inset-0 flex justify-center lg:justify-start items-center pointer-events-none overflow-hidden">
-        <motion.div
-          className="absolute w-[200%] h-[400px] opacity-25"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{
-            duration: 6,
-            ease: 'linear',
-            repeat: Infinity,
-          }}
+      {/* Gráfico animado à esquerda */}
+      <div className="absolute inset-0 flex justify-center lg:justify-start items-center pointer-events-none">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 800 400"
+          className="w-[90%] max-w-4xl opacity-20"
+          preserveAspectRatio="none"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1600 400"
-            className="w-full h-full"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient id="pulse-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#5a5aff" />
-                <stop offset="100%" stopColor="#9b9bff" />
-              </linearGradient>
-            </defs>
+          <defs>
+            <linearGradient id="pulse-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#5a5aff" />
+              <stop offset="100%" stopColor="#9b9bff" />
+            </linearGradient>
+          </defs>
 
-            {/* Linha base */}
-            <path
-              d="M0 200 H1600"
-              stroke="rgba(255,255,255,0.1)"
-              strokeWidth="2"
-              fill="none"
-            />
+          {/* Linha base */}
+          <path
+            d="M0 200 H800"
+            stroke="rgba(255,255,255,0.1)"
+            strokeWidth="2"
+            fill="none"
+          />
 
-            {/* Linha de batimentos repetida duas vezes para looping suave */}
-            <path
-              d="M0 200 L100 200 L130 150 L160 250 L190 200 L220 200 L250 170 L280 230 L310 200 L340 200 L370 120 L400 280 L430 200 L460 200 L490 180 L520 220 L550 200 L580 200 L610 150 L640 250 L670 200 L700 200 L730 150 L760 250 L790 200 L820 200 L850 170 L880 230 L910 200 L940 200 L970 120 L1000 280 L1030 200 L1060 200 L1090 180 L1120 220 L1150 200 L1180 200 L1210 150 L1240 250 L1270 200 L1300 200 L1330 150 L1360 250 L1390 200 L1420 200 L1450 170 L1480 230 L1510 200 L1600 200"
-              stroke="url(#pulse-gradient)"
-              strokeWidth="3"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </motion.div>
+          {/* Linha animada de batimentos */}
+          <motion.path
+            d="M0 200 L100 200 L130 150 L160 250 L190 200 L220 200 L250 170 L280 230 L310 200 L340 200 L370 120 L400 280 L430 200 L460 200 L490 180 L520 220 L550 200 L580 200 L610 150 L640 250 L670 200 L800 200"
+            stroke="url(#pulse-gradient)"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="400"
+            animate={{
+              strokeDashoffset: [400, -1200], // movimento contínuo
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+          />
+        </svg>
       </div>
 
       {/* Conteúdo principal */}
