@@ -41,11 +41,13 @@ export function StressTestSection() {
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: [0, 1, 0] }}
+            strokeDasharray="1200"
+            strokeDashoffset="1200"
+            animate={{ strokeDashoffset: [1200, 0] }}
             transition={{
-              duration: 4,
+              duration: 3.5,
               repeat: Infinity,
+              repeatType: 'loop',
               ease: 'easeInOut',
             }}
           />
