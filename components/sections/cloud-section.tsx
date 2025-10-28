@@ -9,19 +9,19 @@ const features = [
     icon: Server,
     title: 'Arquitetura híbrida',
     description:
-      'Desenhamos ambientes cloud e on-premise personalizados para o ritmo e as necessidades da sua operação — com performance e escalabilidade garantidas.',
+      'Desenhamos ambientes cloud e on-premise personalizados para o ritmo e as necessidades da sua operação.',
   },
   {
     icon: Settings,
-    title: 'Governança e automação',
+    title: 'Governança',
     description:
-      'Implementamos processos inteligentes que monitoram, atualizam e otimizam sua infraestrutura de forma constante — menos esforço, mais controle.',
+      'Implementamos processos inteligentes que monitoram, atualizam e otimizam sua infraestrutura de forma constante.',
   },
   {
     icon: Shield,
     title: 'Segurança avançada',
     description:
-      'Ambientes configurados com camadas de proteção, redundância e resposta rápida — garantindo estabilidade mesmo em cenários críticos.',
+      'Ambientes configurados com camadas de proteção, redundância e resposta rápida, garantindo estabilidade.',
   },
   {
     icon: BarChart3,
