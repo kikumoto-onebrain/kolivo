@@ -52,19 +52,8 @@ export function ServiceDeskSection() {
             className="text-xl text-gray-300 leading-relaxed mb-8 text-center"
           >
             Com nosso Service Desk e CSC (Centro de Serviços Compartilhados),
-            sua empresa ganha suporte ágil, integrado e humanizado.
-          </motion.p>
-
-          {/* Parágrafo secundário */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg text-gray-400 leading-relaxed mb-12 text-center"
-          >
-            Monitoramos incidentes, tratamos chamados e garantimos a
-            continuidade do negócio com qualidade e SLA reais.
+            sua empresa ganha suporte ágil, integrado e humanizado. Monitoramos incidentes, 
+            tratamos chamados e garantimos a continuidade do negócio com qualidade e SLA reais.
           </motion.p>
 
           {/* Botão CTA */}

@@ -9,7 +9,7 @@ const features = [
     icon: Database,
     title: 'Inventário automatizado',
     description:
-      'Visão em tempo real dos ativos. Controle completo do parque tecnológico com automação e inteligência.',
+      'Visão em tempo real dos ativos. Controle completo e automatizado do parque tecnológico.',
   },
   {
     icon: TrendingDown,
@@ -21,26 +21,46 @@ const features = [
 
 export function AssetManagementSection() {
   return (
-    <section id="gestao-ativos" className="py-32 bg-white">
+    <section id="gestao-ativos" className="py-32 bg-white overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl sm:text-5xl font-bold text-kolivo-primary mb-6">
-              Controle total do seu parque tecnológico
-            </h2>
-            <p className="text-xl text-kolivo-gray max-w-3xl mx-auto">
-              Com o ITAM Kolivo, cada ativo é monitorado, otimizado e governado.
-              Gestão inteligente que reduz custos e aumenta eficiência.
-            </p>
-          </motion.div>
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-16 max-w-7xl mx-auto">
+          {/* Coluna esquerda: título, texto e botão */}
+          <div className="flex-1 text-left">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6 }}
+              className="mb-10"
+            >
+              <h2 className="text-4xl sm:text-5xl font-bold text-kolivo-primary mb-6">
+                Controle total do seu parque tecnológico
+              </h2>
+              <p className="text-xl text-kolivo-gray max-w-xl">
+                Com o ITAM Kolivo, cada ativo é monitorado, otimizado e
+                governado. Gestão inteligente que reduz custos e aumenta
+                eficiência.
+              </p>
+            </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <Button
+                size="lg"
+                className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
+              >
+                Simplifique sua gestão de ativos
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* Coluna direita: cards (1 por linha) */}
+          <div className="flex-1 flex flex-col gap-8 w-full">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
@@ -77,22 +97,6 @@ export function AssetManagementSection() {
               );
             })}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-center"
-          >
-            <Button
-              size="lg"
-              className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
-            >
-              Simplifique sua gestão de ativos
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </motion.div>
         </div>
       </div>
     </section>
