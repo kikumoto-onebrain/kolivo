@@ -13,12 +13,13 @@ export function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="flex flex-col items-start"
           >
-            <h3 className="text-2xl font-bold text-white mb-4">Kolivo</h3>
-            <p className="text-gray-400 leading-relaxed">
-              Transformamos operações complexas em ecossistemas vivos. Juntos em
-              fluxo.
-            </p>
+            <img
+              src="/kolivo.svg"
+              alt="Kolivo"
+              className="w-32 h-auto mb-2"
+            />
           </motion.div>
 
           <motion.div
