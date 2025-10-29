@@ -18,7 +18,7 @@ export function Footer() {
             <img
               src="/kolivo.svg"
               alt="Kolivo"
-              className="w-32 h-auto mb-2"
+              className="w-20 h-auto mb-2"
             />
           </motion.div>
 
