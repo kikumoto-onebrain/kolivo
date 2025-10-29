@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Camada_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
+  <!-- Generator: Adobe Illustrator 29.8.2, SVG Export Plug-In . SVG Version: 2.1.1 Build 3)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #5a5aff;
+        fill-rule: evenodd;
+      }
+
+      .st1 {
+        fill: #fff;
+      }
+
+      .st2 {
+        fill: #181828;
+      }
+    </style>
+  </defs>
+  <rect class="st2" width="512" height="512" rx="60.2" ry="60.2"/>
+  <g>
+    <path class="st1" d="M275,223.84l141.2,195.27h-71.77l-112.78-155.66-82.49,75.03v80.62h-58.26V92.89h58.26v166.83l48-43.8,43.34-39.61,90.87-83.42h86.22l-142.6,130.95h0Z"/>
+    <polygon class="st0" points="421.09 154.88 421.09 339.59 336.9 228.42 421.09 154.88"/>
+  </g>
+</svg>

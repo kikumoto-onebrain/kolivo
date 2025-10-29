@@ -27,9 +27,9 @@ export const metadata: Metadata = {
 
   // Favicon e ícone
   icons: {
-    icon: '/kolivo-favicon.svg',
-    shortcut: '/kolivo-favicon.svg',
-    apple: '/kolivo-favicon.svg',
+    icon: '/favicon-kolivo.svg',
+    shortcut: '/favicon-kolivo.svg',
+    apple: '/favicon-kolivo.svg',
   },
 
   // Open Graph (para WhatsApp, Slack, LinkedIn, etc.)
