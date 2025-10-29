@@ -21,17 +21,17 @@ export function NOCSection() {
       </div>
 
       {/* Conteúdo principal */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          {/* Título e ícone */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <div className="max-w-4xl mx-auto">
+          {/* Ícone e título */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="text-left mb-8"
+            className="mb-8 flex flex-col items-center"
           >
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-kolivo-accent/20 mb-6">
+            <div className="flex items-center justify-center w-20 h-20 rounded-full bg-kolivo-accent/20 mb-6">
               <Network className="w-10 h-10 text-kolivo-accent" />
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
@@ -45,7 +45,7 @@ export function NOCSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-gray-300 leading-relaxed mb-8 max-w-2xl text-left"
+            className="text-xl text-gray-300 leading-relaxed mb-6"
           >
             Nosso NOC (Network Operations Center) garante alta disponibilidade e
             resposta proativa.
@@ -57,7 +57,7 @@ export function NOCSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl text-gray-300 leading-relaxed mb-8 max-w-2xl text-left"
+            className="text-xl text-gray-300 leading-relaxed mb-12"
           >
             Detectamos e solucionamos incidentes antes que impactem o negócio,
             assegurando estabilidade, performance e experiência digital impecável.
@@ -69,12 +69,11 @@ export function NOCSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-left"
           >
             <Button
               size="lg"
               variant="outline"
-              className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
+              className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group mx-auto"
             >
               Monitore sua rede
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
