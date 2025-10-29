@@ -23,43 +23,10 @@ export function AssetManagementSection() {
   return (
     <section id="gestao-ativos" className="py-32 bg-white overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-16 max-w-7xl mx-auto min-h-[70vh]">
-          {/* Coluna esquerda: título, texto e botão centralizados */}
-          <div className="flex-1 flex flex-col items-start justify-center text-left h-full">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.6 }}
-              className="mb-10"
-            >
-              <h2 className="text-4xl sm:text-5xl font-bold text-kolivo-primary mb-6">
-                Controle total do seu parque tecnológico
-              </h2>
-              <p className="text-xl text-kolivo-gray max-w-xl">
-                Com o ITAM Kolivo, cada ativo é monitorado, otimizado e
-                governado. Gestão inteligente que reduz custos e aumenta
-                eficiência.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <Button
-                size="lg"
-                className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
-              >
-                Simplifique sua gestão de ativos
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
-          </div>
-
-          {/* Coluna direita: cards (1 por linha) */}
+        {/* Inverte a ordem apenas no mobile */}
+        <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-16 max-w-7xl mx-auto min-h-[70vh]">
+          
+          {/* Coluna direita — Cards */}
           <div className="flex-1 flex flex-col justify-center gap-8 w-full">
             {features.map((feature, index) => {
               const Icon = feature.icon;
@@ -96,6 +63,58 @@ export function AssetManagementSection() {
                 </motion.div>
               );
             })}
+
+            {/* Botão — apenas no mobile, após os cards */}
+            <div className="mt-10 flex justify-center lg:hidden">
+              <Button
+                size="lg"
+                className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg 
+                           font-semibold rounded-lg transition-all duration-300 
+                           hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
+              >
+                Simplifique sua gestão de ativos
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
+          </div>
+
+          {/* Coluna esquerda — Título e texto */}
+          <div className="flex-1 flex flex-col items-center lg:items-start justify-center text-center lg:text-left h-full">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.6 }}
+              className="mb-10"
+            >
+              <h2 className="text-4xl sm:text-5xl font-bold text-kolivo-primary mb-6">
+                Controle total do seu parque tecnológico
+              </h2>
+              <p className="text-xl text-kolivo-gray max-w-xl mx-auto lg:mx-0">
+                Com o ITAM Kolivo, cada ativo é monitorado, otimizado e
+                governado. Gestão inteligente que reduz custos e aumenta
+                eficiência.
+              </p>
+            </motion.div>
+
+            {/* Botão — apenas no desktop */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="hidden lg:flex"
+            >
+              <Button
+                size="lg"
+                className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg 
+                           font-semibold rounded-lg transition-all duration-300 
+                           hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
+              >
+                Simplifique sua gestão de ativos
+                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
           </div>
         </div>
       </div>
