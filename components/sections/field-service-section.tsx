@@ -27,6 +27,7 @@ export function FieldServiceSection() {
     <section id="field-service" className="py-32 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
+          {/* Cabeçalho */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -43,8 +44,9 @@ export function FieldServiceSection() {
             </p>
           </motion.div>
 
+          {/* Cards de features */}
           <div className="overflow-hidden mb-12">
-            <div className="flex gap-6">
+            <div className="flex flex-col items-center sm:flex-row sm:items-stretch sm:justify-center gap-6">
               {features.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
@@ -54,9 +56,11 @@ export function FieldServiceSection() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: '-50px' }}
                     transition={{ duration: 0.6, delay: index * 0.15 }}
-                    className="flex-1 min-w-[280px] p-8 bg-white rounded-2xl border border-gray-200 hover:border-kolivo-accent transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.15)]"
+                    className="w-full sm:flex-1 max-w-[340px] p-8 bg-white rounded-2xl border border-gray-200 
+                               hover:border-kolivo-accent transition-all duration-300 
+                               hover:shadow-[0_0_30px_rgba(90,90,255,0.15)] text-center sm:text-left"
                   >
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-kolivo-accent/10 mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-kolivo-accent/10 mb-6 mx-auto sm:mx-0">
                       <Icon className="w-8 h-8 text-kolivo-accent" />
                     </div>
                     <h3 className="text-2xl font-bold text-kolivo-primary mb-3">
@@ -71,6 +75,7 @@ export function FieldServiceSection() {
             </div>
           </div>
 
+          {/* Botão CTA */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -80,7 +85,8 @@ export function FieldServiceSection() {
           >
             <Button
               size="lg"
-              className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
+              className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg font-semibold 
+                         rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
             >
               Solicite especialistas técnicos
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
