@@ -8,6 +8,7 @@ export function Footer() {
     <footer className="bg-kolivo-primary border-t border-white/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+          {/* Logo Kolivo + selo Landor */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -18,10 +19,16 @@ export function Footer() {
             <img
               src="/kolivo.svg"
               alt="Kolivo"
-              className="w-20 h-auto mb-2"
+              className="w-20 h-auto mb-4"
+            />
+            <img
+              src="/selo-sites.svg"
+              alt="Landor"
+              className="w-24 h-auto opacity-80"
             />
           </motion.div>
 
+          {/* Serviços */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -47,6 +54,7 @@ export function Footer() {
             </ul>
           </motion.div>
 
+          {/* Contato */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -71,29 +79,17 @@ export function Footer() {
           </motion.div>
         </div>
 
+        {/* Rodapé inferior simplificado */}
         <div className="border-t border-white/10 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+            <p className="text-gray-400 text-sm text-center">
               © {new Date().getFullYear()} Kolivo. Todos os direitos reservados.
             </p>
-            <div className="flex gap-6">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-kolivo-accent transition-colors text-sm"
-              >
-                Política de Privacidade
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-kolivo-accent transition-colors text-sm"
-              >
-                Termos de Uso
-              </a>
-            </div>
           </div>
         </div>
       </div>
 
+      {/* JSON-LD de organização */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
