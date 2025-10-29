@@ -108,6 +108,7 @@ export function StressTestSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex justify-center lg:justify-start"
             >
               <Button
                 size="lg"
@@ -116,7 +117,9 @@ export function StressTestSection() {
               >
                 {/* Rótulo curto no mobile, longo no desktop */}
                 <span className="lg:hidden">Iniciar stress test</span>
-                <span className="hidden lg:inline">Teste a performance da sua operação</span>
+                <span className="hidden lg:inline">
+                  Teste a performance da sua operação
+                </span>
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
