@@ -5,40 +5,20 @@ import { ArrowRight, Server, Settings, Shield, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const features = [
-  {
-    icon: Server,
-    title: 'Arquitetura híbrida',
-    description:
-      'Desenhamos ambientes cloud e on-premise personalizados para o ritmo e as necessidades da sua operação.',
-  },
-  {
-    icon: Settings,
-    title: 'Governança',
-    description:
-      'Implementamos processos inteligentes que monitoram, atualizam e otimizam sua infraestrutura de forma constante.',
-  },
-  {
-    icon: Shield,
-    title: 'Segurança avançada',
-    description:
-      'Ambientes configurados com camadas de proteção, redundância e resposta rápida, garantindo estabilidade.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Escalabilidade total',
-    description:
-      'Aumente capacidade e recursos de forma dinâmica, sem comprometer performance ou custo operacional.',
-  },
+  { icon: Server,    title: 'Arquitetura híbrida',  description: 'Desenhamos ambientes cloud e on-premise personalizados para o ritmo e as necessidades da sua operação.' },
+  { icon: Settings,  title: 'Governança',           description: 'Implementamos processos inteligentes que monitoram, atualizam e otimizam sua infraestrutura de forma constante.' },
+  { icon: Shield,    title: 'Segurança avançada',   description: 'Ambientes configurados com camadas de proteção, redundância e resposta rápida, garantindo estabilidade.' },
+  { icon: BarChart3, title: 'Escalabilidade total', description: 'Aumente capacidade e recursos de forma dinâmica, sem comprometer performance ou custo operacional.' },
 ];
 
 export function CloudSection() {
   return (
     <section id="cloud" className="py-32 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Estrutura flexível: colunas no desktop, ordem vertical no mobile */}
+        {/* Mantém desktop; no mobile a ordem segue como no seu layout atual */}
         <div className="max-w-6xl mx-auto flex flex-col-reverse lg:flex-row items-start lg:items-center justify-between gap-12 lg:gap-16">
 
-          {/* COLUNA ESQUERDA — CARDS (vem depois do texto no mobile) */}
+          {/* COLUNA ESQUERDA — CARDS */}
           <div className="flex-1 w-full">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {features.map(({ icon: Icon, title, description }, index) => (
@@ -64,9 +44,22 @@ export function CloudSection() {
                 </motion.div>
               ))}
             </div>
+
+            {/* BOTÃO SÓ NO MOBILE: aparece após os cards */}
+            <div className="mt-8 flex justify-center lg:hidden">
+              <Button
+                size="lg"
+                className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg
+                           font-semibold rounded-lg transition-all duration-300
+                           hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
+              >
+                Modernize sua infraestrutura de TI
+                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </div>
           </div>
 
-          {/* COLUNA DIREITA — TÍTULO, TEXTO E BOTÃO */}
+          {/* COLUNA DIREITA — TÍTULO, TEXTO E BOTÃO (botão só no desktop) */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -84,8 +77,8 @@ export function CloudSection() {
               garantindo performance, segurança e governança contínua.
             </p>
 
-            {/* Botão — agora com estilo igual ao da RPASection */}
-            <div className="flex justify-center lg:justify-start mt-8">
+            {/* BOTÃO SÓ NO DESKTOP */}
+            <div className="hidden lg:flex">
               <Button
                 size="lg"
                 className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg
@@ -93,7 +86,7 @@ export function CloudSection() {
                            hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
               >
                 Modernize sua infraestrutura de TI
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>
           </motion.div>
