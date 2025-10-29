@@ -25,14 +25,17 @@ export const metadata: Metadata = {
     'Field Service',
   ],
 
-  // Favicon e ícone
+  // ✅ Favicon e ícones
   icons: {
     icon: '/favicon-kolivo.svg',
     shortcut: '/favicon-kolivo.svg',
     apple: '/favicon-kolivo.svg',
   },
 
-  // Open Graph (para WhatsApp, Slack, LinkedIn, etc.)
+  // ✅ Cor do tema para navegadores e PWA
+  themeColor: '#0B0C2A',
+
+  // ✅ Open Graph (para WhatsApp, Slack, LinkedIn, etc.)
   openGraph: {
     title: 'Kolivo - IT Operations com automação e IA',
     description:
@@ -43,21 +46,29 @@ export const metadata: Metadata = {
     siteName: 'Kolivo',
     images: [
       {
-        url: '/thumb-kolivo.webp',
+        url: 'https://kolivo.com.br/thumb-kolivo.webp', // URL absoluta
+        secureUrl: 'https://kolivo.com.br/thumb-kolivo.webp',
         width: 1200,
         height: 630,
         alt: 'Kolivo - IT Operations com automação e IA',
+        type: 'image/webp',
       },
     ],
   },
 
-  // Twitter Card (para links no Twitter/X)
+  // ✅ Twitter Card (para compartilhamentos no X/Twitter)
   twitter: {
     card: 'summary_large_image',
     title: 'Kolivo - IT Operations com automação e IA',
     description:
       'A Kolivo une pessoas, tecnologia e processos para construir operações de TI mais inteligentes, automatizadas e colaborativas.',
-    images: ['/thumb-kolivo.webp'],
+    images: ['https://kolivo.com.br/thumb-kolivo.webp'],
+    creator: '@kolivo',
+  },
+
+  // ✅ Outras propriedades úteis de SEO
+  alternates: {
+    canonical: 'https://kolivo.com.br',
   },
 };
 
