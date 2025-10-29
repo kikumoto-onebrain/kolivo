@@ -23,8 +23,8 @@ export function AssetManagementSection() {
   return (
     <section id="gestao-ativos" className="py-32 bg-white overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Inverte a ordem apenas no mobile */}
-        <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-16 max-w-7xl mx-auto min-h-[70vh]">
+        {/* gap menor no mobile, mantém espaçamento no desktop */}
+        <div className="flex flex-col-reverse lg:flex-row items-center justify-center gap-10 lg:gap-16 max-w-7xl mx-auto min-h-[70vh]">
           
           {/* Coluna direita — Cards */}
           <div className="flex-1 flex flex-col justify-center gap-8 w-full">
@@ -65,7 +65,7 @@ export function AssetManagementSection() {
             })}
 
             {/* Botão — apenas no mobile, após os cards */}
-            <div className="mt-10 flex justify-center lg:hidden">
+            <div className="mt-8 flex justify-center lg:hidden">
               <Button
                 size="lg"
                 className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg 
@@ -85,9 +85,9 @@ export function AssetManagementSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6 }}
-              className="mb-10"
+              className="mb-6 lg:mb-10"
             >
-              <h2 className="text-4xl sm:text-5xl font-bold text-kolivo-primary mb-6">
+              <h2 className="text-4xl sm:text-5xl font-bold text-kolivo-primary mb-4 sm:mb-6">
                 Controle total do seu parque tecnológico
               </h2>
               <p className="text-xl text-kolivo-gray max-w-xl mx-auto lg:mx-0">
