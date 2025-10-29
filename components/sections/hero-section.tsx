@@ -41,7 +41,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-kolivo-primary">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-kolivo-primary">
       {/* Fundo animado com focos de luz */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-accent/10 via-transparent to-kolivo-blue/15" />
@@ -100,66 +100,81 @@ export function HeroSection() {
       </div>
 
       {/* Conteúdo principal */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Título principal */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-          >
-            <span className="block text-white">Operações inteligentes</span>
-            <span className="block text-kolivo-accent">Negócios em fluxo</span>
-          </motion.h1>
+      <div className="container mx-auto px-6 sm:px-8 lg:px-10 relative z-10 flex flex-col items-center text-center">
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+        >
+          <span className="block text-white">Operações inteligentes</span>
+          <span className="block text-kolivo-accent">Negócios em fluxo</span>
+        </motion.h1>
 
-          {/* Parágrafo */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-            className="text-xl sm:text-2xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto"
-          >
-            A Kolivo une pessoas, tecnologia e processos para construir
-            operações de TI mais inteligentes, automatizadas e colaborativas.
-          </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+          className="text-xl sm:text-2xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto"
+        >
+          A Kolivo une pessoas, tecnologia e processos para construir operações
+          de TI mais inteligentes, automatizadas e colaborativas.
+        </motion.p>
 
-          {/* Botão */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
+        >
+          <Button
+            size="lg"
+            className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-10 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] hover:scale-105 flex justify-center w-fit mx-auto"
+            onClick={() => {
+              document
+                .getElementById('contato')
+                ?.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
-            <Button
-              size="lg"
-              className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-10 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] hover:scale-105 flex justify-center w-fit mx-auto"
-              onClick={() => {
-                document
-                  .getElementById('contato')
-                  ?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Fale com um especialista
-            </Button>
-          </motion.div>
-        </div>
+            Fale com um especialista
+          </Button>
+        </motion.div>
       </div>
 
-      {/* Chevron duplo animado (corrigido e centralizado) */}
+      {/* Chevron duplo animado — corrigido e responsivo */}
       <motion.div
-        className="absolute left-1/2 -translate-x-1/2 z-30 text-white opacity-80"
-        style={{
-          bottom: '8vh', // espaço proporcional, não cola no botão em telas pequenas
-        }}
+        className="
+          absolute 
+          left-1/2 
+          -translate-x-1/2 
+          text-white 
+          opacity-80 
+          z-30
+          flex 
+          justify-center 
+          items-center
+          pointer-events-none
+        "
         animate={{ y: [0, -10, 0] }}
         transition={{
           duration: 1.8,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
+        style={{
+          bottom: '4rem', // distância padrão
+        }}
       >
         <ChevronsDown size={48} strokeWidth={1.5} />
       </motion.div>
+
+      {/* Ajuste extra no mobile */}
+      <style jsx>{`
+        @media (max-width: 640px) {
+          section > div:last-child {
+            bottom: 2rem !important; /* mais espaço no mobile */
+          }
+        }
+      `}</style>
     </section>
   );
 }
@@ -180,7 +195,6 @@ function LightPulse({
 }) {
   const [pos, setPos] = useState({ x: 0, y: 0 });
 
-  // Atualiza a posição das luzes suavemente a cada ciclo
   useEffect(() => {
     const setRandomPos = () => {
       setPos({
