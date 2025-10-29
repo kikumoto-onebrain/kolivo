@@ -10,6 +10,19 @@ export function StressTestSection() {
       id="stress-test"
       className="relative py-32 bg-kolivo-primary overflow-hidden"
     >
+      {/* Imagem de fundo + overlay de cor */}
+      <div className="absolute inset-0">
+        {/* Imagem de fundo */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-40"
+          style={{
+            backgroundImage: "url('/stress-test.webp')",
+          }}
+        />
+        {/* Overlay de cor para preservar o tom principal */}
+        <div className="absolute inset-0 bg-gradient-to-br from-kolivo-primary/90 via-kolivo-primary/80 to-transparent" />
+      </div>
+
       {/* Gráfico animado à esquerda */}
       <div className="absolute inset-0 flex justify-center lg:justify-start items-center pointer-events-none">
         <svg
@@ -85,7 +98,7 @@ export function StressTestSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-lg text-gray-400 leading-relaxed mb-12 max-w-xl"
+              className="text-xl text-gray-300 leading-relaxed mb-6 max-w-xl"
             >
               Nossos stress tests ajudam sua equipe a antecipar gargalos e
               preparar o ambiente para qualquer cenário.
