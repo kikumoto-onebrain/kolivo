@@ -145,11 +145,16 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Chevron duplo animado */}
+      {/* Chevron duplo animado (ajustado) */}
       <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white opacity-70 z-20"
+        className="fixed left-1/2 -translate-x-1/2 text-white opacity-80 z-20
+                   bottom-16 sm:bottom-20 md:bottom-24 lg:bottom-28 xl:bottom-32"
         animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{
+          duration: 1.8,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
       >
         <ChevronsDown size={48} strokeWidth={1.5} />
       </motion.div>

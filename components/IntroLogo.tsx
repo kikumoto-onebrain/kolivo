@@ -21,7 +21,7 @@ export function IntroLogo() {
     ]);
 
     // Exibe por 2 segundos antes de iniciar o fade-out
-    const timer = setTimeout(() => setShowIntro(false), 2000);
+    const timer = setTimeout(() => setShowIntro(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
