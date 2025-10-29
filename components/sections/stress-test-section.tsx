@@ -79,7 +79,7 @@ export function StressTestSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl sm:text-5xl font-bold text-white mb-6"
+              className="text-4xl sm:text-5xl font-bold text-white mb-6 text-center lg:text-left"
             >
               Descubra os limites antes que o sistema descubra por você
             </motion.h2>
@@ -88,7 +88,7 @@ export function StressTestSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-gray-300 leading-relaxed mb-6 max-w-xl"
+              className="text-xl text-gray-300 leading-relaxed mb-6 max-w-xl mx-auto lg:mx-0 text-center lg:text-left"
             >
               Simulamos picos de acesso e cargas extremas para avaliar a
               resiliência da sua infraestrutura.
@@ -98,7 +98,7 @@ export function StressTestSection() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-xl text-gray-300 leading-relaxed mb-6 max-w-xl"
+              className="text-xl text-gray-300 leading-relaxed mb-6 max-w-xl mx-auto lg:mx-0 text-center lg:text-left"
             >
               Nossos stress tests ajudam sua equipe a antecipar gargalos e
               preparar o ambiente para qualquer cenário.
@@ -114,7 +114,9 @@ export function StressTestSection() {
                 variant="outline"
                 className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
               >
-                Teste a performance da sua operação
+                {/* Rótulo curto no mobile, longo no desktop */}
+                <span className="lg:hidden">Iniciar stress test</span>
+                <span className="hidden lg:inline">Teste a performance da sua operação</span>
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
