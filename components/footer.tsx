@@ -19,7 +19,7 @@ export function Footer() {
             <img
               src="/kolivo.svg"
               alt="Kolivo"
-              className="w-20 h-auto mb-4"
+              className="w-20 h-auto mb-6"
             />
             <img
               src="/selo-sites.svg"
