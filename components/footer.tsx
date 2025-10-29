@@ -24,7 +24,7 @@ export function Footer() {
             <img
               src="/selo-sites.svg"
               alt="Landor"
-              className="w-32 h-auto opacity-80"
+              className="w-36 h-auto opacity-80"
             />
           </motion.div>
 
