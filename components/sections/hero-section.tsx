@@ -145,9 +145,12 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Chevron duplo animado (centralizado corretamente) */}
+      {/* Chevron duplo animado (corrigido e centralizado) */}
       <motion.div
-        className="absolute bottom-16 sm:bottom-20 md:bottom-24 lg:bottom-28 xl:bottom-32 left-1/2 transform -translate-x-1/2 text-white opacity-80 z-20 flex justify-center"
+        className="absolute left-1/2 -translate-x-1/2 z-30 text-white opacity-80"
+        style={{
+          bottom: '8vh', // espaço proporcional, não cola no botão em telas pequenas
+        }}
         animate={{ y: [0, -10, 0] }}
         transition={{
           duration: 1.8,
