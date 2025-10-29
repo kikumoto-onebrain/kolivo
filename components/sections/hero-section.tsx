@@ -145,10 +145,9 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Chevron duplo animado (ajustado) */}
+      {/* Chevron duplo animado (centralizado corretamente) */}
       <motion.div
-        className="fixed left-1/2 -translate-x-1/2 text-white opacity-80 z-20
-                   bottom-16 sm:bottom-20 md:bottom-24 lg:bottom-28 xl:bottom-32"
+        className="absolute bottom-16 sm:bottom-20 md:bottom-24 lg:bottom-28 xl:bottom-32 left-1/2 transform -translate-x-1/2 text-white opacity-80 z-20 flex justify-center"
         animate={{ y: [0, -10, 0] }}
         transition={{
           duration: 1.8,
