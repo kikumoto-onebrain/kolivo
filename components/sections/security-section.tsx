@@ -21,9 +21,41 @@ export function SecuritySection() {
         <div className="absolute inset-0 bg-gradient-to-br from-kolivo-primary/90 via-kolivo-primary/80 to-transparent" />
       </div>
 
-      {/* Escudo com efeito de ondas */}
-      <div className="absolute inset-0 flex items-center justify-center lg:justify-start">
-        <div className="relative lg:ml-24 w-[21rem] h-[21rem]">
+      {/* Conteúdo principal */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col items-center text-center lg:text-left lg:flex-row lg:items-center lg:justify-between gap-16">
+          {/* Coluna de texto */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="flex-1 max-w-2xl"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+              Diagnóstico completo. <br /> Segurança contínua.
+            </h2>
+
+            <p className="text-xl text-gray-300 leading-relaxed mb-6">
+              Realizamos avaliações que mapeiam vulnerabilidades, identificam
+              riscos e fortalecem sua infraestrutura.
+            </p>
+
+            <p className="text-xl text-gray-300 leading-relaxed mb-12">
+              Combinamos análise técnica e cultura organizacional para garantir
+              que a segurança acompanhe a inovação.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Escudo animado — agora centralizado e menor */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="relative mx-auto my-12 w-[14rem] h-[14rem] sm:w-[16rem] sm:h-[16rem] flex items-center justify-center"
+        >
           {/* Escudo pulsante */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0.8 }}
@@ -51,7 +83,6 @@ export function SecuritySection() {
               ease: 'easeOut',
             }}
           />
-
           <motion.div
             className="absolute inset-0 rounded-full border-2 border-white/10"
             animate={{
@@ -65,47 +96,18 @@ export function SecuritySection() {
               delay: 1,
             }}
           />
-        </div>
-      </div>
+        </motion.div>
 
-      {/* Conteúdo principal */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-          {/* Coluna esquerda (animação visível apenas em telas grandes) */}
-          <div className="hidden lg:flex flex-1 justify-center items-center"></div>
-
-          {/* Coluna direita (texto e CTA) */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6 }}
-            className="flex-1 text-left lg:pl-12"
+        {/* Botão CTA — centralizado e responsivo */}
+        <div className="text-center">
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group mx-auto"
           >
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-              Diagnóstico completo. <br /> Segurança contínua.
-            </h2>
-
-            <p className="text-xl text-gray-300 leading-relaxed mb-6 max-w-lg">
-              Realizamos avaliações de segurança que mapeiam vulnerabilidades,
-              identificam riscos e fortalecem sua infraestrutura.
-            </p>
-
-            <p className="text-xl text-gray-300 leading-relaxed mb-6 max-w-lg">
-              Combinamos análise técnica, compliance e cultura organizacional
-              para garantir que a segurança acompanhe a inovação.
-            </p>
-
-            {/* Botão */}
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
-            >
-              Avalie o nível de segurança da sua empresa
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </motion.div>
+            Verifique sua segurança
+            <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+          </Button>
         </div>
       </div>
     </section>
