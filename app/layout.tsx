@@ -1,6 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
+import WhatsAppButton from '@/components/WhatsAppButton'; // ✅ importa o botão
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
     siteName: 'Kolivo',
     images: [
       {
-        url: 'https://kolivo.com.br/thumb-kolivo.webp', // URL absoluta
+        url: 'https://kolivo.com.br/thumb-kolivo.webp',
         secureUrl: 'https://kolivo.com.br/thumb-kolivo.webp',
         width: 1200,
         height: 630,
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
     ],
   },
 
-  // ✅ Twitter Card (para compartilhamentos no X/Twitter)
+  // ✅ Twitter Card
   twitter: {
     card: 'summary_large_image',
     title: 'Kolivo - IT Ops com automação e IA',
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
     creator: '@kolivo',
   },
 
-  // ✅ Outras propriedades úteis de SEO
+  // ✅ Outras propriedades úteis
   alternates: {
     canonical: 'https://kolivo.com.br',
   },
@@ -81,6 +82,7 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={`${raleway.variable} font-raleway antialiased`}>
         {children}
+        <WhatsAppButton /> {/* ✅ botão fixo de WhatsApp */}
       </body>
     </html>
   );
