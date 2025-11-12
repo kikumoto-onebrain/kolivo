@@ -10,7 +10,7 @@ const raleway = Raleway({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kolivo.com.br'),
-  title: 'Kolivo - IT Operations com automação e IA',
+  title: 'Kolivo - ITOps com automação e IA',
   description:
     'A Kolivo une pessoas, tecnologia e processos para construir operações de TI mais inteligentes, automatizadas e colaborativas. ITOps, RPA, SOC, NOC e muito mais.',
   keywords: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 
   // ✅ Open Graph (para WhatsApp, Slack, LinkedIn, etc.)
   openGraph: {
-    title: 'Kolivo - IT Operations com automação e IA',
+    title: 'Kolivo - ITOps com automação e IA',
     description:
       'A Kolivo une pessoas, tecnologia e processos para construir operações de TI mais inteligentes, automatizadas e colaborativas.',
     type: 'website',
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
         secureUrl: 'https://kolivo.com.br/thumb-kolivo.webp',
         width: 1200,
         height: 630,
-        alt: 'Kolivo - IT Operations com automação e IA',
+        alt: 'Kolivo - IT Ops com automação e IA',
         type: 'image/webp',
       },
     ],
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   // ✅ Twitter Card (para compartilhamentos no X/Twitter)
   twitter: {
     card: 'summary_large_image',
-    title: 'Kolivo - IT Operations com automação e IA',
+    title: 'Kolivo - IT Ops com automação e IA',
     description:
       'A Kolivo une pessoas, tecnologia e processos para construir operações de TI mais inteligentes, automatizadas e colaborativas.',
     images: ['https://kolivo.com.br/thumb-kolivo.webp'],
