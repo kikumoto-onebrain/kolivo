@@ -103,7 +103,7 @@ export function Footer() {
             logo: 'https://kolivo.com.br/logo.png',
             contactPoint: {
               '@type': 'ContactPoint',
-              telephone: '+55-11-1234-5678',
+              telephone: '+55-11-99645-6724',
               contactType: 'Customer Service',
               areaServed: 'BR',
               availableLanguage: 'Portuguese',
