@@ -15,6 +15,9 @@ const clients = [
 ];
 
 export function ClientsCarousel() {
+  // 🔧 Oculta completamente a section (não é renderizada)
+  return null;
+
   const [speed, setSpeed] = useState('25s');
 
   useEffect(() => {
@@ -38,7 +41,6 @@ export function ClientsCarousel() {
         </h2>
 
         <div className="relative overflow-hidden">
-          {/* Faixa com duas cópias lado a lado */}
           <div className="marquee__track" style={{ animationDuration: speed }}>
             {[0, 1].map((groupIndex) => (
               <ul key={groupIndex} className="marquee__group">
@@ -74,7 +76,7 @@ export function ClientsCarousel() {
 
         .marquee__group {
           display: flex;
-          gap: 4rem; /* espaçamento fixo entre logos */
+          gap: 4rem;
           margin: 0;
           padding: 0;
           list-style: none;
@@ -92,7 +94,6 @@ export function ClientsCarousel() {
           transition: filter 0.3s ease;
         }
 
-        /* 🔧 Adiciona espaçamento no último item para não colar com o próximo grupo */
         .marquee__item--last {
           margin-right: 4rem;
         }
