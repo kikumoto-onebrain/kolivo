@@ -21,11 +21,19 @@ export function Footer() {
               alt="Kolivo"
               className="w-20 h-auto mb-6"
             />
-            <img
-              src="/selo-sites.svg"
-              alt="Landor"
-              className="w-40 h-auto opacity-80"
-            />
+
+            <a
+              href="https://www.landor.com.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <img
+                src="/selo-sites.svg"
+                alt="Landor"
+                className="w-40 h-auto opacity-80"
+              />
+            </a>
           </motion.div>
 
           {/* Serviços */}
@@ -89,7 +97,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* JSON-LD de organização */}
+      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
