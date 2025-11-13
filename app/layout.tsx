@@ -1,7 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
-import WhatsAppButton from '@/components/WhatsAppButton'; // ✅ importa o botão
+import Script from 'next/script'; // 👈 IMPORTANTE: adicione isso
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -25,18 +26,12 @@ export const metadata: Metadata = {
     'Service Desk',
     'Field Service',
   ],
-
-  // ✅ Favicon e ícones
   icons: {
     icon: '/favicon-kolivo.svg',
     shortcut: '/favicon-kolivo.svg',
     apple: '/favicon-kolivo.svg',
   },
-
-  // ✅ Cor do tema para navegadores e PWA
   themeColor: '#0B0C2A',
-
-  // ✅ Open Graph (para WhatsApp, Slack, LinkedIn, etc.)
   openGraph: {
     title: 'Kolivo - ITOps com automação e IA',
     description:
@@ -51,23 +46,19 @@ export const metadata: Metadata = {
         secureUrl: 'https://kolivo.com.br/thumb-kolivo.webp',
         width: 1200,
         height: 630,
-        alt: 'Kolivo - IT Ops com automação e IA',
+        alt: 'Kolivo - ITOps com automação e IA',
         type: 'image/webp',
       },
     ],
   },
-
-  // ✅ Twitter Card
   twitter: {
     card: 'summary_large_image',
-    title: 'Kolivo - IT Ops com automação e IA',
+    title: 'Kolivo - ITOps com automação e IA',
     description:
       'A Kolivo une pessoas, tecnologia e processos para construir operações de TI mais inteligentes, automatizadas e colaborativas.',
     images: ['https://kolivo.com.br/thumb-kolivo.webp'],
     creator: '@kolivo',
   },
-
-  // ✅ Outras propriedades úteis
   alternates: {
     canonical: 'https://kolivo.com.br',
   },
@@ -80,9 +71,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
+      <head>
+        {/* 👇 Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-FEYSJPV6T9"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-FEYSJPV6T9');
+          `}
+        </Script>
+      </head>
       <body className={`${raleway.variable} font-raleway antialiased`}>
         {children}
-        <WhatsAppButton /> {/* ✅ botão fixo de WhatsApp */}
+        <WhatsAppButton />
       </body>
     </html>
   );
