@@ -16,6 +16,7 @@ import {
 import { Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
+// 💡 Mesmos serviços de antes
 const services = [
   'ITOps',
   'RPA - Automação',
@@ -28,6 +29,11 @@ const services = [
   'Stress Test',
   'Field Service',
 ];
+
+// 🔑 IDs DIRETO DO EMAILJS (igual ao outro projeto)
+const SERVICE_ID = 'service_7gblydj';
+const TEMPLATE_ID = 'template_hbug1cp';
+const PUBLIC_KEY = '13O_ZGPDK5-AjkGRr';
 
 export function ContactSection() {
   const { toast } = useToast();
@@ -46,33 +52,20 @@ export function ContactSection() {
     setIsSubmitting(true);
 
     try {
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-      if (!serviceId || !templateId || !publicKey) {
-        toast({
-          title: 'Erro de configuração',
-          description:
-            'Por favor, configure as variáveis de ambiente do EmailJS.',
-          variant: 'destructive',
-        });
-        setIsSubmitting(false);
-        return;
-      }
-
       await emailjs.send(
-        serviceId,
-        templateId,
+        SERVICE_ID,
+        TEMPLATE_ID,
         {
-          from_name: formData.name,
-          from_email: formData.email,
+          // 🔗 Esses nomes precisam bater com o template do EmailJS:
+          // {{name}}, {{email}}, {{company}}, {{phone}}, {{service}}, {{message}}
+          name: formData.name,
+          email: formData.email,
           company: formData.company,
           phone: formData.phone,
           service: formData.service,
           message: formData.message,
         },
-        publicKey
+        PUBLIC_KEY
       );
 
       toast({
@@ -89,6 +82,7 @@ export function ContactSection() {
         message: '',
       });
     } catch (error) {
+      console.error(error);
       toast({
         title: 'Erro ao enviar',
         description: 'Tente novamente mais tarde.',
