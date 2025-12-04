@@ -45,19 +45,25 @@ export function ClientsCarousel() {
                     }`}
                   >
                     <div className="flex items-center justify-center transition-opacity">
-                      {/* Contêiner individual com tamanho customizado */}
+                      {/* Wrapper que limita o espaço, mas não força proporção */}
                       <div
-                        className="logo-box relative"
+                        className="logo-wrapper"
                         style={{
-                          width: client.w,
-                          height: client.h,
+                          maxWidth: client.w,
+                          maxHeight: client.h,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
                         }}
                       >
+                        {/* next/image com width/height preserva proporção do SVG */}
                         <Image
                           src={client.src}
                           alt={client.alt}
-                          fill
+                          width={client.w}
+                          height={client.h}
                           style={{ objectFit: 'contain' }}
+                          priority={false}
                         />
                       </div>
                     </div>
@@ -107,8 +113,9 @@ export function ClientsCarousel() {
           opacity: 1;
         }
 
-        .logo-box {
+        .logo-wrapper {
           background: transparent;
+          /* evita overflow se o SVG for maior; object-fit:contain cuida do resto */
         }
 
         @keyframes marqueeScroll {
