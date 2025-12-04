@@ -8,6 +8,7 @@ const clients = [
   { src: '/itau-logo.svg', alt: 'Itaú', w: 60, h: 40 },
   { src: '/starrett-logo.svg', alt: 'Starrett', w: 180, h: 40 },
   { src: '/attivo-logo.svg', alt: 'Attivo', w: 140, h: 40 },
+  { src: '/smart-asset.svg', alt: 'Smart Asset Control', w: 60, h: 40 },
 ];
 
 export function ClientsCarousel() {
