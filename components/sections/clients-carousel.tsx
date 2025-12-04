@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const clients = [
-  { src: '/localiza.svg', alt: 'Localiza' },
-  { src: '/itau.svg', alt: 'Itaú' },
-  { src: '/starret.svg', alt: 'Starrett' },
-  { src: '/attivo.svg', alt: 'Attivo' },
+  { src: '/localiza-logo.svg', alt: 'Localiza' },
+  { src: '/itau-logo.svg', alt: 'Itaú' },
+  { src: '/starret-logo.svg', alt: 'Starrett' },
+  { src: '/attivo-logo.svg', alt: 'Attivo' },
   // Se quiser repetir até preencher espaço, pode duplicar itens aqui.
 ];
 
