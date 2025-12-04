@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const clients = [
   { src: '/localiza-logo.svg', alt: 'Localiza', w: 120, h: 40 },
-  { src: '/itau-logo.svg', alt: 'Itaú', w: 160, h: 30 },
+  { src: '/itau-logo.svg', alt: 'Itaú', w: 90, h: 40 },
   { src: '/starrett-logo.svg', alt: 'Starrett', w: 200, h: 40 },
   { src: '/attivo-logo.svg', alt: 'Attivo', w: 140, h: 40 },
 ];
