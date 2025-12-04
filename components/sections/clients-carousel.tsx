@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const clients = [
-  { src: '/localiza-logo.svg', alt: 'Localiza', w: 120, h: 40 },
-  { src: '/itau-logo.svg', alt: 'Itaú', w: 90, h: 40 },
+  { src: '/localiza-logo.svg', alt: 'Localiza', w: 160, h: 40 },
+  { src: '/itau-logo.svg', alt: 'Itaú', w: 70, h: 40 },
   { src: '/starrett-logo.svg', alt: 'Starrett', w: 200, h: 40 },
   { src: '/attivo-logo.svg', alt: 'Attivo', w: 140, h: 40 },
 ];
