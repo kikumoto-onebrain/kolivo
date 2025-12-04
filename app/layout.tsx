@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
-import Script from 'next/script'; // 👈 IMPORTANTE: adicione isso
+import Script from 'next/script';
 import WhatsAppButton from '@/components/WhatsAppButton';
 
 const raleway = Raleway({

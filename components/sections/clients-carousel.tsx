@@ -1,22 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Building2 } from 'lucide-react';
+import Image from 'next/image';
 
 const clients = [
-  'Empresa A',
-  'Empresa B',
-  'Empresa C',
-  'Empresa D',
-  'Empresa E',
-  'Empresa F',
-  'Empresa G',
-  'Empresa H',
+  { src: '/localiza.svg', alt: 'Localiza' },
+  { src: '/itau.svg', alt: 'Itaú' },
+  { src: '/starret.svg', alt: 'Starrett' },
+  { src: '/attivo.svg', alt: 'Attivo' },
+  // Se quiser repetir até preencher espaço, pode duplicar itens aqui.
 ];
 
 export function ClientsCarousel() {
-  // 🔧 Oculta completamente a section (não é renderizada)
-  return null;
 
   const [speed, setSpeed] = useState('25s');
 
@@ -51,11 +46,17 @@ export function ClientsCarousel() {
                       i === clients.length - 1 ? 'marquee__item--last' : ''
                     }`}
                   >
-                    <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                      <Building2 className="w-10 sm:w-12 h-10 sm:h-12 text-kolivo-gray" />
-                      <span className="text-sm font-semibold text-kolivo-gray">
-                        {client}
-                      </span>
+                    <div className="flex items-center justify-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                      {/* Usando next/image para SVGs - se preferir, troque por <img src={client.src} ... /> */}
+                      <div className="w-28 h-12 flex items-center justify-center">
+                        <Image
+                          src={client.src}
+                          alt={client.alt}
+                          width={180}
+                          height={60}
+                          style={{ objectFit: 'contain' }}
+                        />
+                      </div>
                     </div>
                   </li>
                 ))}
@@ -91,7 +92,7 @@ export function ClientsCarousel() {
           align-items: center;
           justify-content: center;
           filter: grayscale(100%);
-          transition: filter 0.3s ease;
+          transition: filter 0.3s ease, opacity 0.3s ease;
         }
 
         .marquee__item--last {
