@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 const clients = [
-  { src: '/localiza-logo.svg', alt: 'Localiza' },
-  { src: '/itau-logo.svg', alt: 'Itaú' },
-  { src: '/starret-logo.svg', alt: 'Starrett' },
-  { src: '/attivo-logo.svg', alt: 'Attivo' },
+  { src: '/localiza-logo.svg', alt: 'Localiza', w: 160, h: 40 },
+  { src: '/itau-logo.svg', alt: 'Itaú', w: 120, h: 40 },
+  { src: '/starrett-logo.svg', alt: 'Starrett', w: 220, h: 40 },
+  { src: '/attivo-logo.svg', alt: 'Attivo', w: 140, h: 40 },
 ];
 
 export function ClientsCarousel() {
@@ -44,17 +44,20 @@ export function ClientsCarousel() {
                       i === clients.length - 1 ? 'marquee__item--last' : ''
                     }`}
                   >
-                    <div className="flex items-center justify-center gap-2 transition-opacity">
-                      {/* Container padronizado e responsivo */}
-                      <div className="logo-box relative w-40 sm:w-48 md:w-56 h-12 flex items-center justify-center">
-                        {/* Image com fill + objectFit contain evita cortes e padroniza escala */}
+                    <div className="flex items-center justify-center transition-opacity">
+                      {/* Contêiner individual com tamanho customizado */}
+                      <div
+                        className="logo-box relative"
+                        style={{
+                          width: client.w,
+                          height: client.h,
+                        }}
+                      >
                         <Image
                           src={client.src}
                           alt={client.alt}
                           fill
                           style={{ objectFit: 'contain' }}
-                          sizes="(max-width: 640px) 120px, (max-width: 1024px) 160px, 224px"
-                          priority={false}
                         />
                       </div>
                     </div>
@@ -72,7 +75,6 @@ export function ClientsCarousel() {
           width: max-content;
           animation: marqueeScroll linear infinite;
           will-change: transform;
-          transform: translate3d(0, 0, 0);
         }
 
         .marquee__group {
@@ -86,12 +88,11 @@ export function ClientsCarousel() {
 
         .marquee__item {
           flex: none;
-          width: 11rem;
-          height: 5rem;
+          width: 12rem;
+          height: 6rem;
           display: flex;
           align-items: center;
           justify-content: center;
-          /* remover grayscale global — usar leve desaturação se quiser */
           filter: none;
           opacity: 0.95;
           transition: transform 0.25s ease, opacity 0.25s ease;
@@ -101,14 +102,13 @@ export function ClientsCarousel() {
           margin-right: 4rem;
         }
 
-        /* hover: destaque (remover desaturação caso tenha) */
         .marquee__item:hover {
           transform: translateY(-2px);
           opacity: 1;
         }
 
         .logo-box {
-          background: transparent; /* garante fundo transparente */
+          background: transparent;
         }
 
         @keyframes marqueeScroll {
@@ -117,13 +117,6 @@ export function ClientsCarousel() {
           }
           100% {
             transform: translate3d(-50%, 0, 0);
-          }
-        }
-
-        @media (min-width: 640px) {
-          .marquee__item {
-            width: 12rem;
-            height: 6rem;
           }
         }
       `}</style>
