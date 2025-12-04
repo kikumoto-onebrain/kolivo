@@ -8,11 +8,9 @@ const clients = [
   { src: '/itau-logo.svg', alt: 'Itaú' },
   { src: '/starret-logo.svg', alt: 'Starrett' },
   { src: '/attivo-logo.svg', alt: 'Attivo' },
-  // Se quiser repetir até preencher espaço, pode duplicar itens aqui.
 ];
 
 export function ClientsCarousel() {
-
   const [speed, setSpeed] = useState('25s');
 
   useEffect(() => {
@@ -46,15 +44,17 @@ export function ClientsCarousel() {
                       i === clients.length - 1 ? 'marquee__item--last' : ''
                     }`}
                   >
-                    <div className="flex items-center justify-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
-                      {/* Usando next/image para SVGs - se preferir, troque por <img src={client.src} ... /> */}
-                      <div className="w-28 h-12 flex items-center justify-center">
+                    <div className="flex items-center justify-center gap-2 transition-opacity">
+                      {/* Container padronizado e responsivo */}
+                      <div className="logo-box relative w-40 sm:w-48 md:w-56 h-12 flex items-center justify-center">
+                        {/* Image com fill + objectFit contain evita cortes e padroniza escala */}
                         <Image
                           src={client.src}
                           alt={client.alt}
-                          width={180}
-                          height={60}
+                          fill
                           style={{ objectFit: 'contain' }}
+                          sizes="(max-width: 640px) 120px, (max-width: 1024px) 160px, 224px"
+                          priority={false}
                         />
                       </div>
                     </div>
@@ -91,16 +91,24 @@ export function ClientsCarousel() {
           display: flex;
           align-items: center;
           justify-content: center;
-          filter: grayscale(100%);
-          transition: filter 0.3s ease, opacity 0.3s ease;
+          /* remover grayscale global — usar leve desaturação se quiser */
+          filter: none;
+          opacity: 0.95;
+          transition: transform 0.25s ease, opacity 0.25s ease;
         }
 
         .marquee__item--last {
           margin-right: 4rem;
         }
 
+        /* hover: destaque (remover desaturação caso tenha) */
         .marquee__item:hover {
-          filter: grayscale(0%);
+          transform: translateY(-2px);
+          opacity: 1;
+        }
+
+        .logo-box {
+          background: transparent; /* garante fundo transparente */
         }
 
         @keyframes marqueeScroll {
