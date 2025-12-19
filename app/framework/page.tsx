@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Header } from '@/components/header';
+import { Header } from '@/components/Header';
 import { Footer } from '@/components/footer';
 
 export default function FrameworkHomePage() {
