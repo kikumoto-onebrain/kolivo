@@ -68,6 +68,11 @@ export function ServiceDeskSection() {
               size="lg"
               variant="outline"
               className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
+              onClick={() => {
+                document
+                  .getElementById('contato')
+                  ?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Otimize seu suporte
               <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
