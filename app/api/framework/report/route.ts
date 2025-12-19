@@ -1,0 +1,148 @@
+import { NextResponse } from 'next/server';
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+
+type Payload = {
+  overall: number;
+  level: string;
+  desc: string;
+  dimScores: Record<string, number>;
+  improvements: { label: string; score: number }[];
+  strengths: { label: string; score: number }[];
+  services: string[];
+};
+
+export async function POST(req: Request) {
+  try {
+    const body = (await req.json()) as Payload;
+
+    const pdfDoc = await PDFDocument.create();
+    const page = pdfDoc.addPage([595.28, 841.89]); // A4
+    const { width, height } = page.getSize();
+
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+    const margin = 48;
+    let y = height - margin;
+
+    const accent = rgb(90 / 255, 90 / 255, 1);
+
+    const drawTitle = (text: string) => {
+      page.drawText(text, { x: margin, y, size: 18, font: fontBold, color: accent });
+      y -= 26;
+    };
+
+    const drawH2 = (text: string) => {
+      page.drawText(text, { x: margin, y, size: 13, font: fontBold, color: rgb(1, 1, 1) });
+      y -= 18;
+    };
+
+    const drawP = (text: string) => {
+      const maxWidth = width - margin * 2;
+      const size = 10.5;
+
+      // quebra simples por palavras
+      const words = text.split(' ');
+      let line = '';
+      const lines: string[] = [];
+
+      for (const w of words) {
+        const test = line ? `${line} ${w}` : w;
+        const testWidth = font.widthOfTextAtSize(test, size);
+        if (testWidth > maxWidth) {
+          lines.push(line);
+          line = w;
+        } else {
+          line = test;
+        }
+      }
+      if (line) lines.push(line);
+
+      for (const ln of lines) {
+        page.drawText(ln, { x: margin, y, size, font, color: rgb(0.85, 0.87, 0.9) });
+        y -= 14;
+      }
+      y -= 4;
+    };
+
+    const drawRow = (left: string, right: string) => {
+      page.drawText(left, { x: margin, y, size: 10.5, font, color: rgb(0.85, 0.87, 0.9) });
+      const rightWidth = fontBold.widthOfTextAtSize(right, 10.5);
+      page.drawText(right, {
+        x: width - margin - rightWidth,
+        y,
+        size: 10.5,
+        font: fontBold,
+        color: rgb(1, 1, 1),
+      });
+      y -= 16;
+    };
+
+    // Header
+    drawTitle('Relatório do Framework de Maturidade — Kolivo');
+    drawP('Este relatório foi gerado automaticamente com base nas respostas do seu questionário.');
+
+    // Resumo
+    drawH2('Resumo');
+    drawRow('Pontuação geral (0–100)', String(body.overall));
+    drawRow('Classificação', body.level);
+    drawP(body.desc);
+
+    // Dimensões
+    drawH2('Pontuação por dimensão (1–5)');
+    for (const [k, v] of Object.entries(body.dimScores)) {
+      drawRow(k, `${Number(v).toFixed(2)}/5`);
+    }
+
+    // Oportunidades e Fortes
+    if (y < 220) {
+      pdfDoc.addPage([595.28, 841.89]);
+    }
+
+    drawH2('Oportunidades de melhoria');
+    if (!body.improvements?.length) {
+      drawP('Sem dados suficientes para exibir oportunidades.');
+    } else {
+      body.improvements.slice(0, 3).forEach((it, idx) => {
+        drawRow(`${idx + 1}. ${it.label}`, `${it.score.toFixed(2)}/5`);
+      });
+    }
+
+    drawH2('Pontos fortes');
+    if (!body.strengths?.length) {
+      drawP('Sem dados suficientes para exibir pontos fortes.');
+    } else {
+      body.strengths.slice(0, 3).forEach((it, idx) => {
+        drawRow(`${idx + 1}. ${it.label}`, `${it.score.toFixed(2)}/5`);
+      });
+    }
+
+    // Serviços recomendados
+    drawH2('Serviços especializados recomendados');
+    if (!body.services?.length) {
+      drawP('Sem recomendações disponíveis.');
+    } else {
+      body.services.forEach((s) => drawP(`• ${s}`));
+    }
+
+    // Rodapé
+    page.drawText('kolivo.com.br', {
+      x: margin,
+      y: 24,
+      size: 9,
+      font,
+      color: rgb(0.6, 0.63, 0.7),
+    });
+
+    const pdfBytes = await pdfDoc.save();
+
+    return new NextResponse(pdfBytes, {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename="relatorio-kolivo.pdf"',
+      },
+    });
+  } catch {
+    return NextResponse.json({ error: 'Falha ao gerar PDF' }, { status: 500 });
+  }
+}

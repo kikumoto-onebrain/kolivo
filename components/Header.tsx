@@ -128,6 +128,14 @@ export function Header() {
             )}
           </div>
 
+          {/* ✅ NOVO ITEM */}
+          <a
+            href="/framework"
+            className="hover:text-[#5a5aff] transition"
+          >
+            Framework de Maturidade
+          </a>
+
           <a
             href="#contato"
             onClick={(e) => handleSmoothScroll(e, '#contato')}
@@ -172,7 +180,6 @@ export function Header() {
             ['#gestao-ativos', 'Gestão de Ativos | ITAM'],
             ['#stress-test', 'Stress Test'],
             ['#field-service', 'Field Service'],
-            ['#contato', 'Contato'],
           ].map(([href, label]) => (
             <a
               key={href}
@@ -183,6 +190,23 @@ export function Header() {
               {label}
             </a>
           ))}
+
+          {/* ✅ NOVO ITEM NO MOBILE */}
+          <a
+            href="/framework"
+            onClick={() => setMenuOpen(false)}
+            className="block text-lg font-medium hover:text-[#5a5aff] transition"
+          >
+            Framework de Maturidade
+          </a>
+
+          <a
+            href="#contato"
+            onClick={(e) => handleSmoothScroll(e, '#contato')}
+            className="block text-lg font-medium hover:text-[#5a5aff] transition"
+          >
+            Contato
+          </a>
         </motion.div>
       )}
     </motion.header>

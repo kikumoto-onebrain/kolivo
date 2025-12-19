@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="bg-kolivo-primary border-t border-white/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Logo Kolivo + selo Landor */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -16,11 +16,7 @@ export function Footer() {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-start"
           >
-            <img
-              src="/kolivo.svg"
-              alt="Kolivo"
-              className="w-20 h-auto mb-6"
-            />
+            <img src="/kolivo.svg" alt="Kolivo" className="w-14 h-auto mb-6" />
 
             <a
               href="https://www.landor.com.br/"
@@ -59,6 +55,28 @@ export function Footer() {
                   </span>
                 </li>
               ))}
+            </ul>
+          </motion.div>
+
+          {/* Framework de Maturidade */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
+            <h4 className="text-lg font-semibold text-white mb-4">
+              Framework de Maturidade
+            </h4>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="/framework"
+                  className="text-gray-400 hover:text-kolivo-accent transition-colors cursor-pointer"
+                >
+                  Iniciar avaliação
+                </a>
+              </li>
             </ul>
           </motion.div>
 
