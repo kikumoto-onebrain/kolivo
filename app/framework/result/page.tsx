@@ -539,7 +539,6 @@ export default function ResultPage() {
 
                         <PolarRadiusAxis
                           domain={[0, 5]}
-                          ticks={[1, 2, 3, 4, 5]}
                           tick={false}
                           axisLine={false}
                         />
