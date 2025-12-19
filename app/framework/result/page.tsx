@@ -789,51 +789,74 @@ export default function ResultPage() {
                   <button
                     type="button"
                     onClick={async () => {
-                      if (!dimScores) return;
+  try {
+    if (!dimScores) return;
 
-                      const model = servicesFromMatrix(label.level, dimScores);
+    const model = servicesFromMatrix(label.level, dimScores);
 
-                      const payload = {
-                        overall,
-                        level: label.level,
-                        desc: label.desc,
-                        dimScores: Object.fromEntries(
-                          (Object.keys(dimScores) as DimensionKey[]).map((k) => [
-                            DIMENSIONS[k].label,
-                            dimScores[k],
-                          ])
-                        ),
-                        improvements: insights.improvements.slice(0, 3).map((i: any) => ({
-                          label: i.label,
-                          score: i.score,
-                        })),
-                        strengths: insights.strengths.slice(0, 3).map((i: any) => ({
-                          label: i.label,
-                          score: i.score,
-                        })),
-                        services: model.items,
-                      };
+    const payload = {
+      overall,
+      level: label.level,
+      desc: label.desc,
+      dimScores: Object.fromEntries(
+        (Object.keys(dimScores) as DimensionKey[]).map((k) => [
+          DIMENSIONS[k].label,
+          dimScores[k],
+        ])
+      ),
+      improvements: insights.improvements.slice(0, 3).map((i: any) => ({
+        label: i.label,
+        score: i.score,
+      })),
+      strengths: insights.strengths.slice(0, 3).map((i: any) => ({
+        label: i.label,
+        score: i.score,
+      })),
+      services: model.items,
+    };
 
-                      const res = await fetch('/api/framework/report', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload),
-                      });
+    const res = await fetch('/api/framework/report', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
 
-                      if (!res.ok) return;
+    if (!res.ok) {
+      const txt = await res.text().catch(() => '');
+      console.error('PDF API error:', res.status, txt);
+      alert(`Falha ao gerar PDF (${res.status}). Veja o console.`);
+      return;
+    }
 
-                      const blob = await res.blob();
-                      const url = window.URL.createObjectURL(blob);
+    const contentType = res.headers.get('content-type') || '';
+    if (!contentType.includes('application/pdf')) {
+      const txt = await res.text().catch(() => '');
+      console.error('Resposta não é PDF:', contentType, txt);
+      alert('A API não retornou um PDF. Veja o console.');
+      return;
+    }
 
-                      const a = document.createElement('a');
-                      a.href = url;
-                      a.download = 'relatorio-kolivo.pdf';
-                      document.body.appendChild(a);
-                      a.click();
-                      a.remove();
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
 
-                      window.URL.revokeObjectURL(url);
-                    }}
+    // download normal
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'relatorio-kolivo.pdf';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    // fallback (alguns Safari/iOS podem bloquear download via click programático)
+    setTimeout(() => {
+      window.URL.revokeObjectURL(url);
+    }, 2000);
+  } catch (err) {
+    console.error(err);
+    alert('Erro inesperado ao gerar o PDF. Veja o console.');
+  }
+}}
+
                     className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-lg border border-white/20 text-white hover:bg-white/10 transition"
                   >
                     <Download className="w-5 h-5" />

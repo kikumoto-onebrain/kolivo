@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
-export const runtime = 'nodejs'; // garante runtime Node na Vercel
+export const runtime = 'nodejs';
 
 type Payload = {
   overall: number;
@@ -27,7 +27,6 @@ export async function POST(req: Request) {
 
     const accent = rgb(90 / 255, 90 / 255, 1);
 
-    // ✅ controle de página atual
     let page = pdfDoc.addPage(A4);
     let { width, height } = page.getSize();
     let y = height - margin;
@@ -44,25 +43,13 @@ export async function POST(req: Request) {
 
     const drawTitle = (text: string) => {
       ensureSpace(100);
-      page.drawText(text, {
-        x: margin,
-        y,
-        size: 18,
-        font: fontBold,
-        color: accent,
-      });
+      page.drawText(text, { x: margin, y, size: 18, font: fontBold, color: accent });
       y -= 26;
     };
 
     const drawH2 = (text: string) => {
       ensureSpace(80);
-      page.drawText(text, {
-        x: margin,
-        y,
-        size: 13,
-        font: fontBold,
-        color: rgb(1, 1, 1),
-      });
+      page.drawText(text, { x: margin, y, size: 13, font: fontBold, color: rgb(1, 1, 1) });
       y -= 18;
     };
 
@@ -70,7 +57,6 @@ export async function POST(req: Request) {
       const maxWidth = width - margin * 2;
       const size = 10.5;
 
-      // quebra simples por palavras
       const words = String(text ?? '').split(' ');
       let line = '';
       const lines: string[] = [];
@@ -89,13 +75,7 @@ export async function POST(req: Request) {
 
       for (const ln of lines) {
         ensureSpace(60);
-        page.drawText(ln, {
-          x: margin,
-          y,
-          size,
-          font,
-          color: rgb(0.85, 0.87, 0.9),
-        });
+        page.drawText(ln, { x: margin, y, size, font, color: rgb(0.85, 0.87, 0.9) });
         y -= 14;
       }
       y -= 4;
@@ -126,25 +106,20 @@ export async function POST(req: Request) {
       y -= 16;
     };
 
-    // Header
+    // Conteúdo
     drawTitle('Relatório do Framework de Maturidade — Kolivo');
-    drawP(
-      'Este relatório foi gerado automaticamente com base nas respostas do seu questionário.'
-    );
+    drawP('Este relatório foi gerado automaticamente com base nas respostas do seu questionário.');
 
-    // Resumo
     drawH2('Resumo');
     drawRow('Pontuação geral (0–100)', String(body.overall ?? 0));
     drawRow('Classificação', String(body.level ?? ''));
     drawP(String(body.desc ?? ''));
 
-    // Dimensões
     drawH2('Pontuação por dimensão (1–5)');
     for (const [k, v] of Object.entries(body.dimScores ?? {})) {
       drawRow(k, `${Number(v).toFixed(2)}/5`);
     }
 
-    // Oportunidades e Fortes
     drawH2('Oportunidades de melhoria');
     if (!body.improvements?.length) {
       drawP('Sem dados suficientes para exibir oportunidades.');
@@ -163,7 +138,6 @@ export async function POST(req: Request) {
       });
     }
 
-    // Serviços recomendados
     drawH2('Serviços especializados recomendados');
     if (!body.services?.length) {
       drawP('Sem recomendações disponíveis.');
@@ -171,7 +145,6 @@ export async function POST(req: Request) {
       body.services.forEach((s) => drawP(`• ${s}`));
     }
 
-    // Rodapé (na página atual)
     page.drawText('kolivo.com.br', {
       x: margin,
       y: 24,
@@ -180,16 +153,17 @@ export async function POST(req: Request) {
       color: rgb(0.6, 0.63, 0.7),
     });
 
-    const pdfBytes = await pdfDoc.save();
+    const pdfBytes = await pdfDoc.save(); // Uint8Array
+    const arrayBuffer = pdfBytes.buffer.slice(
+      pdfBytes.byteOffset,
+      pdfBytes.byteOffset + pdfBytes.byteLength
+    );
 
-    // ✅ FIX: NextResponse aceita Uint8Array / ArrayBuffer (não Buffer)
-    const bodyBytes = new Uint8Array(pdfBytes);
-
-    return new NextResponse(bodyBytes, {
+    return new NextResponse(arrayBuffer, {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="relatorio-kolivo.pdf"',
+        'Content-Disposition': 'attachment; filename=relatorio-kolivo.pdf',
         'Cache-Control': 'no-store',
       },
     });
