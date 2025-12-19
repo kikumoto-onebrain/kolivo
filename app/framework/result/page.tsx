@@ -519,7 +519,7 @@ export default function ResultPage() {
                 {/* Radar */}
                 <div className="p-6 bg-white/5 border border-white/10 rounded-2xl">
                   <h2 className="text-white font-bold text-xl mb-4 flex items-center gap-2">
-                    <Radar as RadarIcon className="w-5 h-5 text-[#5A5AFF]" />
+                    <RadarIcon className="w-5 h-5 text-[#5A5AFF]" />
                     Radar de Maturidade
                   </h2>
 
