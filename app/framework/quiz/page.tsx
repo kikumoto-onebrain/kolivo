@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Header } from '@/components/header';
+import { Header } from '@/components/Header';
 import { Footer } from '@/components/footer';
 
 import { QUESTIONS, DIMENSIONS, DimensionKey } from '@/lib/maturity/questions';
