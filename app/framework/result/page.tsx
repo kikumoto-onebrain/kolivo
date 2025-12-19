@@ -1,5 +1,13 @@
 'use client';
 
+export const metadata = {
+  title: 'Resultado da Avaliação | Kolivo',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
