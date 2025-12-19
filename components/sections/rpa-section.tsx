@@ -93,6 +93,11 @@ export function RPASection() {
                 className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-8 py-6 text-lg 
                            font-semibold rounded-lg transition-all duration-300 
                            hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
+                onClick={() => {
+                  document
+                    .getElementById('contato')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                 }}
               >
                 Acelere sua operação
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
