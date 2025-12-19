@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
+export const runtime = 'nodejs'; // garante runtime Node na Vercel
+
 type Payload = {
   overall: number;
   level: string;
@@ -16,24 +18,51 @@ export async function POST(req: Request) {
     const body = (await req.json()) as Payload;
 
     const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage([595.28, 841.89]); // A4
-    const { width, height } = page.getSize();
+
+    const A4: [number, number] = [595.28, 841.89];
+    const margin = 48;
 
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
-    const margin = 48;
-    let y = height - margin;
-
     const accent = rgb(90 / 255, 90 / 255, 1);
 
+    // ✅ controle de página atual
+    let page = pdfDoc.addPage(A4);
+    let { width, height } = page.getSize();
+    let y = height - margin;
+
+    const newPage = () => {
+      page = pdfDoc.addPage(A4);
+      ({ width, height } = page.getSize());
+      y = height - margin;
+    };
+
+    const ensureSpace = (minY: number) => {
+      if (y < minY) newPage();
+    };
+
     const drawTitle = (text: string) => {
-      page.drawText(text, { x: margin, y, size: 18, font: fontBold, color: accent });
+      ensureSpace(100);
+      page.drawText(text, {
+        x: margin,
+        y,
+        size: 18,
+        font: fontBold,
+        color: accent,
+      });
       y -= 26;
     };
 
     const drawH2 = (text: string) => {
-      page.drawText(text, { x: margin, y, size: 13, font: fontBold, color: rgb(1, 1, 1) });
+      ensureSpace(80);
+      page.drawText(text, {
+        x: margin,
+        y,
+        size: 13,
+        font: fontBold,
+        color: rgb(1, 1, 1),
+      });
       y -= 18;
     };
 
@@ -42,7 +71,7 @@ export async function POST(req: Request) {
       const size = 10.5;
 
       // quebra simples por palavras
-      const words = text.split(' ');
+      const words = String(text ?? '').split(' ');
       let line = '';
       const lines: string[] = [];
 
@@ -50,7 +79,7 @@ export async function POST(req: Request) {
         const test = line ? `${line} ${w}` : w;
         const testWidth = font.widthOfTextAtSize(test, size);
         if (testWidth > maxWidth) {
-          lines.push(line);
+          if (line) lines.push(line);
           line = w;
         } else {
           line = test;
@@ -59,46 +88,63 @@ export async function POST(req: Request) {
       if (line) lines.push(line);
 
       for (const ln of lines) {
-        page.drawText(ln, { x: margin, y, size, font, color: rgb(0.85, 0.87, 0.9) });
+        ensureSpace(60);
+        page.drawText(ln, {
+          x: margin,
+          y,
+          size,
+          font,
+          color: rgb(0.85, 0.87, 0.9),
+        });
         y -= 14;
       }
       y -= 4;
     };
 
     const drawRow = (left: string, right: string) => {
-      page.drawText(left, { x: margin, y, size: 10.5, font, color: rgb(0.85, 0.87, 0.9) });
-      const rightWidth = fontBold.widthOfTextAtSize(right, 10.5);
-      page.drawText(right, {
+      ensureSpace(60);
+
+      page.drawText(String(left ?? ''), {
+        x: margin,
+        y,
+        size: 10.5,
+        font,
+        color: rgb(0.85, 0.87, 0.9),
+      });
+
+      const rightText = String(right ?? '');
+      const rightWidth = fontBold.widthOfTextAtSize(rightText, 10.5);
+
+      page.drawText(rightText, {
         x: width - margin - rightWidth,
         y,
         size: 10.5,
         font: fontBold,
         color: rgb(1, 1, 1),
       });
+
       y -= 16;
     };
 
     // Header
     drawTitle('Relatório do Framework de Maturidade — Kolivo');
-    drawP('Este relatório foi gerado automaticamente com base nas respostas do seu questionário.');
+    drawP(
+      'Este relatório foi gerado automaticamente com base nas respostas do seu questionário.'
+    );
 
     // Resumo
     drawH2('Resumo');
-    drawRow('Pontuação geral (0–100)', String(body.overall));
-    drawRow('Classificação', body.level);
-    drawP(body.desc);
+    drawRow('Pontuação geral (0–100)', String(body.overall ?? 0));
+    drawRow('Classificação', String(body.level ?? ''));
+    drawP(String(body.desc ?? ''));
 
     // Dimensões
     drawH2('Pontuação por dimensão (1–5)');
-    for (const [k, v] of Object.entries(body.dimScores)) {
+    for (const [k, v] of Object.entries(body.dimScores ?? {})) {
       drawRow(k, `${Number(v).toFixed(2)}/5`);
     }
 
     // Oportunidades e Fortes
-    if (y < 220) {
-      pdfDoc.addPage([595.28, 841.89]);
-    }
-
     drawH2('Oportunidades de melhoria');
     if (!body.improvements?.length) {
       drawP('Sem dados suficientes para exibir oportunidades.');
@@ -125,7 +171,7 @@ export async function POST(req: Request) {
       body.services.forEach((s) => drawP(`• ${s}`));
     }
 
-    // Rodapé
+    // Rodapé (na página atual)
     page.drawText('kolivo.com.br', {
       x: margin,
       y: 24,
@@ -136,13 +182,21 @@ export async function POST(req: Request) {
 
     const pdfBytes = await pdfDoc.save();
 
-    return new NextResponse(pdfBytes, {
+    // ✅ FIX: NextResponse aceita Uint8Array / ArrayBuffer (não Buffer)
+    const bodyBytes = new Uint8Array(pdfBytes);
+
+    return new NextResponse(bodyBytes, {
+      status: 200,
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="relatorio-kolivo.pdf"',
+        'Cache-Control': 'no-store',
       },
     });
-  } catch {
-    return NextResponse.json({ error: 'Falha ao gerar PDF' }, { status: 500 });
+  } catch (e) {
+    return NextResponse.json(
+      { error: 'Falha ao gerar PDF', details: String((e as any)?.message ?? e) },
+      { status: 500 }
+    );
   }
 }
