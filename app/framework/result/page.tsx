@@ -816,17 +816,17 @@ export default function ResultPage() {
     };
 
     const res = await fetch('/api/framework/report', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(payload),
+});
 
-    if (!res.ok) {
-      const txt = await res.text().catch(() => '');
-      console.error('PDF API error:', res.status, txt);
-      alert(`Falha ao gerar PDF (${res.status}). Veja o console.`);
-      return;
-    }
+if (!res.ok) {
+  const txt = await res.text();
+  console.error('PDF error:', res.status, txt);
+  alert(`Falha ao gerar PDF (${res.status}). Veja o console.`);
+  return;
+}
 
     const contentType = res.headers.get('content-type') || '';
     if (!contentType.includes('application/pdf')) {

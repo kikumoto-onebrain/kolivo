@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 type Payload = {
   overall: number;
@@ -18,13 +20,11 @@ export async function POST(req: Request) {
     const body = (await req.json()) as Payload;
 
     const pdfDoc = await PDFDocument.create();
-
     const A4: [number, number] = [595.28, 841.89];
     const margin = 48;
 
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-
     const accent = rgb(90 / 255, 90 / 255, 1);
 
     let page = pdfDoc.addPage(A4);
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
 
     const drawH2 = (text: string) => {
       ensureSpace(80);
-      page.drawText(text, { x: margin, y, size: 13, font: fontBold, color: rgb(1, 1, 1) });
+      page.drawText(text, { x: margin, y, size: 13, font: fontBold, color: rgb(0, 0, 0) });
       y -= 18;
     };
 
@@ -75,7 +75,7 @@ export async function POST(req: Request) {
 
       for (const ln of lines) {
         ensureSpace(60);
-        page.drawText(ln, { x: margin, y, size, font, color: rgb(0.85, 0.87, 0.9) });
+        page.drawText(ln, { x: margin, y, size, font, color: rgb(0.15, 0.18, 0.25) });
         y -= 14;
       }
       y -= 4;
@@ -89,7 +89,7 @@ export async function POST(req: Request) {
         y,
         size: 10.5,
         font,
-        color: rgb(0.85, 0.87, 0.9),
+        color: rgb(0.15, 0.18, 0.25),
       });
 
       const rightText = String(right ?? '');
@@ -100,13 +100,12 @@ export async function POST(req: Request) {
         y,
         size: 10.5,
         font: fontBold,
-        color: rgb(1, 1, 1),
+        color: rgb(0, 0, 0),
       });
 
       y -= 16;
     };
 
-    // Conteúdo
     drawTitle('Relatório do Framework de Maturidade — Kolivo');
     drawP('Este relatório foi gerado automaticamente com base nas respostas do seu questionário.');
 
@@ -121,50 +120,33 @@ export async function POST(req: Request) {
     }
 
     drawH2('Oportunidades de melhoria');
-    if (!body.improvements?.length) {
-      drawP('Sem dados suficientes para exibir oportunidades.');
-    } else {
-      body.improvements.slice(0, 3).forEach((it, idx) => {
-        drawRow(`${idx + 1}. ${it.label}`, `${it.score.toFixed(2)}/5`);
-      });
-    }
+    if (!body.improvements?.length) drawP('Sem dados suficientes para exibir oportunidades.');
+    else body.improvements.slice(0, 3).forEach((it, idx) => drawRow(`${idx + 1}. ${it.label}`, `${it.score.toFixed(2)}/5`));
 
     drawH2('Pontos fortes');
-    if (!body.strengths?.length) {
-      drawP('Sem dados suficientes para exibir pontos fortes.');
-    } else {
-      body.strengths.slice(0, 3).forEach((it, idx) => {
-        drawRow(`${idx + 1}. ${it.label}`, `${it.score.toFixed(2)}/5`);
-      });
-    }
+    if (!body.strengths?.length) drawP('Sem dados suficientes para exibir pontos fortes.');
+    else body.strengths.slice(0, 3).forEach((it, idx) => drawRow(`${idx + 1}. ${it.label}`, `${it.score.toFixed(2)}/5`));
 
     drawH2('Serviços especializados recomendados');
-    if (!body.services?.length) {
-      drawP('Sem recomendações disponíveis.');
-    } else {
-      body.services.forEach((s) => drawP(`• ${s}`));
-    }
+    if (!body.services?.length) drawP('Sem recomendações disponíveis.');
+    else body.services.forEach((s) => drawP(`• ${s}`));
 
     page.drawText('kolivo.com.br', {
       x: margin,
       y: 24,
       size: 9,
       font,
-      color: rgb(0.6, 0.63, 0.7),
+      color: rgb(0.45, 0.48, 0.55),
     });
 
-    const pdfBytes = await pdfDoc.save(); // Uint8Array
-    const arrayBuffer = pdfBytes.buffer.slice(
-      pdfBytes.byteOffset,
-      pdfBytes.byteOffset + pdfBytes.byteLength
-    );
+    const pdfBytes = await pdfDoc.save();
 
-    return new NextResponse(arrayBuffer, {
+    return new NextResponse(pdfBytes, {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename=relatorio-kolivo.pdf',
-        'Cache-Control': 'no-store',
+        'Content-Disposition': 'attachment; filename="relatorio-kolivo.pdf"',
+        'Cache-Control': 'no-store, max-age=0',
       },
     });
   } catch (e) {
