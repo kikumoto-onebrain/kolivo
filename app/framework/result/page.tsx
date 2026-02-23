@@ -214,12 +214,12 @@ export default function ResultPage() {
 
       const overall5 = Number(avg.toFixed(1));
 
-      const bars = Object.keys(dimScores).map((k: any) => ({
+      const bars = (Object.keys(dimScores) as DimensionKey[]).map((k) => ({
         name: DIMENSIONS[k].label,
         score: dimScores[k],
       }));
 
-      const radar = Object.keys(dimScores).map((k: any) => ({
+      const radar = (Object.keys(dimScores) as DimensionKey[]).map((k) => ({
         dimension: DIMENSIONS[k].label,
         score: dimScores[k],
       }));
