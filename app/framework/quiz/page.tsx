@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/footer';
+import { LeadForm } from '@/components/framework/leadform';
 
 import { QUESTIONS, DIMENSIONS, DimensionKey } from '@/lib/maturity/questions';
 import { clampScore } from '@/lib/maturity/scoring';
@@ -16,6 +17,7 @@ export default function QuizPage() {
 
   const [idx, setIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [showForm, setShowForm] = useState(false); // 🔥 novo estado
 
   useEffect(() => {
     const saved = loadAnswers();
@@ -41,12 +43,27 @@ export default function QuizPage() {
 
   function next() {
     if (!answers[q.id]) return;
-    if (idx < total - 1) setIdx((p) => p + 1);
-    else router.push('/framework/result');
+
+    if (idx < total - 1) {
+      setIdx((p) => p + 1);
+    } else {
+      // 🔥 ao invés de ir direto pro resultado
+      setShowForm(true);
+    }
   }
 
   function back() {
     if (idx > 0) setIdx((p) => p - 1);
+  }
+
+  // 🔥 intercepta e mostra o form
+  if (showForm) {
+    return (
+      <LeadForm
+        answers={answers}
+        onSuccess={() => router.push('/framework/result')}
+      />
+    );
   }
 
   return (

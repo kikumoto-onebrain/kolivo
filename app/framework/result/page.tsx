@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
   ResponsiveContainer,
@@ -130,10 +131,8 @@ function InsightRow({
     ? 'bg-red-500/8 border-red-400/15'
     : 'bg-emerald-500/8 border-emerald-300/15';
 
-  // ✅ número da pontuação continua colorido
   const scoreColor = isImprovement ? 'text-red-200' : 'text-emerald-200';
 
-  // ✅ tags coloridas continuam
   const badge = isImprovement
     ? {
         text: `#${index + 1} Prioridade`,
@@ -145,30 +144,15 @@ function InsightRow({
       };
 
   return (
-    <div
-      className={['rounded-2xl border p-6', 'backdrop-blur-sm', wrapper].join(
-        ' '
-      )}
-    >
+    <div className={['rounded-2xl border p-6', 'backdrop-blur-sm', wrapper].join(' ')}>
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-start gap-4">
-          <div
-            className={[
-              'w-11 h-11 rounded-xl flex items-center justify-center',
-              'bg-white/5 border border-white/10',
-            ].join(' ')}
-          >
-            {/* ✅ ícones sempre #5A5AFF */}
+          <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-white/5 border border-white/10">
             <Icon className="text-[#5A5AFF]" />
           </div>
 
           <div>
-            {/* ✅ label em branco (visível) */}
-            <p className="font-semibold text-lg leading-tight text-white">
-              {item.label}
-            </p>
-
-            {/* ✅ “Pontuação:” em branco + valor colorido */}
+            <p className="font-semibold text-lg text-white">{item.label}</p>
             <p className="mt-1 text-white">
               Pontuação:{' '}
               <span className={['font-semibold', scoreColor].join(' ')}>
@@ -178,14 +162,7 @@ function InsightRow({
           </div>
         </div>
 
-        <span
-          className={[
-            'shrink-0 inline-flex items-center justify-center',
-            'px-4 py-2 rounded-full text-sm font-semibold',
-            'border',
-            badge.cls,
-          ].join(' ')}
-        >
+        <span className={['px-4 py-2 rounded-full text-sm font-semibold border', badge.cls].join(' ')}>
           {badge.text}
         </span>
       </div>
@@ -195,186 +172,21 @@ function InsightRow({
   );
 }
 
-/** ---- Plano de Ação ---- */
-function roadmapTitle(key: DimensionKey) {
-  switch (key) {
-    case 'ai':
-      return 'Centro de Excelência em IA';
-    case 'automation':
-      return 'Automação e Otimização de Processos';
-    case 'people':
-      return 'People Analytics e Performance';
-    case 'assets':
-      return 'Gestão de Ativos e Licenciamento';
-    case 'itsm':
-      return 'Evolução do ITSM';
-    case 'culture':
-      return 'Cultura e Liderança Digital';
-    default:
-      return 'Roadmap de Evolução';
-  }
-}
-
-function roadmapDesc(key: DimensionKey) {
-  switch (key) {
-    case 'ai':
-      return 'Estruture casos de uso, governança e um pipeline para adoção de IA com impacto mensurável.';
-    case 'automation':
-      return 'Mapeie processos críticos, priorize automações e integre sistemas para reduzir esforço operacional.';
-    case 'people':
-      return 'Defina métricas, consolide dados de jornada e gere insights para elevar performance e engajamento.';
-    case 'assets':
-      return 'Melhore descoberta, controle de licenças e otimização de custos para compliance e eficiência.';
-    case 'itsm':
-      return 'Padronize catálogo, SLAs e workflows, elevando qualidade e previsibilidade do atendimento.';
-    case 'culture':
-      return 'Fortalheça patrocínio da liderança, rituais e governança para sustentar evolução contínua.';
-    default:
-      return 'Implemente ações práticas e mensuráveis para evolução de maturidade.';
-  }
-}
-
-function roadmapTimeline(key: DimensionKey) {
-  switch (key) {
-    case 'ai':
-      return '6–12 meses';
-    case 'automation':
-      return '4–8 meses';
-    case 'people':
-      return '3–6 meses';
-    case 'assets':
-      return '3–6 meses';
-    case 'itsm':
-      return '3–6 meses';
-    case 'culture':
-      return 'Contínuo';
-    default:
-      return 'Contínuo';
-  }
-}
-
-function impactLabel(score: number) {
-  return score < 3.5 ? 'Estratégico' : 'Alto';
-}
-
-/** ---- Serviços recomendados (MATRIZ por nível) ---- */
-type ServicesCardModel = {
-  items: string[];
-  nextTitle: string;
-  nextDesc: string;
-};
-
-function servicesFromMatrix(
-  level: string,
-  dimScores: DimScores
-): ServicesCardModel {
-  const matrixBasic: Partial<Record<DimensionKey, string[]>> = {
-    itsm: [
-      'Implementação de plataforma ITSM',
-      'Definição de processos básicos (incidentes, solicitações e SLAs)',
-    ],
-    automation: [
-      'Mapeamento de processos prioritários',
-      'Implementação de workflow básico e padronização operacional',
-    ],
-    people: [
-      'Centralização de dados de RH',
-      'Dashboard básico de métricas e acompanhamento de performance',
-    ],
-  };
-
-  const matrixIntermediate: Partial<Record<DimensionKey, string[]>> = {
-    itsm: [
-      'Automação avançada de processos ITSM',
-      'Integração do ITSM com ferramentas e sistemas corporativos',
-    ],
-    automation: [
-      'Implementação de RPA para processos críticos',
-      'Plataforma de integração (iPaaS) para orquestração de fluxos',
-    ],
-    ai: [
-      'Projetos piloto de IA aplicados a processos-chave',
-      'Capacitação em Machine Learning e estruturação de cases',
-    ],
-  };
-
-  const matrixAdvanced: string[] = [
-    'Otimização contínua de performance e governança',
-    'Inovação com IA aplicada a operações e processos',
-    'Consultoria estratégica para acelerar a evolução digital',
-  ];
-
-  const nextCopy: Record<string, { title: string; desc: string }> = {
-    Básico: {
-      title: 'Próximo Nível',
-      desc:
-        'Consolide uma base digital consistente: processos padronizados, dados centralizados e visibilidade mínima para evoluir com segurança.',
-    },
-    Intermediário: {
-      title: 'Próximo Nível',
-      desc:
-        'Ganhe escala com automação avançada e integrações: reduza esforço operacional, aumente previsibilidade e prepare o terreno para IA com impacto.',
-    },
-    Avançado: {
-      title: 'Próximo Nível',
-      desc:
-        'Continue liderando a produtividade digital com otimização contínua e inovação: amplie casos de uso de IA e acelere ganhos estratégicos.',
-    },
-  };
-
-  const pickCritical = (
-    keys: DimensionKey[],
-    predicate: (v: number) => boolean
-  ) => {
-    const hits = keys.filter((k) => predicate(dimScores[k]));
-    if (hits.length) return hits;
-
-    const sorted = [...keys].sort((a, b) => dimScores[a] - dimScores[b]);
-    return sorted.slice(0, 1);
-  };
-
-  if (level === 'Avançado') {
-    return {
-      items: matrixAdvanced,
-      nextTitle: nextCopy.Avançado.title,
-      nextDesc: nextCopy.Avançado.desc,
-    };
-  }
-
-  if (level === 'Básico') {
-    const criticalDims = pickCritical(
-      ['itsm', 'automation', 'people'],
-      (v) => v < 2.0
-    );
-
-    const items = criticalDims.flatMap((k) => matrixBasic[k] ?? []);
-    return {
-      items: items.length ? items : matrixAdvanced,
-      nextTitle: nextCopy.Básico.title,
-      nextDesc: nextCopy.Básico.desc,
-    };
-  }
-
-  const criticalDims = pickCritical(
-    ['itsm', 'automation', 'ai'],
-    (v) => v >= 2.1 && v <= 3.5
-  );
-
-  const items = criticalDims.flatMap((k) => matrixIntermediate[k] ?? []);
-  return {
-    items: items.length ? items : matrixAdvanced,
-    nextTitle: nextCopy.Intermediário.title,
-    nextDesc: nextCopy.Intermediário.desc,
-  };
-}
-
 export default function ResultPage() {
+  const router = useRouter(); // ✅ ADICIONADO
   const [answers, setAnswers] = useState<Record<string, number> | null>(null);
 
   useEffect(() => {
     const saved = loadAnswers();
-    setAnswers(saved?.answers ?? null);
-  }, []);
+
+    // 🔒 PROTEÇÃO
+    if (!saved?.answers || Object.keys(saved.answers).length === 0) {
+      router.push('/framework/quiz');
+      return;
+    }
+
+    setAnswers(saved.answers);
+  }, [router]);
 
   const { overall, label, bars, radar, insights, dimScores, overall5, max5, min5 } =
     useMemo(() => {
@@ -397,31 +209,28 @@ export default function ResultPage() {
       const overall = weightedOverallScore(dimScores);
       const label = maturityLabel(overall);
 
-      const values = (Object.keys(dimScores) as DimensionKey[]).map(
-        (k) => dimScores[k]
-      );
+      const values = Object.values(dimScores);
       const avg = values.reduce((a, b) => a + b, 0) / values.length;
-      const mx = Math.max(...values);
-      const mn = Math.min(...values);
 
       const overall5 = Number(avg.toFixed(1));
-      const max5 = Number(mx.toFixed(1));
-      const min5 = Number(mn.toFixed(1));
 
-      const bars = (Object.keys(dimScores) as DimensionKey[]).map((k) => ({
+      const bars = Object.keys(dimScores).map((k: any) => ({
         name: DIMENSIONS[k].label,
         score: dimScores[k],
       }));
 
-      const radar = (Object.keys(dimScores) as DimensionKey[]).map((k) => ({
+      const radar = Object.keys(dimScores).map((k: any) => ({
         dimension: DIMENSIONS[k].label,
         score: dimScores[k],
       }));
 
       const insights = buildInsights(dimScores);
 
-      return { overall, label, bars, radar, insights, dimScores, overall5, max5, min5 };
+      return { overall, label, bars, radar, insights, dimScores, overall5, max5: 0, min5: 0 };
     }, [answers]);
+
+  // ✅ evita flash
+  if (!answers) return null;
 
   return (
     <>

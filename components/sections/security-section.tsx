@@ -128,6 +128,11 @@ export function SecuritySection() {
                 variant="outline"
                 className="border-kolivo-accent text-kolivo-accent hover:bg-kolivo-accent hover:text-white
                            transition-all duration-300 px-8 py-6 text-lg font-semibold rounded-lg group"
+                onClick={() => {
+                  document
+                    .getElementById('contato')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                 }}
               >
                 <span className="hidden sm:inline">
                   Avalie o nível de segurança da sua empresa

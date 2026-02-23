@@ -16,7 +16,7 @@ import {
 import { Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
-// 💡 Mesmos serviços de antes
+// Serviços
 const services = [
   'ITOps',
   'RPA - Automação',
@@ -30,7 +30,7 @@ const services = [
   'Field Service',
 ];
 
-// 🔑 IDs DIRETO DO EMAILJS (igual ao outro projeto)
+// 🔑 IDs DIRETO DO EMAILJS
 const SERVICE_ID = 'service_7gblydj';
 const TEMPLATE_ID = 'template_hbug1cp';
 const PUBLIC_KEY = '13O_ZGPDK5-AjkGRr';
