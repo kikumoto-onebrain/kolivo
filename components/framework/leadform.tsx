@@ -12,6 +12,13 @@ const SERVICE_ID = 'service_7gblydj';
 const TEMPLATE_ID = 'template_hbug1cp';
 const PUBLIC_KEY = '13O_ZGPDK5-AjkGRr';
 
+// Tipagem segura para o gtag no browser
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 export function LeadForm({
   onSuccess,
   answers,
@@ -48,6 +55,13 @@ export function LeadForm({
         },
         PUBLIC_KEY
       );
+
+      // ✅ Dispara conversão Google Ads após envio bem-sucedido
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+          send_to: 'AW-11171385452/VjYUCMPLxv8bEOyg984p',
+        });
+      }
 
       toast({
         title: 'Tudo certo!',
