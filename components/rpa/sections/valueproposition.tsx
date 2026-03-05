@@ -40,7 +40,6 @@ const item: Variants = {
   show: {
     opacity: 1,
     y: 0,
-    // Usa easing tipado (evita erro de build no TS)
     transition: { duration: 0.5, ease: 'easeOut' as const },
   },
 };
@@ -79,12 +78,22 @@ export function ValueProposition() {
           viewport={{ once: true, margin: '-80px' }}
           className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
         >
-          {valueCards.map(({ icon: Icon, title, desc }) => (
+          {valueCards.map(({ icon: Icon, title, desc }, i) => (
             <motion.div
               key={title}
               variants={item}
-              whileHover={{ y: -6, scale: 1.02 }}
-              transition={{ type: 'spring', stiffness: 220, damping: 16 }}
+              // motion constante (float) com delays diferentes por card
+              animate={{ y: [0, -6, 0] }}
+              transition={{
+                y: {
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: 'easeInOut' as const,
+                  delay: i * 0.4,
+                },
+              }}
+              // mantém hover (mais forte do que o float)
+              whileHover={{ y: -10, scale: 1.04 }}
               className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]"
             >
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-kolivo-accent/10 mb-4">
