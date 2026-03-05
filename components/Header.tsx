@@ -105,7 +105,7 @@ export function Header() {
                 onMouseLeave={closeServicesWithDelay}
               >
                 {[
-                  ['#rpa', 'RPA'],
+                  ['/rpa', 'RPA'],
                   ['#assessment-seguranca', 'Assessment de Segurança'],
                   ['#soc', 'SOC & IAM'],
                   ['#noc', 'NOC'],
@@ -118,7 +118,9 @@ export function Header() {
                   <a
                     key={href}
                     href={href}
-                    onClick={(e) => handleSmoothScroll(e, href)}
+                    onClick={(e) => {
+                      if (href.startsWith('#')) handleSmoothScroll(e, href)
+                    }}
                     className="block hover:text-[#5a5aff] transition"
                   >
                     {label}
@@ -171,7 +173,7 @@ export function Header() {
           className="md:hidden bg-[#181828]/95 backdrop-blur-lg border-t border-[#323284] text-white px-6 py-6 space-y-4 shadow-xl"
         >
           {[
-            ['#rpa', 'RPA'],
+            ['/rpa', 'RPA'],
             ['#assessment-seguranca', 'Assessment de Segurança'],
             ['#soc', 'SOC & IAM'],
             ['#noc', 'NOC'],
@@ -184,7 +186,10 @@ export function Header() {
             <a
               key={href}
               href={href}
-              onClick={(e) => handleSmoothScroll(e, href)}
+              onClick={(e) => {
+                if (href.startsWith('#')) handleSmoothScroll(e, href)
+                else setMenuOpen(false)
+              }}
               className="block text-lg font-medium hover:text-[#5a5aff] transition"
             >
               {label}

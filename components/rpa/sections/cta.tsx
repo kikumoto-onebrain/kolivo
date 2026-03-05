@@ -158,7 +158,6 @@ export function CTA() {
                 className="w-full bg-kolivo-accent hover:bg-kolivo-accent/90 h-14 text-lg font-semibold transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)] group"
               >
                 {isSubmitting ? 'Enviando...' : 'Fale com um especialista'}
-                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
 
               <p className="text-xs text-gray-400 text-center">
