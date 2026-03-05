@@ -130,7 +130,7 @@ export default function RPAClientPage() {
               transition={{ duration: 0.6 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight"
             >
-              Automação <span className="text-[#5A5AFF]">RPA</span> para reduzir custos, erros e acelerar processos
+              Automação de processos com<span className="text-[#5A5AFF]">RPA</span> para empresas
             </motion.h1>
 
             <motion.p
@@ -140,7 +140,7 @@ export default function RPAClientPage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mt-6 text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto"
             >
-              Automatize tarefas repetitivas com bots operando 24/7, conecte sistemas e libere sua equipe para atividades estratégicas.
+              Automatize tarefas repetitivas, reduza erros humanos e libere sua equipe para atividades estratégicas.
             </motion.p>
 
             <motion.div
@@ -160,16 +160,7 @@ export default function RPAClientPage() {
                 Solicitar diagnóstico
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-
-              <Link href="/framework/quiz" className="inline-flex">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white/25 text-white hover:bg-white/10 px-10 py-6 text-lg font-semibold rounded-lg"
-                >
-                  Fazer avaliação gratuita
-                </Button>
-              </Link>
+            
             </motion.div>
 
             {/* STATS */}
