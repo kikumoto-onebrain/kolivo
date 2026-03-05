@@ -123,7 +123,7 @@ export function ValueProposition() {
                 ?.scrollIntoView({ behavior: 'smooth' });
             }}
           >
-            Acelerar com RPA
+            Acelere com RPA
           </Button>
         </div>
       </div>

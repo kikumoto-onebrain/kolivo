@@ -70,7 +70,7 @@ export function Hero() {
                   ?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              Solicitar diagnóstico
+              Solicite um diagnóstico
             </Button>
           </motion.div>
 

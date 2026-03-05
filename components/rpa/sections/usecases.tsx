@@ -2,30 +2,49 @@
 
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export function UseCases() {
   const useCases = [
     {
       title: 'Financeiro',
-      bullets: ['Processamento de faturas', 'Reconciliação financeira', 'Validações e conciliações'],
+      bullets: [
+        'Processamento de faturas',
+        'Reconciliação financeira',
+        'Validações e conciliações',
+      ],
     },
     {
       title: 'Operações',
-      bullets: ['Entrada de dados', 'Geração de relatórios', 'Atualização de cadastros e transações'],
+      bullets: [
+        'Entrada de dados',
+        'Geração de relatórios',
+        'Atualização de cadastros e transações',
+      ],
     },
     {
       title: 'Atendimento',
-      bullets: ['Automação de e-mails', 'Triagem e encaminhamento', 'Chatbots e respostas a FAQs'],
+      bullets: [
+        'Automação de e-mails',
+        'Triagem e encaminhamento',
+        'Chatbots e respostas a FAQs',
+      ],
     },
     {
       title: 'TI',
-      bullets: ['Monitoramento de rotinas', 'Execução de tarefas operacionais', 'Apoio a atualizações e checklists'],
+      bullets: [
+        'Monitoramento de rotinas',
+        'Execução de tarefas operacionais',
+        'Apoio a atualizações e checklists',
+      ],
     },
   ];
 
   return (
     <section className="py-20 sm:py-24 bg-[#070824]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* HEADER */}
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
             initial={{ opacity: 0, y: 18 }}
@@ -44,10 +63,12 @@ export function UseCases() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mt-4 text-lg text-gray-300"
           >
-            Processos repetitivos e baseados em regras são ideais para automação. Começamos pelo que gera resultado mais rápido.
+            Processos repetitivos e baseados em regras são ideais para automação. 
+            Começamos pelo que gera resultado mais rápido.
           </motion.p>
         </div>
 
+        {/* CARDS */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {useCases.map((c) => (
             <motion.div
@@ -59,6 +80,7 @@ export function UseCases() {
               className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-colors"
             >
               <h3 className="text-xl font-bold mb-4">{c.title}</h3>
+
               <ul className="space-y-3">
                 {c.bullets.map((b) => (
                   <li key={b} className="flex items-start gap-3 text-gray-200">
@@ -70,6 +92,28 @@ export function UseCases() {
             </motion.div>
           ))}
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-14 flex justify-center"
+        >
+          <Button
+            size="lg"
+            className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-10 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)]"
+            onClick={() => {
+              document
+                .getElementById('contato')
+                ?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            Identifique processos para automação
+          </Button>
+        </motion.div>
+
       </div>
     </section>
   );
