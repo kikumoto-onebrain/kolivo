@@ -35,7 +35,7 @@ const container: Variants = {
   },
 };
 
-// IMPORTANTE: variants só para OPACITY (sem y), para não conflitar com o float
+// variants só para OPACITY (sem y)
 const item: Variants = {
   hidden: { opacity: 0 },
   show: {
@@ -82,19 +82,26 @@ export function ValueProposition() {
             <motion.div
               key={title}
               variants={item}
-              // motion constante (float) — agora sem conflito
-              animate={{ y: [-4, 4] }}
-              transition={{
-                y: {
-                  duration: 3.8,
-                  repeat: Infinity,
-                  repeatType: 'mirror',
-                  ease: 'easeInOut' as const,
-                  delay: i * 0.25,
-                },
+              // motion constante (glow sutil)
+              animate={{
+                boxShadow: [
+                  '0 0 0px rgba(90,90,255,0.00)',
+                  '0 0 22px rgba(90,90,255,0.14)',
+                  '0 0 0px rgba(90,90,255,0.00)',
+                ],
               }}
-              // mantém hover (mais forte do que o float)
-              whileHover={{ y: -10, scale: 1.04 }}
+              transition={{
+                duration: 5.5,
+                repeat: Infinity,
+                ease: 'easeInOut' as const,
+                delay: i * 0.35,
+              }}
+              // hover padronizado
+              whileHover={{
+                y: -10,
+                scale: 1.04,
+                boxShadow: '0 0 25px rgba(90,90,255,0.18)',
+              }}
               className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]"
             >
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-kolivo-accent/10 mb-4">
