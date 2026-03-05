@@ -8,6 +8,7 @@ export function Footer() {
     <footer className="bg-kolivo-primary border-t border-white/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+
           {/* Logo Kolivo + selo Landor */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -40,21 +41,49 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <h4 className="text-lg font-semibold text-white mb-4">Serviços</h4>
+
             <ul className="space-y-2">
-              {[
-                'ITOps',
-                'RPA',
-                'Security Assessment',
-                'SOC',
-                'NOC',
-                'Cloud & On-Premise',
-              ].map((service) => (
-                <li key={service}>
-                  <span className="text-gray-400 hover:text-kolivo-accent transition-colors cursor-pointer">
-                    {service}
-                  </span>
-                </li>
-              ))}
+
+              <li>
+                <span className="text-gray-400 hover:text-kolivo-accent transition-colors cursor-pointer">
+                  ITOps
+                </span>
+              </li>
+
+              {/* ✅ ALTERAÇÃO AQUI */}
+              <li>
+                <a
+                  href="/rpa"
+                  className="text-gray-400 hover:text-kolivo-accent transition-colors"
+                >
+                  RPA
+                </a>
+              </li>
+
+              <li>
+                <span className="text-gray-400 hover:text-kolivo-accent transition-colors cursor-pointer">
+                  Security Assessment
+                </span>
+              </li>
+
+              <li>
+                <span className="text-gray-400 hover:text-kolivo-accent transition-colors cursor-pointer">
+                  SOC
+                </span>
+              </li>
+
+              <li>
+                <span className="text-gray-400 hover:text-kolivo-accent transition-colors cursor-pointer">
+                  NOC
+                </span>
+              </li>
+
+              <li>
+                <span className="text-gray-400 hover:text-kolivo-accent transition-colors cursor-pointer">
+                  Cloud & On-Premise
+                </span>
+              </li>
+
             </ul>
           </motion.div>
 
@@ -68,11 +97,12 @@ export function Footer() {
             <h4 className="text-lg font-semibold text-white mb-4">
               Framework de Maturidade
             </h4>
+
             <ul className="space-y-2">
               <li>
                 <a
                   href="/framework"
-                  className="text-gray-400 hover:text-kolivo-accent transition-colors cursor-pointer"
+                  className="text-gray-400 hover:text-kolivo-accent transition-colors"
                 >
                   Iniciar avaliação
                 </a>
@@ -88,15 +118,18 @@ export function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h4 className="text-lg font-semibold text-white mb-4">Contato</h4>
+
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-gray-400">
                 <Mail className="w-5 h-5 text-kolivo-accent" />
                 <span>contato@kolivo.com.br</span>
               </li>
+
               <li className="flex items-center gap-3 text-gray-400">
                 <Phone className="w-5 h-5 text-kolivo-accent" />
                 <span>+55 (11) 99645-6724</span>
               </li>
+
               <li className="flex items-center gap-3 text-gray-400">
                 <MapPin className="w-5 h-5 text-kolivo-accent" />
                 <span>São Paulo, Brasil</span>
@@ -105,7 +138,7 @@ export function Footer() {
           </motion.div>
         </div>
 
-        {/* Rodapé inferior simplificado */}
+        {/* Rodapé inferior */}
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-center items-center gap-4">
             <p className="text-gray-400 text-sm text-center">
