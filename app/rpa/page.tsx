@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import RPA from './RPA';
+import RPA from '@/components/rpa/rpa';
 
 export const metadata: Metadata = {
   title: 'Automação RPA | Reduza custos e acelere processos | Kolivo',
@@ -36,5 +36,5 @@ export const metadata: Metadata = {
 };
 
 export default function RPAPage() {
-  return <RPAClientPage />;
+  return <RPA />;
 }
