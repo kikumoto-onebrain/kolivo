@@ -120,7 +120,6 @@ export function Methodology() {
               }}
             >
               Quero implementar RPA
-              <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
             </Button>
           </motion.div>
         </div>
