@@ -35,12 +35,12 @@ const container: Variants = {
   },
 };
 
+// IMPORTANTE: variants só para OPACITY (sem y), para não conflitar com o float
 const item: Variants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' as const },
+    transition: { duration: 0.45, ease: 'easeOut' as const },
   },
 };
 
@@ -82,14 +82,15 @@ export function ValueProposition() {
             <motion.div
               key={title}
               variants={item}
-              // motion constante (float) com delays diferentes por card
-              animate={{ y: [0, -6, 0] }}
+              // motion constante (float) — agora sem conflito
+              animate={{ y: [-4, 4] }}
               transition={{
                 y: {
-                  duration: 6,
+                  duration: 3.8,
                   repeat: Infinity,
+                  repeatType: 'mirror',
                   ease: 'easeInOut' as const,
-                  delay: i * 0.4,
+                  delay: i * 0.25,
                 },
               }}
               // mantém hover (mais forte do que o float)
