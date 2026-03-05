@@ -130,7 +130,7 @@ export default function RPAClientPage() {
               transition={{ duration: 0.6 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight"
             >
-              Automação de processos com<span className="text-[#5A5AFF]">RPA</span> para empresas
+              <span className="text-[#5A5AFF]">Automação de processos com RPA</span> para empresas
             </motion.h1>
 
             <motion.p
@@ -158,7 +158,6 @@ export default function RPAClientPage() {
                 }}
               >
                 Solicitar diagnóstico
-                <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             
             </motion.div>
