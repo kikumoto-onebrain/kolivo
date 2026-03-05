@@ -130,7 +130,8 @@ export default function RPAClientPage() {
               transition={{ duration: 0.6 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight"
             >
-              <span className="text-[#5A5AFF]">Automação de processos com RPA</span> para empresas
+              <span className="text-[#5A5AFF]">Automação de processos </span>
+              <span className="lg:whitespace-nowrap">com RPA para empresas</span>
             </motion.h1>
 
             <motion.p
