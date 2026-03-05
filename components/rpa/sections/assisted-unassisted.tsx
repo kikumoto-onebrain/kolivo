@@ -20,7 +20,7 @@ export function AssistedVsUnassisted() {
   return (
     <section className="py-20 sm:py-24 bg-kolivo-primary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* HEADER */}
         <div className="max-w-4xl mx-auto text-center">
           <motion.h3
@@ -44,59 +44,69 @@ export function AssistedVsUnassisted() {
           </motion.p>
         </div>
 
-        {/* CARDS */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5 }}
-            className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-colors"
-          >
-            <div className="inline-flex items-center gap-2 text-kolivo-accent font-semibold">
-              <Bot className="w-5 h-5" />
-              Automação assistida
-            </div>
+        {/* GRID COM DIVIDER */}
+        <div className="relative mt-12 max-w-6xl mx-auto">
 
-            <p className="mt-3 text-gray-300 leading-relaxed">
-              Bots atuam em segundo plano e são ativados por ações humanas, acelerando tarefas sem mudar o modo de trabalho.
-            </p>
+          {/* Divider vertical (desktop) */}
+          <div className="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-kolivo-accent/40 to-transparent" />
 
-            <ul className="mt-5 space-y-3">
-              {assisted.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-gray-200">
-                  <CheckCircle2 className="w-5 h-5 text-kolivo-accent mt-0.5" />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5, delay: 0.05 }}
-            className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-colors"
-          >
-            <div className="inline-flex items-center gap-2 text-kolivo-accent font-semibold">
-              <Workflow className="w-5 h-5" />
-              Automação não assistida
-            </div>
+            {/* CARD ASSISTED */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.5 }}
+              className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-colors"
+            >
+              <div className="inline-flex items-center gap-2 text-kolivo-accent font-semibold">
+                <Bot className="w-5 h-5" />
+                Automação assistida
+              </div>
 
-            <p className="mt-3 text-gray-300 leading-relaxed">
-              Bots executam processos completos de forma agendada ou por gatilhos, sem intervenção humana.
-            </p>
+              <p className="mt-3 text-gray-300 leading-relaxed">
+                Bots atuam em segundo plano e são ativados por ações humanas, acelerando tarefas sem mudar o modo de trabalho.
+              </p>
 
-            <ul className="mt-5 space-y-3">
-              {unassisted.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-gray-200">
-                  <CheckCircle2 className="w-5 h-5 text-kolivo-accent mt-0.5" />
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+              <ul className="mt-5 space-y-3">
+                {assisted.map((b) => (
+                  <li key={b} className="flex items-start gap-3 text-gray-200">
+                    <CheckCircle2 className="w-5 h-5 text-kolivo-accent mt-0.5" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* CARD UNASSISTED */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-colors"
+            >
+              <div className="inline-flex items-center gap-2 text-kolivo-accent font-semibold">
+                <Workflow className="w-5 h-5" />
+                Automação não assistida
+              </div>
+
+              <p className="mt-3 text-gray-300 leading-relaxed">
+                Bots executam processos completos de forma agendada ou por gatilhos, sem intervenção humana.
+              </p>
+
+              <ul className="mt-5 space-y-3">
+                {unassisted.map((b) => (
+                  <li key={b} className="flex items-start gap-3 text-gray-200">
+                    <CheckCircle2 className="w-5 h-5 text-kolivo-accent mt-0.5" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+          </div>
         </div>
 
         {/* CTA */}
@@ -117,7 +127,6 @@ export function AssistedVsUnassisted() {
             }}
           >
             Quero automatizar processos
-            <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
         </motion.div>
 
