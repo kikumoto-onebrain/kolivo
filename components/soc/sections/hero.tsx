@@ -22,8 +22,13 @@ export function Hero() {
             transition={{ duration: 0.6 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight"
           >
-            <span className="text-[#5A5AFF]">SOC 24/7 </span>
-            <span className="lg:whitespace-nowrap">& IAM com controle total</span>
+            {/* Linha 1 (desktop: sempre 1 linha) */}
+            <span className="block text-[#5A5AFF] lg:whitespace-nowrap">
+              SOC &amp; IAM 24/7
+            </span>
+
+            {/* Linha 2 (sempre embaixo) */}
+            <span className="block">com controle total</span>
           </motion.h1>
 
           <motion.p
