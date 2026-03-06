@@ -175,7 +175,7 @@ export function Header() {
           {[
             ['/rpa', 'RPA'],
             ['#assessment-seguranca', 'Assessment de Segurança'],
-            ['#soc', 'SOC & IAM'],
+            ['/soc', 'SOCM'],
             ['#noc', 'NOC'],
             ['#cloud', 'Infra Cloud & On Premise'],
             ['#service-desk', 'Service Desk | CSC'],

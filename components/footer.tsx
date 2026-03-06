@@ -68,7 +68,7 @@ export function Footer() {
 
               <li>
                 <span className="text-gray-400 hover:text-kolivo-accent transition-colors cursor-pointer">
-                  SOC
+                  SOC & IAM
                 </span>
               </li>
 

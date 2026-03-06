@@ -50,7 +50,8 @@ export function Methodology() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mt-4 text-lg text-gray-300"
             >
-              Um fluxo claro para ganhar visibilidade, reduzir incidentes e controlar acessos com governança.
+              Um fluxo claro para ganhar visibilidade, reduzir incidentes e
+              controlar acessos com governança.
             </motion.p>
           </div>
 
@@ -74,43 +75,35 @@ export function Methodology() {
                       isRight ? 'sm:flex-row-reverse' : ''
                     }`}
                   >
-                    {/* spacer lateral para manter metade/ metade */}
+                    {/* marker alinhado à linha da timeline */}
+                    <motion.div
+                      animate={{ scale: [1, 1.06, 1] }}
+                      transition={{
+                        duration: 2.8,
+                        repeat: Infinity,
+                        ease: 'easeInOut' as const,
+                      }}
+                      className="
+                        absolute
+                        left-5
+                        sm:left-1/2
+                        sm:-translate-x-1/2
+                        top-1/2
+                        -translate-y-1/2
+                        w-6 h-6
+                        rounded-full
+                        bg-kolivo-accent/30
+                        border border-kolivo-accent/60
+                        z-10
+                      "
+                    />
+
+                    {/* spacer lateral para manter metade/metade */}
                     <div className="hidden sm:block sm:w-1/2" />
 
                     {/* card */}
                     <div className="sm:w-1/2 pl-12 sm:pl-0">
-                      <div className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]">
-                        {/* marker alinhado ao centro horizontal do card */}
-                        <motion.div
-                          animate={{ scale: [1, 1.06, 1] }}
-                          transition={{
-                            duration: 2.8,
-                            repeat: Infinity,
-                            ease: 'easeInOut' as const,
-                          }}
-                          className="
-                            absolute
-                            -left-[2.95rem]
-                            top-1/2
-                            -translate-y-1/2
-                            sm:left-auto
-                            sm:right-auto
-                            sm:top-1/2
-                            sm:-translate-y-1/2
-                            sm:w-6 sm:h-6
-                            w-6 h-6
-                            rounded-full
-                            bg-kolivo-accent/30
-                            border border-kolivo-accent/60
-                            z-10
-                          "
-                          style={
-                            isRight
-                              ? { left: '-3.4rem' }
-                              : { right: '-3.4rem' }
-                          }
-                        />
-
+                      <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]">
                         <div className="flex items-center gap-3 mb-2 text-kolivo-accent font-semibold">
                           <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-kolivo-accent/10">
                             <Icon className="w-5 h-5 text-kolivo-accent" />
@@ -138,7 +131,7 @@ export function Methodology() {
                 })
               }
             >
-              Estruture operação de SOC e IAM
+              Estruturar operação de SOC e IAM
             </Button>
           </div>
         </div>
