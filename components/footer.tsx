@@ -50,7 +50,6 @@ export function Footer() {
                 </span>
               </li>
 
-              {/* ✅ ALTERAÇÃO AQUI */}
               <li>
                 <a
                   href="/rpa"
@@ -66,10 +65,14 @@ export function Footer() {
                 </span>
               </li>
 
+              {/* ✅ SOC agora aponta para a página */}
               <li>
-                <span className="text-gray-400 hover:text-kolivo-accent transition-colors cursor-pointer">
+                <a
+                  href="/soc"
+                  className="text-gray-400 hover:text-kolivo-accent transition-colors"
+                >
                   SOC & IAM
-                </span>
+                </a>
               </li>
 
               <li>
