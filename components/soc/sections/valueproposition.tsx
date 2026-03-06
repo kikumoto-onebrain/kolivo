@@ -2,6 +2,7 @@
 
 import { motion, type Variants } from 'framer-motion';
 import { ShieldCheck, Radar, KeyRound, BadgeCheck } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const cards = [
   {
@@ -28,12 +29,17 @@ const cards = [
 
 const container: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
+  show: {
+    transition: { staggerChildren: 0.12 },
+  },
 };
 
 const item: Variants = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { duration: 0.45, ease: 'easeOut' as const } },
+  show: {
+    opacity: 1,
+    transition: { duration: 0.45, ease: 'easeOut' as const },
+  },
 };
 
 export function ValueProposition() {
@@ -74,17 +80,24 @@ export function ValueProposition() {
             <motion.div
               key={title}
               variants={item}
-              animate={{ y: [-4, 4] }}
-              transition={{
-                y: {
-                  duration: 3.8,
-                  repeat: Infinity,
-                  repeatType: 'mirror',
-                  ease: 'easeInOut' as const,
-                  delay: i * 0.25,
-                },
+              animate={{
+                boxShadow: [
+                  '0 0 0px rgba(90,90,255,0.00)',
+                  '0 0 22px rgba(90,90,255,0.14)',
+                  '0 0 0px rgba(90,90,255,0.00)',
+                ],
               }}
-              whileHover={{ y: -10, scale: 1.04 }}
+              transition={{
+                duration: 5.5,
+                repeat: Infinity,
+                ease: 'easeInOut' as const,
+                delay: i * 0.35,
+              }}
+              whileHover={{
+                y: -10,
+                scale: 1.04,
+                boxShadow: '0 0 25px rgba(90,90,255,0.18)',
+              }}
               className="group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]"
             >
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-kolivo-accent/10 mb-4">
@@ -95,6 +108,20 @@ export function ValueProposition() {
             </motion.div>
           ))}
         </motion.div>
+
+        <div className="mt-10 flex justify-center">
+          <Button
+            size="lg"
+            className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-10 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)]"
+            onClick={() => {
+              document
+                .getElementById('contato')
+                ?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            Proteja sua operação
+          </Button>
+        </div>
       </div>
     </section>
   );

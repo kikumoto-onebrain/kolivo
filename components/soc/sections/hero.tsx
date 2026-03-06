@@ -56,7 +56,7 @@ export function Hero() {
                 document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              Fale com um especialista
+              Analise os riscos do seu ambiente
             </Button>
           </motion.div>
 
