@@ -31,7 +31,7 @@ export function Methodology() {
   return (
     <section className="py-20 sm:py-24 bg-[#070824]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center">
             <motion.h2
               initial={{ opacity: 0, y: 18 }}
@@ -55,10 +55,48 @@ export function Methodology() {
             </motion.p>
           </div>
 
-          {/* Timeline */}
-          <div className="mt-12 relative">
-            {/* linha central */}
-            <div className="absolute left-5 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-px bg-white/10" />
+          {/* Timeline mobile */}
+          <div className="mt-12 md:hidden relative">
+            <div className="absolute left-3 top-0 bottom-0 w-px bg-white/10" />
+
+            <div className="space-y-8">
+              {steps.map(({ icon: Icon, title, desc }) => (
+                <motion.div
+                  key={title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.5 }}
+                  className="relative pl-12"
+                >
+                  <motion.div
+                    animate={{ scale: [1, 1.06, 1] }}
+                    transition={{
+                      duration: 2.8,
+                      repeat: Infinity,
+                      ease: 'easeInOut' as const,
+                    }}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-kolivo-accent/30 border border-kolivo-accent/60 z-10"
+                  />
+
+                  <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]">
+                    <div className="flex items-center gap-3 mb-2 text-kolivo-accent font-semibold">
+                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-kolivo-accent/10">
+                        <Icon className="w-5 h-5 text-kolivo-accent" />
+                      </div>
+                      <span className="text-white">{title}</span>
+                    </div>
+
+                    <p className="text-gray-300 leading-relaxed">{desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Timeline desktop */}
+          <div className="mt-12 hidden md:block relative">
+            <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-white/10" />
 
             <div className="space-y-8">
               {steps.map(({ icon: Icon, title, desc }, idx) => {
@@ -71,48 +109,51 @@ export function Methodology() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 0.5 }}
-                    className={`relative flex flex-col sm:flex-row ${
-                      isRight ? 'sm:flex-row-reverse' : ''
-                    }`}
+                    className="grid grid-cols-[1fr_80px_1fr] items-center gap-6"
                   >
-                    {/* marker alinhado à linha da timeline */}
-                    <motion.div
-                      animate={{ scale: [1, 1.06, 1] }}
-                      transition={{
-                        duration: 2.8,
-                        repeat: Infinity,
-                        ease: 'easeInOut' as const,
-                      }}
-                      className="
-                        absolute
-                        left-5
-                        sm:left-1/2
-                        sm:-translate-x-1/2
-                        top-1/2
-                        -translate-y-1/2
-                        w-6 h-6
-                        rounded-full
-                        bg-kolivo-accent/30
-                        border border-kolivo-accent/60
-                        z-10
-                      "
-                    />
-
-                    {/* spacer lateral para manter metade/metade */}
-                    <div className="hidden sm:block sm:w-1/2" />
-
-                    {/* card */}
-                    <div className="sm:w-1/2 pl-12 sm:pl-0">
-                      <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]">
-                        <div className="flex items-center gap-3 mb-2 text-kolivo-accent font-semibold">
-                          <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-kolivo-accent/10">
-                            <Icon className="w-5 h-5 text-kolivo-accent" />
+                    {/* Card esquerdo */}
+                    <div className={isRight ? '' : 'col-start-1'}>
+                      {!isRight && (
+                        <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]">
+                          <div className="flex items-center gap-3 mb-2 text-kolivo-accent font-semibold">
+                            <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-kolivo-accent/10">
+                              <Icon className="w-5 h-5 text-kolivo-accent" />
+                            </div>
+                            <span className="text-white">{title}</span>
                           </div>
-                          <span className="text-white">{title}</span>
-                        </div>
 
-                        <p className="text-gray-300 leading-relaxed">{desc}</p>
-                      </div>
+                          <p className="text-gray-300 leading-relaxed">{desc}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Centro */}
+                    <div className="relative flex justify-center">
+                      <motion.div
+                        animate={{ scale: [1, 1.06, 1] }}
+                        transition={{
+                          duration: 2.8,
+                          repeat: Infinity,
+                          ease: 'easeInOut' as const,
+                        }}
+                        className="w-6 h-6 rounded-full bg-kolivo-accent/30 border border-kolivo-accent/60 z-10"
+                      />
+                    </div>
+
+                    {/* Card direito */}
+                    <div className={isRight ? 'col-start-3' : ''}>
+                      {isRight && (
+                        <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]">
+                          <div className="flex items-center gap-3 mb-2 text-kolivo-accent font-semibold">
+                            <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-kolivo-accent/10">
+                              <Icon className="w-5 h-5 text-kolivo-accent" />
+                            </div>
+                            <span className="text-white">{title}</span>
+                          </div>
+
+                          <p className="text-gray-300 leading-relaxed">{desc}</p>
+                        </div>
+                      )}
                     </div>
                   </motion.div>
                 );
