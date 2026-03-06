@@ -56,11 +56,13 @@ export function Methodology() {
 
           {/* Timeline */}
           <div className="mt-12 relative">
+            {/* linha central */}
             <div className="absolute left-5 sm:left-1/2 sm:-translate-x-1/2 top-0 bottom-0 w-px bg-white/10" />
 
             <div className="space-y-8">
               {steps.map(({ icon: Icon, title, desc }, idx) => {
                 const isRight = idx % 2 === 1;
+
                 return (
                   <motion.div
                     key={title}
@@ -68,30 +70,54 @@ export function Methodology() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 0.5 }}
-                    className={`relative flex gap-6 ${
-                      // mobile: sempre coluna
-                      'flex-col sm:flex-row'
-                    } ${isRight ? 'sm:flex-row-reverse' : ''}`}
+                    className={`relative flex flex-col sm:flex-row ${
+                      isRight ? 'sm:flex-row-reverse' : ''
+                    }`}
                   >
-                    {/* marker */}
-                    <motion.div
-                      animate={{ scale: [1, 1.06, 1] }}
-                      transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' as const }}
-                      className="absolute left-2.5 sm:left-1/2 sm:-translate-x-1/2 mt-2 w-6 h-6 rounded-full bg-kolivo-accent/30 border border-kolivo-accent/60"
-                    />
-
-                    {/* spacer side */}
+                    {/* spacer lateral para manter metade/ metade */}
                     <div className="hidden sm:block sm:w-1/2" />
 
                     {/* card */}
-                    <div className="sm:w-1/2 pl-10 sm:pl-0">
-                      <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]">
+                    <div className="sm:w-1/2 pl-12 sm:pl-0">
+                      <div className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-kolivo-accent/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(90,90,255,0.18)]">
+                        {/* marker alinhado ao centro horizontal do card */}
+                        <motion.div
+                          animate={{ scale: [1, 1.06, 1] }}
+                          transition={{
+                            duration: 2.8,
+                            repeat: Infinity,
+                            ease: 'easeInOut' as const,
+                          }}
+                          className="
+                            absolute
+                            -left-[2.95rem]
+                            top-1/2
+                            -translate-y-1/2
+                            sm:left-auto
+                            sm:right-auto
+                            sm:top-1/2
+                            sm:-translate-y-1/2
+                            sm:w-6 sm:h-6
+                            w-6 h-6
+                            rounded-full
+                            bg-kolivo-accent/30
+                            border border-kolivo-accent/60
+                            z-10
+                          "
+                          style={
+                            isRight
+                              ? { left: '-3.4rem' }
+                              : { right: '-3.4rem' }
+                          }
+                        />
+
                         <div className="flex items-center gap-3 mb-2 text-kolivo-accent font-semibold">
                           <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-kolivo-accent/10">
                             <Icon className="w-5 h-5 text-kolivo-accent" />
                           </div>
                           <span className="text-white">{title}</span>
                         </div>
+
                         <p className="text-gray-300 leading-relaxed">{desc}</p>
                       </div>
                     </div>
@@ -106,9 +132,13 @@ export function Methodology() {
             <Button
               size="lg"
               className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-10 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)]"
-              onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() =>
+                document.getElementById('contato')?.scrollIntoView({
+                  behavior: 'smooth',
+                })
+              }
             >
-              Quero diagnóstico de SOC e IAM
+              Estruture operação de SOC e IAM
             </Button>
           </div>
         </div>

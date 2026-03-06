@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Shield, Radar, Lock, DatabaseBackup } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export function Tools() {
   const blocks = [
@@ -30,6 +31,7 @@ export function Tools() {
   return (
     <section className="py-20 sm:py-24 bg-gradient-to-b from-kolivo-primary to-[#070824]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
             initial={{ opacity: 0, y: 18 }}
@@ -83,6 +85,22 @@ export function Tools() {
             </motion.div>
           ))}
         </div>
+
+        {/* CTA */}
+        <div className="mt-10 flex justify-center">
+          <Button
+            size="lg"
+            className="bg-kolivo-accent hover:bg-kolivo-accent/90 text-white px-10 py-6 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(90,90,255,0.5)]"
+            onClick={() =>
+              document
+                .getElementById('contato')
+                ?.scrollIntoView({ behavior: 'smooth' })
+            }
+          >
+            Estruture sua stack de segurança
+          </Button>
+        </div>
+
       </div>
     </section>
   );

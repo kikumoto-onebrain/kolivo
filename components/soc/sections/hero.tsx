@@ -72,7 +72,7 @@ export function Hero() {
                 <Shield className="w-5 h-5" /> Segurança em tempo real
               </div>
               <p className="mt-3 text-gray-300">
-                Identificar, prevenir e responder com rapidez — reduzindo impacto e tempo de exposição.
+                Identificar, prevenir e responder com rapidez, reduzindo impacto e tempo de exposição.
               </p>
             </div>
 
